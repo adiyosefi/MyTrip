@@ -1,0 +1,27 @@
+.header .logo {
+    height: 80px;
+}
+
+.header .navlist {
+    display: flex;
+    box-sizing: border-box;
+    list-style-type: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    position: fixed;
+    top: 20px;
+    left: 0;
+    right: 0;
+    padding: 20px 0px;
+    z-index: 100;
+}
+
+.header .navitem {
+    flex:1 auto;
+    margin: 0px 20px;
+    padding-top: 20px;
+}
+
+.header .navitem:hover {
+    color: #282c34;
+    text-decoration: none;
+}
