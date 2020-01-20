@@ -20,11 +20,11 @@ export const useItems = () => {
     const [state, setState] = useState([]);
 
     useEffect(() => {
-        firebase.database().ref('/tasks').on('value', snapshot => {
+        firebase.database().ref('/items').on('value', snapshot => {
             setState(values(snapshot.val()));
         });
 
-        return () => firebase.database().ref('/tasks').off();
+        return () => firebase.database().ref('/items').off();
     }, []);
 
     const syncItems = useCallback(data => {

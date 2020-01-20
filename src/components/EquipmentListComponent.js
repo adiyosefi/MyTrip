@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import '../styles/EquipmentList.css';
 
 // HOOKS
@@ -35,15 +35,17 @@ const RenderListItems = ({items}) => {
 const EquipmentListComponent = () => {
     const [items, setItems] = useItems();
 
-    const handleClick = useCallback(e => {
-        if (e.target.value != null) {
+    const [labelstate, setLabel] = useState("");
+
+    const handleClick = () => {
+        console.log(labelstate);
+        if (labelstate != null) {
             setItems([
                 ...items,
-                {id: items.length, label: e.target.value, checked: false}
+                {id: items.length, label: labelstate, checked: false}
             ]);
-            e.target.value = '';
         }
-    }, [setItems, items]);
+    }
 
     const handleKeyUp = useCallback(e => {
         if (e.which === 13) {
@@ -63,16 +65,21 @@ const EquipmentListComponent = () => {
                         Create your own Equipment List
                     </div>
                     <div className="formcontainer">
-                        <form className="elform">
-                            <input type="text" className="elforminput" onKeyUp={handleKeyUp} placeholder="Item name..."/>
-                            <button type="submit" className="elformbutton" onClick={handleClick}>Add to list</button>
+                        <form className="elform" onSubmit={(e) => {
+                            e.preventDefault();
+                            handleClick(labelstate);
+                        }}>
+                            <input type="text" className="elforminput" onKeyUp={handleKeyUp} value={labelstate} onChange={e => setLabel(e.target.value)} placeholder="Item name..."/>
+                            <button type="submit" className="elformbutton">Add to list</button>
                         </form>
                     </div>
                 </div>
             </div>
-            <div className="listcontainer">
-                <h4>My Equipment List</h4>
-                <RenderListItems items={items}/>
+            <div className="contentcontainer">
+                <div className="listcontainer">
+                    <h4>My Equipment List</h4>
+                    <RenderListItems items={items}/>
+                </div>
             </div>
         </div>
     );
