@@ -38,24 +38,25 @@ const EquipmentListComponent = () => {
     const [labelstate, setLabel] = useState("");
 
     const handleClick = () => {
-        console.log(labelstate);
-        if (labelstate != null) {
+        if (labelstate != "") {
             setItems([
                 ...items,
                 {id: items.length, label: labelstate, checked: false}
             ]);
+            setLabel("");
         }
     }
 
-    const handleKeyUp = useCallback(e => {
-        if (e.which === 13) {
-            setItems([
-                ...items,
-                {id: items.length, label: e.target.value, checked: false}
-            ]);
-            e.target.value = '';
+    const handleKeyUp = (e) => {
+        if (labelstate != "") {
+            if (e.which === 13) {
+                setItems([
+                    ...items,
+                    {id: items.length, label: labelstate, checked: false}
+                ]);
+            }
         }
-    }, [setItems, items]);
+    }
 
     return (
         <div className="equipmentlist">

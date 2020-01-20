@@ -39,7 +39,7 @@
 
 .equipmentlist .elform {
     display: flex;
-    position: relative;
+
 }
 
 .equipmentlist .elforminput {
@@ -81,7 +81,6 @@
 
 .equipmentlist .contentcontainer {
     height: 500px;
-    position: absolute;
     background-color: white;
     display: flex;
     align-items: center;
@@ -92,5 +91,5 @@
     height: 400px;
     width: 500px;
     background-color: lightpink;
-    
+    padding: 20px;
 }
