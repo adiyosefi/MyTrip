@@ -1,16 +1,16 @@
 import React from 'react';
 import '../styles/Header.css';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
         <div className="header">
-            <Link to="/home" className="logo"><img src=""/></Link>
             <ul className="navlist">
-                <li><Link to="/home" className="navitem">Home</Link></li>
-                <li><Link to="#" className="navitem">About</Link></li>
-                <li><Link to="/equipmentlist" className="navitem">Equipment Lists</Link></li>
-                <li><Link to="#" className="navitem">Contact</Link></li>
+                <Link to="/home" className="logo"><img src="/assets/images/logo.png"/></Link>
+                <li><NavLink to="/home" className="navitem">Home</NavLink></li>
+                <li><NavLink to="/about" className="navitem">About</NavLink></li>
+                <li><NavLink to="/equipmentlist" className="navitem">Equipment Lists</NavLink></li>
+                <li><NavLink to="/contact" className="navitem">Contact</NavLink></li>
             </ul>
         </div>
     );

@@ -1,7 +1,7 @@
+
 .equipmentlist .background {
     background-image: url("/assets/images/AddEquipmentList.jpg");
     background-size: cover;
-    background-position: top;
     height: 100vh;
     width: 100vw;
     background-position: center top;
@@ -11,16 +11,16 @@
 .equipmentlist .container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-top: -200px;
-    margin-left: 100px;
-    height: 50vh;
+    height: 100vh;
     width: 100vw;
     position: relative;
-
 }
 
 .equipmentlist .title {
     color: white;
+    font-weight: bold;
     margin-top: 400px;
     width: fit-content;
     font-size: 50px;
@@ -32,7 +32,6 @@
     display: flex;
     position: relative;
     margin-top: 100px;
-    margin-left: 100px;
     height: fit-content;
     width: fit-content;
 }
@@ -68,6 +67,7 @@
     border-width: thin;
     color: white;
     border-color: transparent;
+    cursor: pointer;
     background-color: #ff9c57;
     -webkit-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
     -moz-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
@@ -80,16 +80,125 @@
 
 
 .equipmentlist .contentcontainer {
-    height: 500px;
+    height: 700px;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .equipmentlist .listcontainer {
-    height: 400px;
+    height: 600px;
     width: 500px;
     background-color: lightpink;
     padding: 20px;
+    box-sizing: border-box;
+    -webkit-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    -moz-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    overflow: auto;
+}
+
+.equipmentlist .listcontainer h4 {
+    padding-bottom: 20px;
+}
+
+.equipmentlist .equipmentlistlist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.equipmentlist .equipmentlistitem {
+    background-color: #ffe9ee;
+    height: 40px;
+    width: 100%;
+    border: 1px solid #ffdde4;
+    padding: 0 10px;
+}
+
+.equipmentlist .equipmentlistitemcontent {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    display: flex;
+}
+
+.state label {
+    display: none;
+}
+
+
+.equipmentlist .equipmentlistitemcontent label {
+    margin-bottom: 0;
+}
+
+.hideP {
+    display: none;
+}
+
+.item-line-through {
+    text-decoration: line-through;
+}
+
+.item-none {
+    text-decoration: none;
+}
+
+.equipmentlist .equipmentlistitemcontent .editbtn, .equipmentlist .equipmentlistitemcontent .hoverBtn {
+    height: fit-content;
+    width: fit-content;
+    margin-left: auto;
+    float: right;
+    border: none;
+    outline:none;
+    background-color:transparent;
+    cursor: pointer;
+}
+
+.showEditInput {
+    height: 30px;
+    width: 180px;
+    margin-left: -8px;
+    padding: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: thin;
+    border-color: #ffdde4;
+}
+
+.showEditInput:focus {
+   outline: none;
+}
+
+.hideEditInput {
+    display: none;
+}
+
+.editbtn{
+    color: darkgray;
+}
+
+.hoverBtn {
+    color: black;
+}
+
+.equipmentlist .equipmentlistitemcontent .editbtn:hover {
+    color: black;
+}
+
+.equipmentlist .equipmentlistitemcontent .removebtn {
+    height: fit-content;
+    width: fit-content;
+    border: none;
+    outline:none;
+    background-color:transparent;
+    color: darkgray;
+    cursor: pointer;
+}
+
+.equipmentlist .equipmentlistitemcontent .removebtn:hover {
+    color: black;
 }

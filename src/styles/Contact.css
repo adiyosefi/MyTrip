@@ -1,0 +1,44 @@
+
+.contact .background {
+    background-image: url("/assets/images/Contact.jpg");
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    background-position: center top;
+    z-index: -1;
+}
+
+.contact .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -200px;
+    margin-left: 100px;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.contact .title {
+    color: white;
+    font-weight: bold;
+    margin-top: 550px;
+    width: fit-content;
+    font-size: 50px;
+    position: relative;
+    height: fit-content;
+}
+
+.contact .contentcontainer {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 40px;
+}
+
+.contact .contentcontainer .phone, .contact .contentcontainer .email {
+    margin-left: 10px;
+}
+
+.contact .contentcontainer .address {
+    margin-left: 12px;
+}
