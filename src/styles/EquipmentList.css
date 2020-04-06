@@ -31,7 +31,7 @@
 .equipmentlist .formcontainer {
     display: flex;
     position: relative;
-    margin-top: 100px;
+    margin-top: 55px;
     height: fit-content;
     width: fit-content;
 }
