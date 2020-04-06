@@ -14,6 +14,7 @@
     right: 0;
     padding: 10px 0px;
     z-index: 100;
+    flex-wrap: wrap;
 }
 
 .header .logo {
@@ -40,4 +41,29 @@
 .header .navitem:hover {
     color: #9c9c9c;
     text-decoration: none;
+}
+
+.header .navlist .button-plan {
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 30px;
+    padding: 5px 30px;
+    background: #fea353;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header .navlist .button-plan:hover {
+    background: #fe8b1d;
+}
+
+.header li:last-child {
+    margin-left: auto;
+    margin-right: 20px;
 }
