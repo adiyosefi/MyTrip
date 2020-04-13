@@ -3,7 +3,7 @@ import '../styles/EquipmentList.css';
 import { v4 as uuidv4 } from 'uuid';
 
 // HOOKS
-import {useItems} from '../shared/items.hooks';
+import {useItems} from '../hooks/items';
 
 
 const RenderListItems = ({items, setItems}) => {
@@ -91,7 +91,7 @@ const RenderListItems = ({items, setItems}) => {
 };
 
 
-const EquipmentListComponent = () => {
+const EquipmentList = () => {
     const [items, setItems] = useItems();
 
     const [labelstate, setLabel] = useState("");
@@ -145,4 +145,4 @@ const EquipmentListComponent = () => {
     );
 };
 
-export default EquipmentListComponent;
+export default EquipmentList;

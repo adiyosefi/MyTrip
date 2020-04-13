@@ -43,6 +43,39 @@
     text-decoration: none;
 }
 
+.header .equipment-dropdown {
+    display: none;
+    position: absolute;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.header .equipment-dropdown .equipment-dropdown-item {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.header .equipment-dropdown .equipment-dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #9c9c9c;
+}
+
+.header .navitem-equipment:hover .equipment-dropdown {
+    display: block;
+}
+
+.header .equipment-dropdown .active {
+    color: #9c9c9c;
+} 
+
+
+
+
+
+
 .header .navlist .button-plan {
     font-size: 16px;
     font-family: "Poppins", sans-serif;
@@ -57,13 +90,45 @@
     border-radius: 12px;
     text-decoration: none;
     font-weight: bold;
+    margin-right: 20px;
 }
 
 .header .navlist .button-plan:hover {
     background: #fe8b1d;
 }
 
-.header li:last-child {
+.header li:nth-last-child(2) {
     margin-left: auto;
+}
+
+.header .navlist .button-login {
     margin-right: 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.header .navlist .button-login:hover {
+    color: #9c9c9c;
+}
+
+.header .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.header .dialog {
+    background: white;
+    border-radius: 5px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 }

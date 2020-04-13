@@ -156,6 +156,7 @@
     outline:none;
     background-color:transparent;
     cursor: pointer;
+    margin-right: 7px;
 }
 
 .showEditInput {
