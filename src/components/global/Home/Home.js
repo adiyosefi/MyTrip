@@ -1,8 +1,17 @@
 import React from 'react';
-import '../styles/Home.css';
+import './Home.css';
 
 
 const Home = () => {
+    const onStartPlanning = () => {
+        /*
+        if(user){
+            //plan trip
+        } else {
+            //open signin 
+        }
+        */
+    }
 
     return (
         <div className="home">
@@ -20,7 +29,7 @@ const Home = () => {
                         <form>
                             <input list="destination-of-trip" className="destination-input" name="Destination of Trip" placeholder="Enter destination (Country)" />
                             <datalist id="destination-of-trip">
-                                <option value="Worldwide" selected></option>
+                                <option value="Worldwide" defaultValue></option>
                                 <option value="Australia"></option>
                                 <option value="Belgium"></option>
                                 <option value="Canada"></option>
@@ -47,14 +56,16 @@ const Home = () => {
                                 <option value="Zimbabwe"></option>&nbsp;
                             </datalist>
                             <div className="start-date">
-                                <label for="start-date"> Start: </label>
+                                <label htmlFor="start-date"> Start: </label>
                                 <input id="start-date" type="date" className="start-date-input" />
                             </div>
                             <div className="end-date">
-                                <label for="end-date"> End: </label>
+                                <label htmlFor="end-date"> End: </label>
                                 <input id="end-date" type="date" className="end-date-input" />
                             </div>
-                            <button type="submit" name="form-submit" className="form-button">Start planning your trip</button>
+                            <button type="submit" name="form-submit"
+                                onClick={onStartPlanning}
+                                className="form-button">Start planning your trip</button>
                         </form>
                     </div>
                 </div>

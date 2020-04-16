@@ -1,20 +1,20 @@
 import React, {useCallback, useState} from 'react';
-import '../styles/ActivitySearch.css';
+import './EquipmentListSearch.css';
 import { v4 as uuidv4 } from 'uuid';
 
 // HOOKS
-import {useItems} from '../hooks/items';
+import {useItems} from '../../../hooks/useItems';
 
 
-const ActivitySearch = () => {
+const EquipmentListSearch = () => {
     
 
     return (
-        <div className="activitysearch">
+        <div className="equipmentlistsearch">
             <div className="background">
                 <div className="container">
                     <div className="title">
-                        Search Activity
+                        Search Equipment List
                     </div>
                 </div>
             </div>
@@ -25,4 +25,4 @@ const ActivitySearch = () => {
     );
 };
 
-export default ActivitySearch;
+export default EquipmentListSearch;

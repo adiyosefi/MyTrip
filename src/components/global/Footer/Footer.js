@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Footer.css';
+import './Footer.css';
 
 const Footer = () => {
     return (
         <>
-            <div class="container"></div>
+            <div className="container"></div>
             <div className="footer">
                 <div className="main-footer">
                     <div className="footer-col col1">
@@ -22,24 +22,24 @@ const Footer = () => {
                     <div className="footer-col col3">
                         <ul className="list-footer">
                             <li className=""><h2 className="footer-headline">Have a Question?</h2></li>
-                            <li><i className="fa fa-map-marker"></i><span class="footer-text"> 1 Ben-Gurion Ave, Beer-Sheva, Israel</span></li>
-                            <li><i className="fa fa-phone"></i><span class="footer-text"> +972-8-646-1600</span></li>
-                            <li><i className="fa fa-envelope"></i><span class="footer-text"> info@mytrip.com</span></li>
+                            <li><i className="fa fa-map-marker"></i><span className="footer-text"> 1 Ben-Gurion Ave, Beer-Sheva, Israel</span></li>
+                            <li><i className="fa fa-phone"></i><span className="footer-text"> +972-8-646-1600</span></li>
+                            <li><i className="fa fa-envelope"></i><span className="footer-text"> info@mytrip.com</span></li>
                         </ul>
                     </div>
                 </div>
                 <div className="social-footer">
-                    <ul class="social-footer-list">
-                        <li><a href="https://www.facebook.com/adi.nomberg" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://twitter.com/adi_nomberg" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="https://github.com/adinomberg" target="_blank" rel="noopener noreferrer"><i class="fa fa-github"></i></a></li>
-                        <li><a href="https://www.linkedin.com/in/adinomberg/" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"></i></a></li>
+                    <ul className="social-footer-list">
+                        <li><a href="https://www.facebook.com/adi.nomberg" target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook"></i></a></li>
+                        <li><a href="https://twitter.com/adi_nomberg" target="_blank" rel="noopener noreferrer"><i className="fa fa-twitter"></i></a></li>
+                        <li><a href="https://github.com/adinomberg" target="_blank" rel="noopener noreferrer"><i className="fa fa-github"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/adinomberg/" target="_blank" rel="noopener noreferrer"><i className="fa fa-linkedin"></i></a></li>
                     </ul>
                 </div>
                 <div className="copyright-footer">
                     <ul className="copyright-footer-list">
                         <li><i className="fa fa-copyright"></i> 2020 Copyright MyTrip</li>
-                        <li>This website is made with <i class="fa fa-heart"></i> by Adi Nomberg</li>
+                        <li>This website is made with <i className="fa fa-heart"></i> by Adi Nomberg</li>
                     </ul>
                 </div>
             </div>

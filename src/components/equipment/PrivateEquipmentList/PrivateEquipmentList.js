@@ -1,9 +1,9 @@
 import React, {useCallback, useState} from 'react';
-import '../styles/EquipmentList.css';
+import './PrivateEquipmentList.css';
 import { v4 as uuidv4 } from 'uuid';
 
 // HOOKS
-import {useItems} from '../hooks/items';
+import {useItems} from '../../../hooks/useItems';
 
 
 const RenderListItems = ({items, setItems}) => {
@@ -91,7 +91,7 @@ const RenderListItems = ({items, setItems}) => {
 };
 
 
-const EquipmentList = () => {
+const PrivateEquipmentList = () => {
     const [items, setItems] = useItems();
 
     const [labelstate, setLabel] = useState("");
@@ -145,4 +145,4 @@ const EquipmentList = () => {
     );
 };
 
-export default EquipmentList;
+export default PrivateEquipmentList;

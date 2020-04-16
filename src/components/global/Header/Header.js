@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
-import '../styles/Header.css';
+import './Header.css';
 import { Link, NavLink } from 'react-router-dom';
-import { modalContext } from '../context/modal';
+import { ModalContext } from '../../../context/modal';
 
 const Header = () => {
-    const setIsModalOpen = useContext(modalContext);
+    const {isModalOpen, toggleModal} = useContext(ModalContext);
 
     return (
             <div className="header">
@@ -13,15 +13,16 @@ const Header = () => {
                     <li><NavLink to="/home" className="navitem">Home</NavLink></li>
                     <li><NavLink to="/about" className="navitem">About</NavLink></li>
                     <li className="navitem-equipment"><NavLink to="/equipmentlistsearch" className="navitem dropbtn">Equipment Lists</NavLink>
-                        <ul class="equipment-dropdown">
+                        <ul className="equipment-dropdown">
                             <li><NavLink to="/equipmentlistsearch" className="equipment-dropdown-item">Search Equipment List</NavLink></li>
-                            <li><NavLink to="/equipmentlist" className="equipment-dropdown-item">Add Equipment List</NavLink></li>
+                            <li><NavLink to="/privateequipmentlist" className="equipment-dropdown-item">Add Equipment List</NavLink></li>
                         </ul>
                     </li>
                     <li><NavLink to="/activitysearch" className="navitem">Activities</NavLink></li>
                     <li><NavLink to="/contact" className="navitem">Contact</NavLink></li>
                     <li><NavLink to="/mytrip" className="button-plan">Plan Your Trip!</NavLink></li>
-                        <li><button className="button-login" onClick={() => setIsModalOpen(true)}>
+                        <li><button className={`button-login ${isModalOpen ? 'button-login-modal-open' : ''}`}
+                         onClick={toggleModal}>
                         <i className="fa fa-lg fa-user"></i>
                     </button>
                     </li>
