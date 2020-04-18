@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Redirect, Link } from 'react-router-dom';
 import { auth, signInWithGoogle } from '../../../server/firebase';
 import { UserContext } from '../../../context/user';
+import './SignIn.css';
+
 
 
 const SignIn = () => {
@@ -32,7 +34,7 @@ const SignIn = () => {
 
   const renderSignIn = () => {
     return (
-      <div className=" ">
+      <div className="signin">
         <h1 className=" ">Sign In</h1>
         <div className="">
           {error !== null && <div className="">{error}</div>}

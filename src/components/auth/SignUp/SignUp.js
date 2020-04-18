@@ -1,7 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Redirect, Link } from 'react-router-dom';
-import {auth, signInWithGoogle, generateUserDocument} from '../../../server/firebase'
+import {auth, storage, signInWithGoogle, generateUserDocument} from '../../../server/firebase'
 import { UserContext } from '../../../context/user';
+import FileUploader from "react-firebase-file-uploader";
+import './SignUp.css';
+
 
 const SignUp = () => {
   const user = useContext(UserContext);
@@ -10,6 +13,11 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState(null);
+
+  // picture states
+  const [photoURL, setPhotoURL] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   
   const onChangeHandler = event => {
     const { name, value } = event.currentTarget;
@@ -21,11 +29,37 @@ const SignUp = () => {
       setDisplayName(value);
     }
   };
+
+  const handleUploadStart = () => {
+    setIsUploading(true);
+    setUploadProgress(0);
+  }
+
+  const handleUploadError = (error) => {
+    setIsUploading(false);
+    console.error(error);
+  }
+
+  const handleUploadSuccess = (filename) => {
+    setIsUploading(false);
+    setUploadProgress(100);
+      storage
+      .ref("images")
+      .child(filename)
+      .getDownloadURL()
+      .then(url => setPhotoURL(url));
+      console.log(photoURL);
+  }
+
+  const handleProgress = (progress) => {
+    setUploadProgress(progress);
+  }
+
   const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
     event.preventDefault();
     try{
       const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      generateUserDocument(user, {displayName});
+      generateUserDocument(user, {displayName, photoURL});
     }
     catch(error){
       setError('Error Signing up with email and password');
@@ -34,11 +68,12 @@ const SignUp = () => {
     setEmail("");
     setPassword("");
     setDisplayName("");
+    setPhotoURL("");
   };
 
   const renderSignUp = () => {
     return (
-      <div className="">
+      <div className="signup">
       <h1 className="">Sign Up</h1>
       <div className="">
         {error !== null && (
@@ -83,6 +118,21 @@ const SignUp = () => {
             id="userPassword"
             onChange={event => onChangeHandler(event)}
           />
+          {/* Image uploader*/}
+          <label >Profile picture:</label>
+          {isUploading && <p>Progress: {uploadProgress}</p>}
+          {photoURL && <img src={photoURL} />}
+          <FileUploader
+          accept="image/*"
+          name="userPicture"
+          filename={file => displayName + file.name.split('.')[1] }
+          storageRef={storage.ref('images')}
+          onUploadStart={handleUploadStart}
+          onUploadError={handleUploadError}
+          onUploadSuccess={handleUploadSuccess}
+          onProgress={handleProgress}
+        />
+
           <button
             className=""
             onClick={event => {
