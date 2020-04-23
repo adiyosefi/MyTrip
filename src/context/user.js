@@ -1,9 +1,6 @@
 import React, { useEffect, useState, createContext } from "react";
 import {auth, generateUserDocument} from '../server/firebase';
 
-// HOOKS
-/*import {useUsers} from '../hooks/useUsers';*/
-
 export const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {

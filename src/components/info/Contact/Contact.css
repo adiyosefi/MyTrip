@@ -35,6 +35,10 @@
     margin-left: 40px;
 }
 
+.contact .contentcontainer .first-para, .contact .contentcontainer .contact-para {
+    margin-bottom: 10px;
+}
+
 .contact .contentcontainer .phone, .contact .contentcontainer .email {
     margin-left: 10px;
 }

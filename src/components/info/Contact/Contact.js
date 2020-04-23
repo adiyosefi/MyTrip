@@ -12,24 +12,24 @@ const Contact = () => {
                 </div>
             </div>
             <div className="contentcontainer">
-                <p className="first-para">
+                <div className="first-para">
                     Need help? More information? Get in touch today and speak to our friendly team!
-                </p>
-                <p>
+                </div>
+                <div className="contact-para">
                     <i className="fa fa-large fa-phone"></i> <b>Phone:</b><span
                     className="phone">+972-8-646-1600</span>
-                </p>
-                <p>
+                </div>
+                <div className="contact-para">
                     <i className="fa fa-large fa-envelope"></i> <b>Email:</b><span
                     className="email">info@mytrip.com</span>
-                </p>
-                <p>
+                </div>
+                <div className="contact-para">
                     <i className="fa fa-large fa-map-marker"></i> <b>Address: </b>
                     <div className="address">1 Ben-Gurion Ave.,<br/>
                         Beer-Sheva 84105,<br/>
                         Israel
                     </div>
-                </p>
+                </div>
             </div>
         </div>
     );

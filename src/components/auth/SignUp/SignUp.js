@@ -23,6 +23,7 @@ const SignUp = () => {
     const { name, value } = event.currentTarget;
     if (name === "userEmail") {
       setEmail(value);
+      console.log(email);
     } else if (name === "userPassword") {
       setPassword(value);
     } else if (name === "displayName") {

@@ -1,0 +1,17 @@
+.mytrip {
+
+}
+
+.mytrip .background {
+
+}
+
+.mytrip .user-profile-container {
+
+}
+
+.mytrip .profile-picture {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}

@@ -72,12 +72,13 @@
     box-sizing: border-box;
     border: 2px solid rgba(203, 204, 188, 0.76);
     border-radius: 4px;
-    text-align: start;
+    text-align: left;
     font-size: 14px;
     font-family: inherit;
     width: 230px;
     outline: none;
 }
+
 
 .home .form-container form .destination-input:focus, .home .form-container form .start-date .start-date-input:focus,
 .home .form-container form .end-date .end-date-input:focus {
@@ -98,6 +99,7 @@
     padding: 7px;
     width: 180px;
 }
+
 
 .home .form-container form .start-date {
     margin-bottom: 10px;

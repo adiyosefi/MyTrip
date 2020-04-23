@@ -53,7 +53,7 @@ export const generateUserDocument = async (user, additionalData) => {
   }
   return getUserDocument(user.uid);
 };
-export const getUserDocument = async uid => {
+const getUserDocument = async uid => {
   if (!uid) return null;
   try {
     const userDocument = await firestore.doc(`users/${uid}`).get();
@@ -65,4 +65,74 @@ export const getUserDocument = async uid => {
     console.error("Error fetching user", error);
   }
 };
+
+// create trip
+export const generateTripDocument = async (user, destination, start, end) => {
+  if (!user) return;
+  var tripRef = firestore.collection("trips").doc();
+  const userRef = firestore.doc(`users/${user.uid}`);
+    try {
+      await tripRef.set({
+        destination: destination,
+        start: start, 
+        end: end
+      });
+    } catch (error) {
+      console.error("Error creating trip document", error);
+    }
+
+    updateUserAddNewTrip(userRef, tripRef);
+  
+  return tripRef;
+};
+const updateUserAddNewTrip = (userRef,tripRef) => {
+  return userRef.update({
+    trip: tripRef
+})
+.then(function() {
+    console.log("User document successfully updated!");
+})
+.catch(function(error) {
+    // The document probably doesn't exist.
+    console.error("Error updating user document: ", error);
+});
+}
+
+// get trip data from document
+export const getTripDocument = async tid => {
+  if (!tid) return null;
+  try {
+    const tripDocument = await firestore.doc(`trips/${tid}`).get();
+    return {
+      tid,
+      ...tripDocument.data()
+    };
+  } catch (error) {
+    console.error("Error fetching trip", error);
+  }
+};
+
+export const deleteTripFromUser = (user) => {
+  const userRef = firestore.doc(`users/${user.uid}`);
+  return userRef.update({
+    trip: null
+})
+.then(function() {
+    console.log("User document successfully updated!");
+})
+.catch(function(error) {
+    // The document probably doesn't exist.
+    console.error("Error updating user document: ", error);
+});
+}
+export const deleteTripFromTrips = (trip) => {
+  const tripRef = firestore.doc(`trips/${trip.tid}`);
+  return tripRef.delete().then(function() {
+    console.log("Document successfully deleted!");
+}).catch(function(error) {
+    console.error("Error removing document: ", error);
+});
+}
+
+
 

@@ -1,17 +1,51 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import './Home.css';
+import { countries } from './../../../server/countries';
+import { UserContext } from './../../../context/user';
+import { generateTripDocument } from './../../../server/firebase'
 
 
 const Home = () => {
-    const onStartPlanning = () => {
-        /*
-        if(user){
-            //plan trip
-        } else {
-            //open signin 
+    const user = useContext(UserContext);
+
+    const [destination, setDestination] = useState("");
+    const [start, setStart] = useState(null);
+    const [end, setEnd] = useState(null);
+    const [error, setError] = useState(null);
+
+    const onChangeHandler = event => {
+        const { name, value } = event.currentTarget;
+        if (name === "tripDestination") {
+            setDestination(value);
+        } else if (name === "tripStart") {
+            setStart(value);
+        } else if (name === "tripEnd") {
+            setEnd(value);
         }
-        */
-    }
+    };
+
+    const createTripHandler = async (event, destination, start, end) => {
+        event.preventDefault();
+        if (!user) {
+            console.log(user);
+            window.location.href = '/signin';
+        } else if (user && user.trip!=null) {
+            window.location.href = '/mytrip';
+        } else if (user && user.trip==null) {
+            try {
+                await generateTripDocument(user, destination, start, end);
+                console.log('trip added');
+                window.location.href = '/mytrip';
+            }
+            catch (error) {
+                setError('Error creating trip');
+            }
+            setDestination("");
+            setStart(null);
+            setEnd(null);
+        }
+    };
 
     return (
         <div className="home">
@@ -27,44 +61,33 @@ const Home = () => {
                             Itinerary Planner
                         </div>
                         <form>
-                            <input list="destination-of-trip" className="destination-input" name="Destination of Trip" placeholder="Enter destination (Country)" />
-                            <datalist id="destination-of-trip">
+                            <input list="destination-of-trip" className="destination-input"
+                                onChange={event => onChangeHandler(event)}
+                                name="tripDestination" id="tripDestination" placeholder="Enter destination (Country)" />
+                            <datalist id="destination-of-trip" className="destination-datalist">
                                 <option value="Worldwide" defaultValue></option>
-                                <option value="Australia"></option>
-                                <option value="Belgium"></option>
-                                <option value="Canada"></option>
-                                <option value="Denmark"></option>
-                                <option value="Egypt"></option>
-                                <option value="France"></option>
-                                <option value="Greece"></option>
-                                <option value="Hungary"></option>
-                                <option value="Israel"></option>
-                                <option value="Japan"></option>
-                                <option value="Korea"></option>
-                                <option value="Latvia"></option>
-                                <option value="Mexico"></option>
-                                <option value="New Zealand"></option>
-                                <option value="Oman"></option>
-                                <option value="Peru"></option>
-                                <option value="Qatar"></option>
-                                <option value="Russia"></option>
-                                <option value="Spain"></option>
-                                <option value="Tanzania"></option>
-                                <option value="United States"></option>
-                                <option value="Vietnam"></option>
-                                <option value="Yemen"></option>
-                                <option value="Zimbabwe"></option>&nbsp;
+                                {countries.map(country => {
+                                    return (
+                                        <option value={country.name} key={country.code}></option>
+                                    );
+                                })}
                             </datalist>
                             <div className="start-date">
-                                <label htmlFor="start-date"> Start: </label>
-                                <input id="start-date" type="date" className="start-date-input" />
+                                <label htmlFor="tripStart"> Start: </label>
+                                <input id="tripStart" type="date" name="tripStart"
+                                    onChange={event => onChangeHandler(event)}
+                                    className="start-date-input" />
                             </div>
                             <div className="end-date">
-                                <label htmlFor="end-date"> End: </label>
-                                <input id="end-date" type="date" className="end-date-input" />
+                                <label htmlFor="tripEnd"> End: </label>
+                                <input id="tripEnd" type="date" name="tripEnd"
+                                    onChange={event => onChangeHandler(event)}
+                                    className="end-date-input" />
                             </div>
-                            <button type="submit" name="form-submit"
-                                onClick={onStartPlanning}
+                            <button name="form-submit"
+                                onClick={event => {
+                                    createTripHandler(event, destination, start, end);
+                                }}
                                 className="form-button">Start planning your trip</button>
                         </form>
                     </div>
