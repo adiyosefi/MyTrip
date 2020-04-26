@@ -3,6 +3,7 @@ import firebase from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
 import { Redirect } from 'react-router-dom';
+import { useItems } from "../hooks/useItems";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -134,5 +135,56 @@ export const deleteTripFromTrips = (trip) => {
 });
 }
 
+
+// generate public equipment list document
+export const generatePublicEquipmentListDocument = async (displayName, destination, season, category, equipmentList) => {
+  var equipmentListRef = firestore.collection("equipmentlists").doc();
+    try {
+      await equipmentListRef.set({
+        displayName: displayName,
+        destination: destination,
+        season: season, 
+        category: category,
+        list: equipmentList
+      });
+    } catch (error) {
+      console.error("Error creating equipmentlist document", error);
+    }
+  return equipmentListRef;
+}
+
+// search public equipment lists
+export const searchPublicEquipmentListDocuments = (destination, season, category) => {
+  var equipmentlistsRef = firestore.collection("equipmentlists");
+  var destinationQuery = equipmentlistsRef.where("destination", "==", destination);
+  var seasonQuery = equipmentlistsRef.where("season", "==", season);
+  var categoryQuery = equipmentlistsRef.where("category", "==", category);
+  var searchResults;
+  var searchResultsArray = [];
+  if (!destination && !season && !category) {
+    searchResults = equipmentlistsRef;
+  } else if (destination && season && category){
+    searchResults = destinationQuery.seasonQuery.categoryQuery;
+  } else if (destination && season && !category) {
+    searchResults = destinationQuery.seasonQuery;
+  } else if (destination && category && !season) {
+    searchResults = destinationQuery.categoryQuery;
+  } else if (season && category && !destination) {
+    searchResults = seasonQuery.categoryQuery;
+  } else if (destination && !season && !category) {
+    searchResults = destinationQuery;
+  } else if (season && !destination && !category) {
+    searchResults = seasonQuery;
+  } else if (category && !destination && !season) {
+    searchResults = categoryQuery;
+  } 
+  searchResults.get().then(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
+        console.log(doc.id, ' => ', doc.data());
+        searchResultsArray.push({id: doc.id, data: doc.data()});
+    });
+  });
+  return searchResultsArray;
+}
 
 

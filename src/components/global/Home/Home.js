@@ -25,14 +25,10 @@ const Home = () => {
         }
     };
 
-    const createTripHandler = async (event, destination, start, end) => {
+    const createTripHandler = async (event, destination, start, end, error, setError) => {
         event.preventDefault();
-        if (!user) {
-            console.log(user);
-            window.location.href = '/signin';
-        } else if (user && user.trip!=null) {
-            window.location.href = '/mytrip';
-        } else if (user && user.trip==null) {
+        if (user.trip==null || !user.trip) {
+            if (destination && start && end) {
             try {
                 await generateTripDocument(user, destination, start, end);
                 console.log('trip added');
@@ -44,7 +40,15 @@ const Home = () => {
             setDestination("");
             setStart(null);
             setEnd(null);
+            }
+            else {
+                setError('Error creating trip');
+                console.log('Error creating trip');
+            }
         }
+        else {
+            window.location.href = '/mytrip';
+        } 
     };
 
     return (
@@ -86,7 +90,7 @@ const Home = () => {
                             </div>
                             <button name="form-submit"
                                 onClick={event => {
-                                    createTripHandler(event, destination, start, end);
+                                    createTripHandler(event, destination, start, end, error, setError);
                                 }}
                                 className="form-button">Start planning your trip</button>
                         </form>

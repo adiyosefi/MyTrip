@@ -31,10 +31,10 @@ const Main = (props) => {
                     <Route exact path="/home" component={Home} />
                     <Route exact path="/about" component={About} />
                     <Route path="/equipmentlistsearch" component={EquipmentListSearch} />
-                    <Route exact path="/privateequipmentlist" component={PrivateEquipmentList} />
+                    <PrivateRoute exact path="/privateequipmentlist" component={PrivateEquipmentList} />
                     <Route path="/activitysearch" component={ActivitySearch} />
                     <Route exact path="/contact" component={Contact} />
-                    <PrivateRoute path="/mytrip" component={MyTrip} />
+                    <PrivateRoute exact path="/mytrip" component={MyTrip} />
                     <Route path="/signin" component={SignIn} />
                     <Route path="/signup" component={SignUp} />
                     <Route path="/passwordreset" component={PasswordReset} />

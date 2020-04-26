@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { UserContext } from "../../../context/user";
 import { auth, getTripDocument } from "../../../server/firebase";
 import './MyTrip.css';
@@ -9,6 +10,7 @@ import { generateTripDocument, deleteTripFromUser, deleteTripFromTrips } from '.
 
 
 const TripTitle = ({ trip, setTrip, user }) => {
+  if (trip != null){
   const { destination } = trip;
 
   const s = new Date(trip.start);
@@ -38,6 +40,7 @@ const TripTitle = ({ trip, setTrip, user }) => {
       </div>
     </div>
   );
+  }
 }
 
 const ItineraryForm = ({user}) => {
@@ -59,23 +62,25 @@ const ItineraryForm = ({user}) => {
 
   const createTripHandler = async (event, destination, start, end) => {
       event.preventDefault();
-      if (!user) {
-          window.location.href = '/signin';
-      } else if (user && user.trip!=null) {
-          window.location.href = '/mytrip';
-      } else if (user && user.trip==null) {
-          try {
-              await generateTripDocument(user, destination, start, end);
-              console.log('trip added');
-              window.location.href = '/mytrip';
-          }
-          catch (error) {
-              setError('Error creating trip');
-          }
-          setDestination("");
-          setStart(null);
-          setEnd(null);
+      if (user.trip==null || !user.trip) {
+        console.log('entered trip is null');
+        if (destination && start && end) {
+        try {
+            await generateTripDocument(user, destination, start, end);
+            console.log('trip added');
+            window.location.href = '/mytrip';
+        }
+        catch (error) {
+            setError('Error creating trip');
+        }
+        setDestination("");
+        setStart(null);
+        setEnd(null);
+      } 
+      else {
+        setError("Error creating trip- not all details entered");
       }
+    }
   };
 
   return (
@@ -106,6 +111,9 @@ const ItineraryForm = ({user}) => {
           <input id="tripEnd" type="date" name="tripEnd"
             onChange={event => onChangeHandler(event)}
             className="end-date-input" />
+        </div>
+        <div>
+          {error}
         </div>
         <button name="form-submit"
           onClick={event => {
@@ -149,7 +157,7 @@ const MyTrip = () => {
           <button className="" onClick={() => { auth.signOut() }}>Sign out</button>
         </div>
         <div className="itinerary-form-or-title-container">
-          {trip ? <TripTitle trip={trip} setTrip={setTrip} user={user} /> : <ItineraryForm user={user}/>}
+          {(trip && trip!=null) ? <TripTitle trip={trip} setTrip={setTrip} user={user} /> : <ItineraryForm user={user}/>}
         </div>
         <div className="favourite-activities-container">
           <div className="activitieslistcontainer">

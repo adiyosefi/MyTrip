@@ -1,21 +1,35 @@
-import {useState, useEffect, useCallback} from 'react';
-import {values} from 'lodash/fp';
-import {database} from '../server/firebase';
+import { useState, useEffect, useCallback } from 'react';
+import { firestore } from '../server/firebase';
 
-export const useItems = () => {
-    const [state, setState] = useState([]);
+
+export const useItems = (user) => {
+
+    const [items, setItems] = useState([]); //useState() hook, sets initial state to an empty array
+
+    const userRef = firestore.doc(`users/${user.uid}`);
 
     useEffect(() => {
-        database.ref('/items').on('value', snapshot => {
-            setState(values(snapshot.val()));
+        userRef.onSnapshot(function(doc) {
+            if (doc.data().privateequipmentlist){
+            console.log("Current data: ", doc.data());
+            setItems(doc.data().privateequipmentlist);
+            }
         });
-
-        return () => database.ref('/items').off();
     }, []);
 
     const syncItems = useCallback(data => {
-        database.ref('/items').set(data);
+        console.log(data);
+        userRef.update({
+            privateequipmentlist: data
+        })
+            .then(function () {
+                console.log("User document successfully updated!");
+            })
+            .catch(function (error) {
+                // The document probably doesn't exist.
+                console.error("Error updating user document: ", error);
+            });
     }, []);
 
-    return [state, syncItems];
+    return [items, syncItems];
 };
