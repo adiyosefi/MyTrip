@@ -7,7 +7,12 @@ export const UserProvider = ({ children }) => {
   const [currentUserState, setCurrentUser] = useState(null);
 
   useEffect(() => {
+    let mounted = true;
+    if(mounted){
     fetchUser();
+    }
+
+    return () => mounted = false;
   }, []);
 
   const fetchUser = () => {

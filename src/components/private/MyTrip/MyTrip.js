@@ -5,78 +5,130 @@ import { auth, getTripDocument } from "../../../server/firebase";
 import './MyTrip.css';
 import moment from 'moment';
 import { countries } from './../../../server/countries';
-import { generateTripDocument, deleteTripFromUser, deleteTripFromTrips } from './../../../server/firebase'
+import { generateTripDocument, deleteTripFromUser, deleteTripFromTrips, addNotesFieldToTrip } from './../../../server/firebase'
 
+const RenderNotes = ({trip, setTrip, user, setError}) => {
+  const [notes, setNotes] = useState("");
+
+  const saveNotesToTrip = (event, user, notes) => {
+    event.preventDefault();
+    if (notes) {
+      try {
+        addNotesFieldToTrip(user, notes);
+        setTrip({
+          ...trip,
+          notes: notes
+        });
+        console.log('notes added to trip successfully');
+        // redirect to list page
+      }
+      catch (error) {
+        setError('Error gadding notes to trip');
+      }
+    } else {
+      setError('notes is not filled');
+    }
+    setNotes("");
+  };
+
+  const onChangeHandler = event => {
+    const { name, value } = event.currentTarget;
+    if (name === "notes") {
+      setNotes(value);
+    }
+  };
+
+  return (
+    <div className="notescontainer">
+            <h4>My Notes</h4>
+            <div className="text">
+              <form>
+                <textarea id="notepad" name="notes" value={notes}
+                  placeholder="Start typing ..."
+                  onChange={event => onChangeHandler(event)}>
+                  </textarea>
+                <button onClick={event => {
+                  saveNotesToTrip(event, user, notes);
+                }}>Save notes in my trip</button>
+              </form>
+              <div>
+                {trip.notes}
+              </div>
+            </div>
+          </div>
+  );
+}
 
 
 const TripTitle = ({ trip, setTrip, user }) => {
-  if (trip != null){
-  const { destination } = trip;
+  if (trip != null) {
+    const { destination } = trip;
 
-  const s = new Date(trip.start);
-  const start = moment(s).format('MMMM Do YYYY');
+    const s = new Date(trip.start);
+    const start = moment(s).format('MMMM Do YYYY');
 
-  const e = new Date(trip.end);
-  const end = moment(e).format('MMMM Do YYYY');
+    const e = new Date(trip.end);
+    const end = moment(e).format('MMMM Do YYYY');
 
-  const deleteTripHandler = event => {
-    event.preventDefault();
-    deleteTripFromUser(user);
-    deleteTripFromTrips(trip);
-    setTrip(null);
-  } 
+    const deleteTripHandler = event => {
+      event.preventDefault();
+      setTrip(null);
+      deleteTripFromUser(user, trip);
+    }
 
-  return (
-    <div>
-      <h1>{user.displayName}'s trip to {destination}!</h1>
+    return (
       <div>
-        Trip start: {start}
+        <h1>{user.displayName}'s trip to {destination}!</h1>
+        <div>
+          Trip start: {start}
+        </div>
+        <div>
+          Trip End: {end}
+        </div>
+        <div>
+          <button className="" onClick={event => deleteTripHandler(event)}>Delete this trip</button>
+        </div>
       </div>
-      <div>
-        Trip End: {end}
-      </div>
-      <div>
-        <button className="" onClick={event => deleteTripHandler(event)}>Delete this trip</button>
-      </div>
-    </div>
-  );
+    );
   }
 }
 
-const ItineraryForm = ({user}) => {
+const ItineraryForm = ({ user, trip, setTrip }) => {
   const [destination, setDestination] = useState("");
-    const [start, setStart] = useState(null);
-    const [end, setEnd] = useState(null);
-    const [error, setError] = useState(null);
+  const [start, setStart] = useState(null);
+  const [end, setEnd] = useState(null);
+  const [error, setError] = useState(null);
 
-    const onChangeHandler = event => {
-      const { name, value } = event.currentTarget;
-      if (name === "tripDestination") {
-          setDestination(value);
-      } else if (name === "tripStart") {
-          setStart(value);
-      } else if (name === "tripEnd") {
-          setEnd(value);
-      }
+  const onChangeHandler = event => {
+    const { name, value } = event.currentTarget;
+    if (name === "tripDestination") {
+      setDestination(value);
+    } else if (name === "tripStart") {
+      setStart(value);
+    } else if (name === "tripEnd") {
+      setEnd(value);
+    }
   };
 
   const createTripHandler = async (event, destination, start, end) => {
-      event.preventDefault();
-      if (user.trip==null || !user.trip) {
-        console.log('entered trip is null');
-        if (destination && start && end) {
+    event.preventDefault();
+    console.log('entered tripHandler');
+    if (trip == null || !trip) {
+      console.log('entered trip is null');
+      if (destination && start && end) {
         try {
-            await generateTripDocument(user, destination, start, end);
-            console.log('trip added');
-            window.location.href = '/mytrip';
+          await generateTripDocument(user, destination, start, end);
+          setTrip(user.trip);
+          console.log('trip added');
+          window.location.href = '/mytrip';
         }
         catch (error) {
-            setError('Error creating trip');
+          setError('Error creating trip');
         }
         setDestination("");
         setStart(null);
         setEnd(null);
-      } 
+      }
       else {
         setError("Error creating trip- not all details entered");
       }
@@ -89,7 +141,7 @@ const ItineraryForm = ({user}) => {
         Itinerary Planner
       </div>
       <form>
-        <input list="destination-of-trip" className="destination-input"
+        <input required list="destination-of-trip" className="destination-input"
           onChange={event => onChangeHandler(event)}
           name="tripDestination" id="tripDestination" placeholder="Enter destination (Country)" />
         <datalist id="destination-of-trip" className="destination-datalist">
@@ -125,22 +177,21 @@ const ItineraryForm = ({user}) => {
   );
 }
 
+
 const MyTrip = () => {
   const user = useContext(UserContext);
   const { photoURL, displayName, email } = user;
   const [trip, setTrip] = useState(user.trip);
+  const [error, setError] = useState(null);
 
   // get trip data from document reference
-  useEffect(() => {
-    if (trip){
-    const getTripData = async (trip) => {
-      const tripData = await getTripDocument(trip.id);
-      console.log(tripData);
-      setTrip(tripData);
-    }
-    getTripData(trip);
-  }
-  }, []);
+  // useEffect(() => {
+  //   console.log("from myTrip: ", trip)
+  //   if (user.trip) {
+  //       setTrip(user.trip);
+  //   }
+  // }, []);
+
 
   return (
     <div className="mytrip">
@@ -157,25 +208,22 @@ const MyTrip = () => {
           <button className="" onClick={() => { auth.signOut() }}>Sign out</button>
         </div>
         <div className="itinerary-form-or-title-container">
-          {(trip && trip!=null) ? <TripTitle trip={trip} setTrip={setTrip} user={user} /> : <ItineraryForm user={user}/>}
+          {trip && trip.destination ? <TripTitle trip={trip} setTrip={setTrip} user={user} /> : <ItineraryForm user={user} trip={trip} setTrip={setTrip} />}
         </div>
         <div className="favourite-activities-container">
           <div className="activitieslistcontainer">
-                    <h4>My Activities</h4>
-                    {/*<RenderActivities items={items} setItems={setItems}/>*/}
+            <h4>My Activities</h4>
+            {/*<RenderActivities items={items} setItems={setItems}/>*/}
           </div>
         </div>
         <div className="favourite-equipment-list-container">
           <div className="equipmentlistcontainer">
-                    <h4>My Equipment List</h4>
-                    {/*<RenderListItems items={items} setItems={setItems}/>*/}
+            <h4>My Equipment List</h4>
+            {/*<RenderListItems items={items} setItems={setItems}/>*/}
           </div>
         </div>
         <div className="notes-container">
-          <div className="notescontainer">
-                    <h4>My Notes</h4>
-                    {/*<RenderNotes />*/}
-          </div>
+        {trip &&  <RenderNotes trip={trip} setTrip={setTrip} user={user} setError={setError}/>}
         </div>
       </div>
     </div>

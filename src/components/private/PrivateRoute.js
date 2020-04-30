@@ -4,6 +4,7 @@ import { UserContext } from "../../context/user";
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   const currentUserState  = useContext(UserContext);
+  if (currentUserState){
   return (
     <Route
       {...rest}
@@ -16,6 +17,8 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
       }
     />
   );
+    }
+    return null;
 };
 
 export default PrivateRoute;

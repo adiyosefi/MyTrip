@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import './Home.css';
 import { countries } from './../../../server/countries';
@@ -9,10 +9,27 @@ import { generateTripDocument } from './../../../server/firebase'
 const Home = () => {
     const user = useContext(UserContext);
 
+    console.log(user);
+
     const [destination, setDestination] = useState("");
     const [start, setStart] = useState(null);
     const [end, setEnd] = useState(null);
     const [error, setError] = useState(null);
+    const [trip, setTrip] = useState((user && user.trip) ? user.trip : null);
+    console.log(trip);
+
+      // get trip data from document reference
+  useEffect(() => {
+    let mounted = true;
+    if(mounted){
+    if (user && user.trip) {
+        setTrip(user.trip);
+        console.log(trip);
+    }
+    }
+    return () => mounted = false;  
+  }, [user]);
+
 
     const onChangeHandler = event => {
         const { name, value } = event.currentTarget;
@@ -25,12 +42,13 @@ const Home = () => {
         }
     };
 
-    const createTripHandler = async (event, destination, start, end, error, setError) => {
+    const createTripHandler = async (event, destination, start, end, error, setError, trip, setTrip) => {
         event.preventDefault();
-        if (user.trip==null || !user.trip) {
+        if (trip == null || !trip) {
             if (destination && start && end) {
             try {
                 await generateTripDocument(user, destination, start, end);
+                setTrip(user.trip);
                 console.log('trip added');
                 window.location.href = '/mytrip';
             }
@@ -90,7 +108,7 @@ const Home = () => {
                             </div>
                             <button name="form-submit"
                                 onClick={event => {
-                                    createTripHandler(event, destination, start, end, error, setError);
+                                    createTripHandler(event, destination, start, end, error, setError, trip, setTrip);
                                 }}
                                 className="form-button">Start planning your trip</button>
                         </form>

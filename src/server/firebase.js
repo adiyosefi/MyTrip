@@ -70,50 +70,49 @@ const getUserDocument = async uid => {
 // create trip
 export const generateTripDocument = async (user, destination, start, end) => {
   if (!user) return;
-  var tripRef = firestore.collection("trips").doc();
   const userRef = firestore.doc(`users/${user.uid}`);
     try {
-      await tripRef.set({
-        destination: destination,
-        start: start, 
-        end: end
+      await userRef.update({
+        trip: {
+          destination: destination,
+          start: start, 
+          end: end
+        }
       });
     } catch (error) {
-      console.error("Error creating trip document", error);
+      console.error("Error updating user document", error);
     }
-
-    updateUserAddNewTrip(userRef, tripRef);
   
-  return tripRef;
+  return userRef;
 };
-const updateUserAddNewTrip = (userRef,tripRef) => {
-  return userRef.update({
-    trip: tripRef
-})
-.then(function() {
-    console.log("User document successfully updated!");
-})
-.catch(function(error) {
-    // The document probably doesn't exist.
-    console.error("Error updating user document: ", error);
-});
-}
+// const updateUserAddNewTrip = (userRef,tripRef) => {
+//   return userRef.update({
+//     trip: tripRef
+// })
+// .then(function() {
+//     console.log("User document successfully updated!");
+// })
+// .catch(function(error) {
+//     // The document probably doesn't exist.
+//     console.error("Error updating user document: ", error);
+// });
+// }
 
 // get trip data from document
-export const getTripDocument = async tid => {
-  if (!tid) return null;
-  try {
-    const tripDocument = await firestore.doc(`trips/${tid}`).get();
-    return {
-      tid,
-      ...tripDocument.data()
-    };
-  } catch (error) {
-    console.error("Error fetching trip", error);
-  }
-};
+// export const getTripDocument = async tid => {
+//   if (!tid) return null;
+//   try {
+//     const tripDocument = await firestore.doc(`trips/${tid}`).get();
+//     return {
+//       tid,
+//       ...tripDocument.data()
+//     };
+//   } catch (error) {
+//     console.error("Error fetching trip", error);
+//   }
+// };
 
-export const deleteTripFromUser = (user) => {
+export const deleteTripFromUser = (user, trip) => {
   const userRef = firestore.doc(`users/${user.uid}`);
   return userRef.update({
     trip: null
@@ -126,14 +125,14 @@ export const deleteTripFromUser = (user) => {
     console.error("Error updating user document: ", error);
 });
 }
-export const deleteTripFromTrips = (trip) => {
-  const tripRef = firestore.doc(`trips/${trip.tid}`);
-  return tripRef.delete().then(function() {
-    console.log("Document successfully deleted!");
-}).catch(function(error) {
-    console.error("Error removing document: ", error);
-});
-}
+// export const deleteTripFromTrips = (trip) => {
+//   const tripRef = firestore.doc(`trips/${trip.tid}`);
+//   return tripRef.delete().then(function() {
+//     console.log("Document successfully deleted!");
+// }).catch(function(error) {
+//     console.error("Error removing document: ", error);
+// });
+// }
 
 
 // generate public equipment list document
@@ -154,7 +153,7 @@ export const generatePublicEquipmentListDocument = async (displayName, destinati
 }
 
 // search public equipment lists
-export const searchPublicEquipmentListDocuments = (destination, season, category) => {
+export const searchPublicEquipmentListDocuments = async (destination, season, category) => {
   var equipmentlistsRef = firestore.collection("equipmentlists");
   var destinationQuery = equipmentlistsRef.where("destination", "==", destination);
   var seasonQuery = equipmentlistsRef.where("season", "==", season);
@@ -178,13 +177,30 @@ export const searchPublicEquipmentListDocuments = (destination, season, category
   } else if (category && !destination && !season) {
     searchResults = categoryQuery;
   } 
-  searchResults.get().then(function (querySnapshot) {
-    querySnapshot.forEach(function (doc) {
+  const querySnapshot = await searchResults.get();
+  querySnapshot.forEach((doc) => {
         console.log(doc.id, ' => ', doc.data());
         searchResultsArray.push({id: doc.id, data: doc.data()});
-    });
   });
   return searchResultsArray;
+}
+
+// add notes field to user's trip
+export const addNotesFieldToTrip = (user, notes) => {
+  const userRef = firestore.doc(`users/${user.uid}`);
+  return userRef.update({
+    trip: {
+      ...user.trip,
+      notes: notes
+    }
+})
+.then(function() {
+    console.log("Trip document successfully updated!");
+})
+.catch(function(error) {
+    // The document probably doesn't exist.
+    console.error("Error updating trip document: ", error);
+});
 }
 
 

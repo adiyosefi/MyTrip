@@ -28,6 +28,7 @@ export function AddEquipmentListToDBForm({ displayName, equipmentList, toggleAdd
         try {
             generatePublicEquipmentListDocument(displayName, destination, season, category, equipmentList);
             console.log('list created successfully');
+            // redirect to list page
         }
         catch (error) {
             setError('Error generating public equipment list');
@@ -50,7 +51,7 @@ export function AddEquipmentListToDBForm({ displayName, equipmentList, toggleAdd
                         name="tripDestination" id="tripDestination"
                         placeholder="Enter destination (Country)" />
                     <datalist id="destination-of-trip" className="destination-datalist">
-                        <option value="Worldwide" selected></option>
+                        <option value="Worldwide" defaultValue></option>
                         {countries.map(country => {
                             return (
                                 <option value={country.name} key={country.code}></option>
@@ -62,7 +63,7 @@ export function AddEquipmentListToDBForm({ displayName, equipmentList, toggleAdd
                     <label htmlFor="season" className=""> Season: </label>
                     <select id="season" name="season"
                         onChange={event => onChangeHandler(event)}>
-                        <option value="All Year Round" selected>All Year Round</option>
+                        <option value="All Year Round" defaultValue>All Year Round</option>
                         <option value="Summer">Summer</option>
                         <option value="Winter">Winter</option>
                         <option value="Fall">Fall</option>
@@ -73,15 +74,15 @@ export function AddEquipmentListToDBForm({ displayName, equipmentList, toggleAdd
                     <label htmlFor="category" className=""> Category: </label>
                     <select id="category" name="category"
                         onChange={event => onChangeHandler(event)}>
-                        <option value="All Categories" selected>All Categories</option>
+                        <option value="All Categories" defaultValue>All Categories</option>
                         <option value="Adventure trip">Adventure trip</option>
                         <option value="City trip">City trip</option>
                         <option value="Relaxing vacation">Relaxing Vacation</option>
                     </select>
                 </div>
                 <div>
-          {error}
-        </div>
+                    {error}
+                </div>
                 <div>
                     <button
                         className=""

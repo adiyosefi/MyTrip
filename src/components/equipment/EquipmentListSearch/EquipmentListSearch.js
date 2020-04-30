@@ -6,12 +6,13 @@ import { searchPublicEquipmentListDocuments } from './../../../server/firebase';
 import { countries } from './../../../server/countries';
 
 const RenderEquipmentLists = ({ lists }) => {
+
     const listsItems = lists.map((list) => {
         return (
             <li key={list.id}>
                 <ul className="resultequipmentlist">
                     <div className="equipmentlistcontent">
-                        <h5>{list.data.displayName}'s Equipmen List</h5>
+                        <h5>{list.data.displayName}'s Equipment List</h5>
                         <div>
                             Destination: {list.data.destination}
                         </div>
@@ -44,8 +45,7 @@ const RenderEquipmentLists = ({ lists }) => {
         );
     });
 
-    if (lists.length) {
-        console.log(lists);
+    if (lists) {              
         return (
             <div>
                 <ul className="equipmentlistslist">
@@ -58,6 +58,7 @@ const RenderEquipmentLists = ({ lists }) => {
             <div></div>
         );
     }
+    
 }
 
 
@@ -69,8 +70,7 @@ const EquipmentListSearch = () => {
     const [category, setCategory] = useState("");
     const [error, setError] = useState(null);
 
-    const [resultsLists, setResultLists] = useState([]);
-    var equipmentListsResults = [];
+    const [resultsLists, setResultLists] = useState("");
 
     const onChangeHandler = event => {
         const { name, value } = event.currentTarget;
@@ -83,11 +83,10 @@ const EquipmentListSearch = () => {
         }
     };
 
-    const searchPublicEquipmentListDB = async (event, destination, season, category) => {
+    const searchPublicEquipmentListDB = async (event, destination, season, category, setResultLists) => {
         event.preventDefault();
         try {
-            equipmentListsResults = await searchPublicEquipmentListDocuments(destination, season, category);
-            console.log(equipmentListsResults);
+            const equipmentListsResults = await searchPublicEquipmentListDocuments(destination, season, category);
             setResultLists(equipmentListsResults);
         }
         catch (error) {
@@ -107,14 +106,17 @@ const EquipmentListSearch = () => {
                         Search an Equipment List
                     </div>
                     <div className="formcontainer">
-                        <form className="el-search-form">
+                        <form className="el-search-form"
+                        onSubmit={event => {
+                            searchPublicEquipmentListDB(event, destination, season, category, setResultLists);
+                        }}>
                             <div className="search-line">
                                 <input list="destination-of-trip" className="destination-input"
                                     onChange={event => onChangeHandler(event)}
                                     name="tripDestination" id="tripDestination"
                                     placeholder="Enter destination (Country)" />
                                 <datalist id="destination-of-trip" className="destination-datalist">
-                                    <option value="Worldwide" selected></option>
+                                    <option value="Worldwide" defaultValue></option>
                                     {countries.map(country => {
                                         return (
                                             <option value={country.name} key={country.code}></option>
@@ -126,7 +128,7 @@ const EquipmentListSearch = () => {
                                 <label htmlFor="season" className=""> Season: </label>
                                 <select id="season" name="season"
                                     onChange={event => onChangeHandler(event)}>
-                                    <option value="All Year Round" selected>All Year Round</option>
+                                    <option value="All Year Round" defaultValue>All Year Round</option>
                                     <option value="Summer">Summer</option>
                                     <option value="Winter">Winter</option>
                                     <option value="Fall">Fall</option>
@@ -137,7 +139,7 @@ const EquipmentListSearch = () => {
                                 <label htmlFor="category" className=""> Category: </label>
                                 <select id="category" name="category"
                                     onChange={event => onChangeHandler(event)}>
-                                    <option value="All Categories" selected>All Categories</option>
+                                    <option value="All Categories" defaultValue>All Categories</option>
                                     <option value="Adventure trip">Adventure trip</option>
                                     <option value="City trip">City trip</option>
                                     <option value="Relaxing vacation">Relaxing Vacation</option>
@@ -149,9 +151,7 @@ const EquipmentListSearch = () => {
                             <div>
                                 <button
                                     className=""
-                                    onClick={event => {
-                                        searchPublicEquipmentListDB(event, destination, season, category);
-                                    }}>
+                                    type="submit">
                                     Search</button>
                             </div>
                         </form>
@@ -164,7 +164,7 @@ const EquipmentListSearch = () => {
             <div className="contentcontainer">
                 <div className="listcontainer">
                     <h4>Search Results</h4>
-                    <RenderEquipmentLists lists={resultsLists} />
+                    {resultsLists && <RenderEquipmentLists lists={resultsLists} />}
                 </div>
             </div>
         </div>
