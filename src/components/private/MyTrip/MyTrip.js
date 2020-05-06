@@ -1,34 +1,208 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../../context/user";
 import { auth, getTripDocument } from "../../../server/firebase";
 import './MyTrip.css';
 import moment from 'moment';
 import { countries } from './../../../server/countries';
-import { generateTripDocument, deleteTripFromUser, deleteTripFromTrips, addNotesFieldToTrip } from './../../../server/firebase'
+import { generateTripDocument, deleteTripFromUser } from './../../../server/firebase'
 
-const RenderNotes = ({trip, setTrip, user, setError}) => {
-  const [notes, setNotes] = useState("");
+// HOOKS
+import { useFavoriteEquipmentList } from '../../../hooks/useFavoriteEquipmentList';
+import { useNotes } from '../../../hooks/useNotes';
 
-  const saveNotesToTrip = (event, user, notes) => {
+const RenderFavoriteActivities = ({ user }) => {
+  const [favoriteActivities, setFavoriteActivities] = useState([]);
+
+  useEffect(() => {
+    console.log("from RenderFavoriteActivities: ", user.trip.favoriteactivities)
+    if (user.trip.favoriteactivities) {
+      setFavoriteActivities(user.trip.favoriteactivities);
+    }
+  }, []);
+
+
+  const renderSeason = (season) => {
+    return (
+        <div>
+            Season: {season}
+        </div>
+    );
+}
+
+const renderCategory = (category) => {
+    return (
+        <div>
+            Category: {category}
+        </div>
+    );
+}
+
+const renderPicture = (picture) => {
+    return (
+        <div>
+            <img src={picture} />
+        </div>
+    );
+}
+
+function titleCase(str) {
+  var splitStr = str.toLowerCase().split(' ');
+  for (var i = 0; i < splitStr.length; i++) {
+      // You do not need to check if i is larger than splitStr length, as your for does that for you
+      // Assign it back to the array
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+  }
+  // Directly return the joined string
+  return splitStr.join(' '); 
+}
+
+  const activitiesList = favoriteActivities.map((activity) => {
+    return (
+      <li key={activity.id} className="activityitem">
+        <div className="activitycontent">
+          {activity.data.picture && renderPicture(activity.data.picture)}
+          <h5>{titleCase(activity.data.activityName)}</h5>
+          <div>
+            Destination: {activity.data.destination}
+          </div>
+          {activity.data.season && renderSeason(activity.data.season)}
+          {activity.data.category && renderCategory(activity.data.category)}
+          <div>
+            {activity.data.description}
+          </div>
+          </div>
+      </li>
+    );
+  });
+
+  return (
+    <div className="favoriteactivitiescontainer">
+      <h4>My Activities</h4>
+      {
+        favoriteActivities && (
+            <div>
+              <ul className="activitieslist">
+                {activitiesList}
+              </ul>
+            </div>
+          )
+      }
+    </div>
+  );
+}
+
+const RenderFavoriteEquipmentList = ({ user }) => {
+  const [items, setItems] = useFavoriteEquipmentList(user);
+  const [inputState, setInput] = useState("");
+
+  const toggleChecked = useCallback(id => {
+    setItems(items.map(item => ({
+      ...item,
+      checked: item.id === id ? !item.checked : item.checked
+    })));
+  }, [setItems, items]);
+
+  const handleEdit = useCallback(id => {
+    setItems(items.map(item => ({
+      ...item,
+      onEditMode: item.id === id ? !item.onEditMode : item.onEditMode
+    })));
+  }, [setItems, items]);
+
+  const handleRemove = (id) => {
+    const newList = items.filter(item => item.id !== id);
+    setItems(newList);
+  };
+
+  const handleInputChange = (e, id) => {
+    if (inputState != "") {
+      if (e.which === 13) {
+        setItems(items.map(item => ({
+          ...item,
+          label: item.id === id ? e.target.value : item.label,
+          onEditMode: item.id === id ? !item.onEditMode : item.onEditMode
+        })));
+        setInput("");
+      }
+    }
+  }
+
+    const listItems = items.map((item) => {
+      return (
+        <li key={item.id} className="equipmentlistitem">
+          <div className="equipmentlistitemcontent">
+            <div className="pretty p-icon p-round">
+              <input type="checkbox" id={`check-item-${item.id}`} onClick={() => toggleChecked(item.id)} />
+              <div className="state">
+                <i className="icon mdi mdi-check"></i>
+                <label></label>
+              </div>
+            </div>
+            <input type="text" value={inputState}
+              placeholder={item.label}
+              className={item.onEditMode ? 'showEditInput' : 'hideEditInput'}
+              onKeyUp={(e) => handleInputChange(e, item.id)}
+              onChange={e => setInput(e.target.value)} />
+            <label htmlFor={`check-item-${item.id}`} className={`${item.checked ? 'item-line-through' : 'item-none'}
+                   ${item.onEditMode ? 'hideP' : 'showP'}`}>{item.label} </label>
+            <button className={item.onEditMode ? 'hoverBtn' : 'editbtn'} onClick={
+              () => { handleEdit(item.id) }
+            }>
+              <i className="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button className="removebtn" onClick={
+              () => { handleRemove(item.id) }
+            }>
+              <i className="fa fa-trash" aria-hidden="true"></i>
+            </button>
+          </div>
+        </li>
+      );
+    });
+
+  return (
+    <div className="favoriteequipmentlistcontainer">
+      <h4>My Equipment List</h4>
+      {
+        items && (
+            <div>
+              <ul className="equipmentlistlist">
+                {listItems}
+              </ul>
+            </div>
+          )
+      }
+    </div>
+  );
+}
+
+const RenderNotes = ({ user, setError }) => {
+  const [notes, setNotes] = useNotes(user);
+
+  // useEffect(() => {
+  //   console.log("from notes: ", notes)
+  //   setNotes(notes);
+  // }, []);
+
+  // const saveNotesToTrip = async (event, notes) => {
+  //   event.preventDefault();
+  //   if (notes) {
+  //     setNotes(notes);
+  //     console.log('notes added to trip successfully');
+  //   } else {
+  //     setError('notes is not filled');
+  //   }
+  // };
+
+  const clearNotesInTrip = async (event, notes) => {
     event.preventDefault();
     if (notes) {
-      try {
-        addNotesFieldToTrip(user, notes);
-        setTrip({
-          ...trip,
-          notes: notes
-        });
-        console.log('notes added to trip successfully');
-        // redirect to list page
-      }
-      catch (error) {
-        setError('Error gadding notes to trip');
-      }
+      setNotes("");
+      console.log('notes cleared in trip successfully-', notes);
     } else {
       setError('notes is not filled');
     }
-    setNotes("");
   };
 
   const onChangeHandler = event => {
@@ -40,22 +214,19 @@ const RenderNotes = ({trip, setTrip, user, setError}) => {
 
   return (
     <div className="notescontainer">
-            <h4>My Notes</h4>
-            <div className="text">
-              <form>
-                <textarea id="notepad" name="notes" value={notes}
-                  placeholder="Start typing ..."
-                  onChange={event => onChangeHandler(event)}>
-                  </textarea>
-                <button onClick={event => {
-                  saveNotesToTrip(event, user, notes);
-                }}>Save notes in my trip</button>
-              </form>
-              <div>
-                {trip.notes}
-              </div>
-            </div>
-          </div>
+      <h4>My Notes</h4>
+      <div className="text">
+        <form>
+          <textarea id="notepad" name="notes" value={notes}
+            placeholder="Start typing ..."
+            onChange={event => onChangeHandler(event)}>
+          </textarea>
+          <button onClick={event => {
+            clearNotesInTrip(event, notes);
+          }}>Clear notes</button>
+        </form>
+      </div>
+    </div>
   );
 }
 
@@ -185,12 +356,12 @@ const MyTrip = () => {
   const [error, setError] = useState(null);
 
   // get trip data from document reference
-  // useEffect(() => {
-  //   console.log("from myTrip: ", trip)
-  //   if (user.trip) {
-  //       setTrip(user.trip);
-  //   }
-  // }, []);
+  useEffect(() => {
+    console.log("from myTrip: ", trip)
+    if (user.trip) {
+      setTrip(user.trip);
+    }
+  }, []);
 
 
   return (
@@ -199,7 +370,7 @@ const MyTrip = () => {
         <div className="user-profile-container">
           <div>
             <img className="profile-picture"
-              src={photoURL || 'https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fblank-profile-picture.png?alt=media&token=cf778c36-c451-48e5-bccb-2fe9923ca724'} />
+              src={photoURL || 'https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fprofile-pictures%2Fblank-profile-picture.png?alt=media&token=fd112c3c-e460-4e37-997b-36a914682bf9'} />
           </div>
           <div className="">
             <h2 className="">{displayName}</h2>
@@ -212,18 +383,16 @@ const MyTrip = () => {
         </div>
         <div className="favourite-activities-container">
           <div className="activitieslistcontainer">
-            <h4>My Activities</h4>
-            {/*<RenderActivities items={items} setItems={setItems}/>*/}
+          {trip && <RenderFavoriteActivities user={user} />}
           </div>
         </div>
         <div className="favourite-equipment-list-container">
           <div className="equipmentlistcontainer">
-            <h4>My Equipment List</h4>
-            {/*<RenderListItems items={items} setItems={setItems}/>*/}
+            {trip && <RenderFavoriteEquipmentList user={user} />}
           </div>
         </div>
         <div className="notes-container">
-        {trip &&  <RenderNotes trip={trip} setTrip={setTrip} user={user} setError={setError}/>}
+          {trip && <RenderNotes user={user} setError={setError} />}
         </div>
       </div>
     </div>

@@ -126,7 +126,7 @@ const SignUp = () => {
           accept="image/*"
           name="userPicture"
           filename={file => displayName + file.name.split('.')[1] }
-          storageRef={storage.ref('images')}
+          storageRef={storage.ref('images/profile-pictures')}
           onUploadStart={handleUploadStart}
           onUploadError={handleUploadError}
           onUploadSuccess={handleUploadSuccess}

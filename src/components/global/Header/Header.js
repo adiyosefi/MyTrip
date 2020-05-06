@@ -9,7 +9,7 @@ const Header = () => {
     return (
             <div className="header">
                 <ul className="navlist">
-                    <Link to="/home" className="logo"><img src="/assets/images/logo.png" /></Link>
+                    <Link to="/home" className="logo"><img src="https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Flogo.png?alt=media&token=77df1670-fc74-4324-bbd1-178410670546" /></Link>
                     <li><NavLink to="/home" className="navitem">Home</NavLink></li>
                     <li><NavLink to="/about" className="navitem">About</NavLink></li>
                     <li className="navitem-equipment"><NavLink to="/equipmentlistsearch" className="navitem dropbtn">Equipment Lists</NavLink>

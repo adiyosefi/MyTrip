@@ -1,6 +1,6 @@
 
 .equipmentlist .background {
-    background-image: url("/assets/images/AddEquipmentList.jpg");
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fbackgrounds%2FAddEquipmentList.jpg?alt=media&token=2c12368b-bf54-47ea-b74c-38ef24dddacf");
     background-size: cover;
     height: 100vh;
     width: 100vw;
@@ -119,6 +119,10 @@
     padding: 0 10px;
 }
 
+.equipmentlist .equipmentlistitem:hover {
+    background-color: #ffdde4;
+}
+
 .equipmentlist .equipmentlistitemcontent {
     height: 100%;
     width: 100%;
@@ -202,4 +206,59 @@
 
 .equipmentlist .equipmentlistitemcontent .removebtn:hover {
     color: black;
+}
+
+.equipmentlist .buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 60px;
+    right: 90px;
+} 
+
+.equipmentlist .set-as-fav-el-button {
+    margin-bottom: 10px;
+}
+
+.equipmentlist .add-to-el-db-button {
+    flex: 1;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+    height: 100px;
+    width: 180px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: thin;
+    color: white;
+    border-color: transparent;
+    cursor: pointer;
+    background-color: #ff9c57;
+    box-shadow: 0px 2px 2px 0px rgba(120,116,120,0.59);
+}
+
+.equipmentlist .add-to-el-db-button:hover {
+    background-color: #ffb75a;
+}
+
+.equipmentlist .open-add-to-el-db-button {
+    height: 50px;
+    width: 180px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: thin;
+    color: white;
+    border-color: transparent;
+    cursor: pointer;
+    background-color: rgb(179, 8, 8);
+    box-shadow: 0px 2px 2px 0px rgba(120,116,120,0.59);
+}
+
+.equipmentlist .open-add-to-el-db-button:hover {
+    background-color: rgb(209, 20, 20);
 }

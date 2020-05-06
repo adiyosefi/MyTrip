@@ -1,3 +1,194 @@
-.equipmentlistsearch {
-    margin-top: 100px;
+
+.equipmentlistsearch .background {
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fbackgrounds%2Fel-search-background.jpg?alt=media&token=8adcc510-c5c2-4c54-921c-8d6c6c9bc542");
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    background-position: center top;
+    z-index: -1;
 }
+
+.equipmentlistsearch .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -140px;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.equipmentlistsearch .title {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(203, 204, 188, 0.959);
+    font-weight: bold;
+    margin-top: 300px;
+    width: fit-content;
+    font-size: 50px;
+    position: relative;
+    height: fit-content;
+}
+
+.equipmentlistsearch .formcontainer {
+    text-align: center;
+    position: relative;
+    margin-top: 40px;
+    height: fit-content;
+    width: 900px;
+    background-color: white;
+    box-shadow: 0 20px 22px 0 rgba(0,0,0,0.12);
+    border: solid 1px #f5f5f5;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.equipmentlistsearch .formcontainer form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+button:focus {
+    outline: none;
+}
+
+.equipmentlistsearch .destination-input {
+    margin-right: 15px;
+}
+
+.equipmentlistsearch .season-input {
+    margin-right: 15px;
+}
+
+.equipmentlistsearch .category-input {
+    margin-right: 15px;
+}
+
+.equipmentlistsearch .el-search-button {
+    flex: 1;
+    height: 55px;
+    width: 100px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: thin;
+    color: white;
+    border-color: transparent;
+    cursor: pointer;
+    background-color: #ff9c57;
+    -webkit-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    -moz-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+}
+
+.equipmentlistsearch .el-search-button:hover {
+    background-color: #ffb75a;
+}
+
+.equipmentlistsearch .goto-ownlist-link {
+    color: inherit;
+    font-weight: bold;
+}
+
+.equipmentlistsearch .goto-ownlist-link:hover {
+    color: #9c9c9c;
+    text-decoration: none;
+}
+
+.equipmentlistsearch .contentcontainer {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.equipmentlistsearch .results-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.equipmentlistsearch .equipmentlist-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.equipmentlistsearch .each-list-and-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.equipmentlistsearch .listcontainer {
+    height: 200px;
+    width: 500px;
+    background-color: lightpink;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    -webkit-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    -moz-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    overflow: auto;
+}
+
+.equipmentlistsearch .lists-search-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.equipmentlistsearch .list-title {
+    font-weight: bold;
+}
+
+.equipmentlistsearch .list-metadata {
+    font-size: 13px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.equipmentlistsearch .list-destination span, .equipmentlistsearch .list-season span,
+ .equipmentlistsearch .list-category span {
+   text-decoration: underline;
+}
+
+.equipmentlistsearch .list-season-and-category {
+    display: flex;
+    justify-content: space-between;
+}
+
+.equipmentlistsearch .equipmentlistlist {
+    padding: 0;
+    width: 75%;
+}
+.equipmentlistsearch .equipmentlistlist ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.equipmentlistsearch .equipmentlistitem {
+    background-color: #ffe9ee;
+    height: 40px;
+    width: 100%;
+    border: 1px solid #ffdde4;
+    padding: 0 20px;
+}
+
+.equipmentlistsearch .equipmentlistitemcontent {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    display: flex;
+}
+
+.equipmentlistsearch .fav-list-button {
+    margin-left: 20px;
+}
+

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { firestore } from '../server/firebase';
 
 
-export const useItems = (user) => {
+export const usePrivateEquipmentList = (user) => {
 
     const [items, setItems] = useState([]); //useState() hook, sets initial state to an empty array
 

@@ -1,5 +1,5 @@
 .home .background {
-    background-image: url("/assets/images/Home.jpg");
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fbackgrounds%2FHome.jpg?alt=media&token=dfa3b185-d9a6-48f9-bda1-b94e366c10d9");
     background-size: cover;
     background-position: top;
     height: calc(100vw * (9/16));

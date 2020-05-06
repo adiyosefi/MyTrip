@@ -1,26 +1,28 @@
 import { useState, useEffect, useCallback } from 'react';
 import { firestore } from '../server/firebase';
 
+export const useFavoriteEquipmentList = (user) => {
 
-export const useTrip = (trip) => {
+    const [items, setItems] = useState([]); //useState() hook, sets initial state to an empty array
 
-    const [trip, setTrip] = useState([]); //useState() hook, sets initial state to an empty array
-
-    const tripRef = firestore.doc(`trips/${trip.tid}`);
+    const userRef = firestore.doc(`users/${user.uid}`);
 
     useEffect(() => {
-        tripRef.onSnapshot(function(doc) {
-            if (doc.data().privateequipmentlist){
+        userRef.onSnapshot(function(doc) {
+            if (doc.data().trip.favoriteequipmentlist){
             console.log("Current data: ", doc.data());
-            setTrip(doc.data());
+            setItems(doc.data().trip.favoriteequipmentlist);
             }
         });
     }, []);
 
-    const syncTrip = useCallback(data => {
+    const syncItems = useCallback(data => {
         console.log(data);
-        tripRef.set({
-            data
+        userRef.update({
+            trip: {
+                ...user.trip,
+                favoriteequipmentlist: data
+            }
         })
             .then(function () {
                 console.log("Trip document successfully updated!");
@@ -31,5 +33,5 @@ export const useTrip = (trip) => {
             });
     }, []);
 
-    return [trip, syncTrip];
+    return [items, syncItems];
 };

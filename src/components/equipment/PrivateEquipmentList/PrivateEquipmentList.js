@@ -4,9 +4,12 @@ import { v4 as uuidv4 } from 'uuid';
 //import { } from './../../../server/firebase';
 import {UserContext} from './../../../context/user';
 import AddEquipmentListToDBForm from './../AddEquipmentListToDBForm/AddEquipmentListToDBForm'
+import {addFavoriteEquipmentListToUserTrip} from './../../../server/firebase';
+import Button from '@material-ui/core/Button';
+
 
 // HOOKS
-import {useItems} from '../../../hooks/useItems';
+import {usePrivateEquipmentList} from '../../../hooks/usePrivateEquipmentList';
 
 
 const RenderListItems = ({items, setItems, user}) => {
@@ -97,20 +100,62 @@ const RenderListItems = ({items, setItems, user}) => {
     }
 };
 
+const ListButtons = ({items, user, error, setError}) => {
+    const [isAddEquipmentListToDBFormOpen, setIsAddEquipmentListToDBFormOpen] = useState(false);
+
+function toggleAddEquipmentListToDBForm() {
+setIsAddEquipmentListToDBFormOpen(!isAddEquipmentListToDBFormOpen);
+}
+
+const handleSetFavoriteEquipmentList = async (event, user, items) => {
+event.preventDefault();
+console.log('entered handleSetFavoriteEquipmentList');
+if (user.trip != null || user.trip) {
+console.log('entered trip is not null');
+try {
+  await addFavoriteEquipmentListToUserTrip(user, items);
+  console.log('trip updated');
+  window.location.href = '/mytrip';
+}
+catch (error) {
+  setError('Error creating trip');
+}
+} else {
+    setError('Create trip first!');
+    console.log("error need to create trip first-" , error);
+    window.location.href = '/mytrip';
+}
+}
+    return (
+        <div className="buttons-container">
+            <div className="set-as-fav-el-button">
+            <Button variant="contained" color="secondary" style={{ width: 180, fontWeight: 'bold',
+             fontSize: 14, fontFamily: 'Poppins, sans-serif', textTransform: 'none', borderRadius: '20px' }}
+            onClick={e => handleSetFavoriteEquipmentList(e, user, items)}>
+                Set as my favorite Equipment List
+            </Button>
+            </div>
+                <button onClick={toggleAddEquipmentListToDBForm} 
+                className={`${isAddEquipmentListToDBFormOpen ? 'open-add-to-el-db-button' : 'add-to-el-db-button'}`}>
+                    {`${isAddEquipmentListToDBFormOpen ? 'Close' : 'Add to our Equipment Lists Database'}`}</button>
+                <div>
+                    {isAddEquipmentListToDBFormOpen && <AddEquipmentListToDBForm 
+                    displayName={user.displayName}
+                    equipmentList={items}
+                     toggleAddEquipmentListToDBForm={toggleAddEquipmentListToDBForm}/>}
+                </div>
+        </div>
+    );
+}
+
 
 const PrivateEquipmentList = () => {
     const user = useContext(UserContext);
 
-    const [items, setItems] = useItems(user);
+    const [items, setItems] = usePrivateEquipmentList(user);
 
     const [labelstate, setLabel] = useState("");
     const [error, setError] = useState("");
-
-    const [isAddEquipmentListToDBFormOpen, setIsAddEquipmentListToDBFormOpen] = useState(false);
-
-  function toggleAddEquipmentListToDBForm() {
-    setIsAddEquipmentListToDBFormOpen(!isAddEquipmentListToDBFormOpen);
-  }
 
     const handleClick = () => {
         if (labelstate != "") {
@@ -148,9 +193,6 @@ const PrivateEquipmentList = () => {
         }
     }
 
-    const handleSetFavoriteEquipmentList = () => {
-
-    }
 
     return (
         <div className="equipmentlist">
@@ -176,15 +218,8 @@ const PrivateEquipmentList = () => {
                     <h4>My Equipment List</h4>
                     <RenderListItems items={items} setItems={setItems} user={user}/>
                 </div>
-                <div className="buttons-container">
-                    <button onClick={handleSetFavoriteEquipmentList}>Set as my favorite equipment list</button>
-                    <button onClick={toggleAddEquipmentListToDBForm}>Add to equipment lists database</button>
-                    <div>
-                        {isAddEquipmentListToDBFormOpen && <AddEquipmentListToDBForm 
-                        displayName={user.displayName}
-                        equipmentList={items}
-                         toggleAddEquipmentListToDBForm={toggleAddEquipmentListToDBForm}/>}
-                    </div>
+                <div className="listbuttonscontainer">
+                {items.length ? <ListButtons items={items} user={user} error={error} setError={setError}/> : null}
                 </div>
             </div>
         </div>

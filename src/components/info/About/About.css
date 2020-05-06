@@ -1,6 +1,6 @@
 
 .about .background {
-    background-image: url("/assets/images/About.jpg");
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fbackgrounds%2FAbout.jpg?alt=media&token=5799adeb-1d4e-48de-abb7-14d1ac05d1ce");
     background-size: cover;
     height: 100vh;
     width: 100vw;

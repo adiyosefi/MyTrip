@@ -2,8 +2,6 @@
 import firebase from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
-import { Redirect } from 'react-router-dom';
-import { useItems } from "../hooks/useItems";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -186,12 +184,48 @@ export const searchPublicEquipmentListDocuments = async (destination, season, ca
 }
 
 // add notes field to user's trip
-export const addNotesFieldToTrip = (user, notes) => {
+// export const addNotesFieldToTrip = (user, notes) => {
+//   const userRef = firestore.doc(`users/${user.uid}`);
+//   return userRef.update({
+//     trip: {
+//       ...user.trip,
+//       notes: notes
+//     }
+// })
+// .then(function() {
+//     console.log("Trip document successfully updated!");
+// })
+// .catch(function(error) {
+//     // The document probably doesn't exist.
+//     console.error("Error updating trip document: ", error);
+// });
+// }
+
+// export const clearNotesFromTrip = (user) => {
+//   const userRef = firestore.doc(`users/${user.uid}`);
+//   return userRef.update({
+//     trip: {
+//       ...user.trip,
+//       notes: ""
+//     }
+// })
+// .then(function() {
+//     console.log("Trip document successfully updated!");
+// })
+// .catch(function(error) {
+//     // The document probably doesn't exist.
+//     console.error("Error updating trip document: ", error);
+// });
+// }
+
+
+// add favorite equipment list field to user's trip
+export const addFavoriteEquipmentListToUserTrip = (user, items) => {
   const userRef = firestore.doc(`users/${user.uid}`);
   return userRef.update({
     trip: {
       ...user.trip,
-      notes: notes
+      favoriteequipmentlist: items
     }
 })
 .then(function() {
@@ -203,4 +237,68 @@ export const addNotesFieldToTrip = (user, notes) => {
 });
 }
 
+export const searchActivitiesDocuments = async (activityName, destination, season, category) => {
+  var activitiesRef = firestore.collection("activities");
+  var nameQuery = activitiesRef.where('activityName', '>=', activityName).where('activityName', '<=', activityName+ '\uf8ff');
+  var destinationQuery = activitiesRef.where("destination", "==", destination);
+  var seasonQuery = activitiesRef.where("season", "==", season);
+  var categoryQuery = activitiesRef.where("category", "==", category);
+  var searchResults;
+  var searchResultsArray = [];
+  if (!activityName && !destination && !season && !category) {
+    searchResults = activitiesRef;
+  } else if (activityName && destination && season && category){
+    searchResults = nameQuery.destinationQuery.seasonQuery.categoryQuery;
+  } else if (activityName && destination && season && !category) {
+    searchResults = nameQuery.destinationQuery.seasonQuery;
+  } else if (activityName && destination && category && !season) {
+    searchResults = nameQuery.destinationQuery.categoryQuery;
+  } else if (activityName && season && category && !destination) {
+    searchResults = nameQuery.seasonQuery.categoryQuery;
+  } else if (!activityName && season && category && destination) {
+    searchResults = destinationQuery.seasonQuery.categoryQuery;
+  } else if (activityName && destination && !season && !category) {
+    searchResults = nameQuery.destinationQuery;
+  } else if (activityName && season && !destination && !category) {
+    searchResults = nameQuery.seasonQuery;
+  } else if (activityName && category && !destination && !season) {
+    searchResults = nameQuery.categoryQuery;
+  } else if (!activityName && category && destination && !season) {
+    searchResults = destinationQuery.categoryQuery;
+  } else if (!activityName && category && !destination && season) {
+    searchResults = seasonQuery.categoryQuery;
+  } else if (!activityName && !category && destination && season) {
+    searchResults = seasonQuery.destinationQuery;
+  } else if (activityName && !category && !destination && !season) {
+    searchResults = nameQuery;
+  } else if (!activityName && !category && destination && !season) {
+    searchResults = destinationQuery;
+  } else if (!activityName && !category && !destination && season) {
+    searchResults = seasonQuery;
+  } else if (!activityName && category && !destination && !season) {
+    searchResults = categoryQuery;
+  } 
+  const querySnapshot = await searchResults.get();
+  querySnapshot.forEach((doc) => {
+        console.log(doc.id, ' => ', doc.data());
+        searchResultsArray.push({id: doc.id, data: doc.data()});
+  });
+  return searchResultsArray;
+}
 
+export const addFavoriteActivitiesToUserTrip = (user, favoriteActivities) => {
+  const userRef = firestore.doc(`users/${user.uid}`);
+  return userRef.update({
+    trip: {
+      ...user.trip,
+      favoriteactivities: favoriteActivities
+    }
+})
+.then(function() {
+    console.log("Trip document successfully updated!");
+})
+.catch(function(error) {
+    // The document probably doesn't exist.
+    console.error("Error updating trip document: ", error);
+});
+}

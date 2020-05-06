@@ -1,0 +1,63 @@
+.addequipmentlisttodbform form {
+    width: 290px;
+    height: 320px;
+    padding: 20px;
+    position: absolute;
+    left: -50px;
+    background-color: white;
+    box-shadow: 0 20px 22px 0 rgba(0,0,0,0.12);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(203, 204, 188, 0.76);
+}
+
+.destination-input {
+    margin-bottom: 10px;
+}
+
+.addequipmentlisttodbform form .season-input, .addequipmentlisttodbform form .category-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.addequipmentlisttodbform form .season-input {
+    margin-bottom: 10px;
+}
+
+.addequipmentlisttodbform form .category-input {
+    margin-bottom: 20px;
+}
+
+.buttons-end {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.addequipmentlisttodbform .add-list-to-db-button {
+    height: 50px;
+    width: 180px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: thin;
+    color: white;
+    border-color: transparent;
+    cursor: pointer;
+    background-color: rgb(7, 59, 7);
+    box-shadow: 0px 2px 2px 0px rgba(120,116,120,0.59);
+}
+
+.addequipmentlisttodbform .add-list-to-db-button:hover {
+    background-color: rgb(12, 109, 12);
+}
+
+.success-mess {
+    color: rgb(12, 109, 12);
+}

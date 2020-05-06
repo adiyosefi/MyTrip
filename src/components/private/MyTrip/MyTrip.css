@@ -15,3 +15,122 @@
     width: 200px;
     border-radius: 50%;
 }
+
+.mytrip .favoriteequipmentlistcontainer {
+    height: 600px;
+    width: 500px;
+    background-color: lightpink;
+    padding: 20px;
+    box-sizing: border-box;
+    -webkit-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    -moz-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    overflow: auto;
+}
+
+.mytrip .favoriteequipmentlistcontainer h4 {
+    padding-bottom: 20px;
+}
+
+.mytrip .equipmentlistlist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.mytrip .equipmentlistitem {
+    background-color: #ffe9ee;
+    height: 40px;
+    width: 100%;
+    border: 1px solid #ffdde4;
+    padding: 0 10px;
+}
+
+.mytrip .equipmentlistitem:hover {
+    background-color: #ffdde4;
+}
+
+.mytrip .equipmentlistitemcontent {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    display: flex;
+}
+
+.state label {
+    display: none;
+}
+
+.mytrip .equipmentlistitemcontent label {
+    margin-bottom: 0;
+}
+
+.hideP {
+    display: none;
+}
+
+.item-line-through {
+    text-decoration: line-through;
+}
+
+.item-none {
+    text-decoration: none;
+}
+
+.mytrip .equipmentlistitemcontent .editbtn, .mytrip .equipmentlistitemcontent .hoverBtn {
+    height: fit-content;
+    width: fit-content;
+    margin-left: auto;
+    float: right;
+    border: none;
+    outline:none;
+    background-color:transparent;
+    cursor: pointer;
+    margin-right: 7px;
+}
+
+.showEditInput {
+    height: 30px;
+    width: 180px;
+    margin-left: -8px;
+    padding: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: thin;
+    border-color: #ffdde4;
+}
+
+.showEditInput:focus {
+   outline: none;
+}
+
+.hideEditInput {
+    display: none;
+}
+
+.editbtn{
+    color: darkgray;
+}
+
+.hoverBtn {
+    color: black;
+}
+
+.mytrip .equipmentlistitemcontent .editbtn:hover {
+    color: black;
+}
+
+.mytrip .equipmentlistitemcontent .removebtn {
+    height: fit-content;
+    width: fit-content;
+    border: none;
+    outline:none;
+    background-color:transparent;
+    color: darkgray;
+    cursor: pointer;
+}
+
+.mytrip .equipmentlistitemcontent .removebtn:hover {
+    color: black;
+}

@@ -1,0 +1,7 @@
+.activitysearch {
+    margin-top: 100px;
+}
+
+button:focus {
+    outline: none;
+}
