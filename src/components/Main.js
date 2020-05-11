@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useEffect, useState, createContext, useContext } from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
 import Header from './global/Header/Header';
 import Footer from './global/Footer/Footer';
@@ -16,6 +16,8 @@ import SignUp from "./auth/SignUp/SignUp";
 import PasswordReset from "./auth/PasswordReset/PasswordReset";
 import {UserProvider} from '../context/user';
 import PrivateRoute from './private/PrivateRoute';
+import ActivityDetails from './activity/ActivityDetails/ActivityDetails'
+import { getActivityWithIdDocument } from './../server/firebase'
 
 
 const Main = (props) => {
@@ -32,7 +34,8 @@ const Main = (props) => {
                     <Route exact path="/about" component={About} />
                     <Route path="/equipmentlistsearch" component={EquipmentListSearch} />
                     <PrivateRoute exact path="/privateequipmentlist" component={PrivateEquipmentList} />
-                    <Route path="/activitysearch" component={ActivitySearch} />
+                    <Route exact path="/activities" component={ActivitySearch} />
+                    <Route path="/activities/:activityId" component={ActivityDetails} />
                     <Route exact path="/contact" component={Contact} />
                     <PrivateRoute exact path="/mytrip" component={MyTrip} />
                     <Route path="/signin" component={SignIn} />

@@ -7,20 +7,12 @@ import {UserContext} from './../../../context/user';
 import { countries } from './../../../server/countries';
 import { Pagination } from '@material-ui/lab';
 import {addFavoriteEquipmentListToUserTrip} from './../../../server/firebase';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Zoom from '@material-ui/core/Zoom';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import Loading from './../../global/Loading';
 
 
 const myTheme = createMuiTheme({
@@ -130,7 +122,7 @@ const RenderEquipmentLists = ({ lists, user }) => {
         });
 
         return (
-            <div className="each-list-and-button">
+            <div key={list.id} className="each-list-and-button">
             <div className="listcontainer">
             <li key={list.id}>
                 <ul className="resultequipmentlist">
@@ -198,8 +190,6 @@ const EquipmentListSearch = () => {
     const [resultsLists, setResultLists] = useState("");
     var equipmentListsResults;
 
-    const [progress, setProgress] = useState(0);
-
     const useStyles = makeStyles(theme => ({
         option: {
             fontSize: 14,
@@ -222,17 +212,8 @@ const EquipmentListSearch = () => {
                 setError('Error searching public equipment lists');
             }
         }
-        function tick() {
-            // reset when reaching 100%
-            setProgress((oldProgress) => (oldProgress >= 100 ? 0 : oldProgress + 1));
-          }
-        const timer = setInterval(tick, 20);
-
+       
         fetchData();
-
-        return () => {
-            clearInterval(timer);
-          };
     }, []);
 
     const handleChangeSeason = (event) => {
@@ -400,10 +381,7 @@ const EquipmentListSearch = () => {
                     </div>
                     {resultsLists ? <RenderEquipmentLists lists={resultsLists} user={user} /> 
                     :
-                    <Box display="flex" justifyContent="center" alignItems="center" m={1}
-     p={1} width={1} height={600} bgcolor="background.paper">
-        <CircularProgress variant="determinate" value={progress} />
-    </Box> }
+                    <Loading /> }
                 </div>
             </div>
         </div>

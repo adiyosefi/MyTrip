@@ -237,6 +237,8 @@ export const addFavoriteEquipmentListToUserTrip = (user, items) => {
 });
 }
 
+
+
 export const searchActivitiesDocuments = async (activityName, destination, season, category) => {
   var activitiesRef = firestore.collection("activities");
   var nameQuery = activitiesRef.where('activityName', '>=', activityName).where('activityName', '<=', activityName+ '\uf8ff');
@@ -302,3 +304,45 @@ export const addFavoriteActivitiesToUserTrip = (user, favoriteActivities) => {
     console.error("Error updating trip document: ", error);
 });
 }
+
+/*export const getAllActivitiesDocuments = async () => {
+  var activitiesRef = firestore.collection("activities");
+  var resultsArray = [];  
+  const querySnapshot = await activitiesRef.get();
+  querySnapshot.forEach((doc) => {
+        console.log(doc.id, ' => ', doc.data());
+        resultsArray.push({id: doc.id, data: doc.data()});
+  });
+  return resultsArray;
+}*/
+
+export const getActivityWithIdDocument = async (id) => {
+  if (!id) return null;
+  try {
+    const activityDocument = await firestore.doc(`activities/${id}`).get();
+    return {
+      id,
+      data: {...activityDocument.data()}
+    };
+  } catch (error) {
+    console.error("Error fetching activity", error);
+  }
+}
+
+export const addFavoriteActivityToUserTrip = (user, activity) => {
+  const userRef = firestore.doc(`users/${user.uid}`);
+  return userRef.update({
+    trip: {
+      ...user.trip,
+      favoriteactivities: [...user.trip.favoriteactivities, activity]
+    }
+})
+.then(function() {
+    console.log("Trip document successfully updated!");
+})
+.catch(function(error) {
+    // The document probably doesn't exist.
+    console.error("Error updating trip document: ", error);
+});
+}
+

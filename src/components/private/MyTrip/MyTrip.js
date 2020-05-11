@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../../context/user";
 import { auth, getTripDocument } from "../../../server/firebase";
 import './MyTrip.css';
@@ -22,56 +22,47 @@ const RenderFavoriteActivities = ({ user }) => {
   }, []);
 
 
-  const renderSeason = (season) => {
-    return (
-        <div>
-            Season: {season}
-        </div>
-    );
-}
 
-const renderCategory = (category) => {
-    return (
-        <div>
-            Category: {category}
-        </div>
-    );
-}
-
-const renderPicture = (picture) => {
-    return (
-        <div>
-            <img src={picture} />
-        </div>
-    );
-}
-
-function titleCase(str) {
-  var splitStr = str.toLowerCase().split(' ');
-  for (var i = 0; i < splitStr.length; i++) {
+  function titleCase(str) {
+    var splitStr = str.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
       // You do not need to check if i is larger than splitStr length, as your for does that for you
       // Assign it back to the array
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    // Directly return the joined string
+    return splitStr.join(' ');
   }
-  // Directly return the joined string
-  return splitStr.join(' '); 
-}
 
   const activitiesList = favoriteActivities.map((activity) => {
     return (
       <li key={activity.id} className="activityitem">
         <div className="activitycontent">
-          {activity.data.picture && renderPicture(activity.data.picture)}
-          <h5>{titleCase(activity.data.activityName)}</h5>
-          <div>
-            Destination: {activity.data.destination}
+          <div className="activity-picture-container">
+            <img src={activity.data.picture} className="activity-picture" />
           </div>
-          {activity.data.season && renderSeason(activity.data.season)}
-          {activity.data.category && renderCategory(activity.data.category)}
-          <div>
-            {activity.data.description}
+          <div className="activity-details">
+            <div className="activity-name">
+              <Link to={`/activities/${activity.id}`} className="activity-link">
+                <h5>{titleCase(activity.data.activityName)}</h5>
+              </ Link>
+            </div>
+            <div className="activity-metadata">
+              <div className="activity-metadata-item">
+                <span>Destination:</span> {activity.data.destination}
+              </div>
+              <div className="activity-metadata-item">
+                <span>Season:</span> {activity.data.season ? activity.data.season : 'All year round'}
+              </div>
+              <div className="activity-metadata-item">
+                <span>Category:</span> {activity.data.category ? activity.data.category : 'All categories'}
+              </div>
+            </div>
+            <div>
+              {activity.data.shortDescription}
+            </div>
           </div>
-          </div>
+        </div>
       </li>
     );
   });
@@ -81,12 +72,12 @@ function titleCase(str) {
       <h4>My Activities</h4>
       {
         favoriteActivities && (
-            <div>
-              <ul className="activitieslist">
-                {activitiesList}
-              </ul>
-            </div>
-          )
+          <div>
+            <ul className="activitieslist">
+              {activitiesList}
+            </ul>
+          </div>
+        )
       }
     </div>
   );
@@ -128,50 +119,50 @@ const RenderFavoriteEquipmentList = ({ user }) => {
     }
   }
 
-    const listItems = items.map((item) => {
-      return (
-        <li key={item.id} className="equipmentlistitem">
-          <div className="equipmentlistitemcontent">
-            <div className="pretty p-icon p-round">
-              <input type="checkbox" id={`check-item-${item.id}`} onClick={() => toggleChecked(item.id)} />
-              <div className="state">
-                <i className="icon mdi mdi-check"></i>
-                <label></label>
-              </div>
+  const listItems = items.map((item) => {
+    return (
+      <li key={item.id} className="equipmentlistitem">
+        <div className="equipmentlistitemcontent">
+          <div className="pretty p-icon p-round">
+            <input type="checkbox" id={`check-item-${item.id}`} onClick={() => toggleChecked(item.id)} />
+            <div className="state">
+              <i className="icon mdi mdi-check"></i>
+              <label></label>
             </div>
-            <input type="text" value={inputState}
-              placeholder={item.label}
-              className={item.onEditMode ? 'showEditInput' : 'hideEditInput'}
-              onKeyUp={(e) => handleInputChange(e, item.id)}
-              onChange={e => setInput(e.target.value)} />
-            <label htmlFor={`check-item-${item.id}`} className={`${item.checked ? 'item-line-through' : 'item-none'}
-                   ${item.onEditMode ? 'hideP' : 'showP'}`}>{item.label} </label>
-            <button className={item.onEditMode ? 'hoverBtn' : 'editbtn'} onClick={
-              () => { handleEdit(item.id) }
-            }>
-              <i className="fa fa-pencil" aria-hidden="true"></i>
-            </button>
-            <button className="removebtn" onClick={
-              () => { handleRemove(item.id) }
-            }>
-              <i className="fa fa-trash" aria-hidden="true"></i>
-            </button>
           </div>
-        </li>
-      );
-    });
+          <input type="text" value={inputState}
+            placeholder={item.label}
+            className={item.onEditMode ? 'showEditInput' : 'hideEditInput'}
+            onKeyUp={(e) => handleInputChange(e, item.id)}
+            onChange={e => setInput(e.target.value)} />
+          <label htmlFor={`check-item-${item.id}`} className={`${item.checked ? 'item-line-through' : 'item-none'}
+                   ${item.onEditMode ? 'hideP' : 'showP'}`}>{item.label} </label>
+          <button className={item.onEditMode ? 'hoverBtn' : 'editbtn'} onClick={
+            () => { handleEdit(item.id) }
+          }>
+            <i className="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+          <button className="removebtn" onClick={
+            () => { handleRemove(item.id) }
+          }>
+            <i className="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      </li>
+    );
+  });
 
   return (
     <div className="favoriteequipmentlistcontainer">
       <h4>My Equipment List</h4>
       {
         items && (
-            <div>
-              <ul className="equipmentlistlist">
-                {listItems}
-              </ul>
-            </div>
-          )
+          <div>
+            <ul className="equipmentlistlist">
+              {listItems}
+            </ul>
+          </div>
+        )
       }
     </div>
   );
@@ -383,7 +374,7 @@ const MyTrip = () => {
         </div>
         <div className="favourite-activities-container">
           <div className="activitieslistcontainer">
-          {trip && <RenderFavoriteActivities user={user} />}
+            {trip && <RenderFavoriteActivities user={user} />}
           </div>
         </div>
         <div className="favourite-equipment-list-container">

@@ -18,7 +18,7 @@ const Header = () => {
                             <li><NavLink to="/privateequipmentlist" className="equipment-dropdown-item">Add Equipment List</NavLink></li>
                         </ul>
                     </li>
-                    <li><NavLink to="/activitysearch" className="navitem">Activities</NavLink></li>
+                    <li><NavLink to="/activities" className="navitem">Activities</NavLink></li>
                     <li><NavLink to="/contact" className="navitem">Contact</NavLink></li>
                     <li><NavLink to="/mytrip" className="button-plan">Plan Your Trip!</NavLink></li>
                         <li><button className={`button-login ${isModalOpen ? 'button-login-modal-open' : ''}`}
