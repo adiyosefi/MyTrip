@@ -6,10 +6,50 @@ import './MyTrip.css';
 import moment from 'moment';
 import { countries } from './../../../server/countries';
 import { generateTripDocument, deleteTripFromUser } from './../../../server/firebase'
+import TextField from '@material-ui/core/TextField';
+import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
+
 
 // HOOKS
 import { useFavoriteEquipmentList } from '../../../hooks/useFavoriteEquipmentList';
 import { useNotes } from '../../../hooks/useNotes';
+
+const myTheme = createMuiTheme({
+  typography: {
+      fontFamily: 'Poppins, sans-serif'
+  },
+  overrides: {
+      MuiInputLabel: { // Name of the component ⚛️ / style sheet
+          root: { // Name of the rule
+              fontSize: 14,
+              "&$focused:not($error)": { // increase the specificity for the pseudo class
+                  color: "#9c9c9c"
+              },
+              '&:hover:not($error)': {
+                  color: "#9c9c9c",
+              }
+          }
+      },
+      MuiOutlinedInput: {
+          root: {
+              '& $notchedOutline': {
+                  borderColor: 'rgba(0, 0, 0, 0.23)',
+              },
+              '&:hover:not($disabled):not($focused):not($error) $notchedOutline': {
+                  borderColor: '#9c9c9c',
+                  // Reset on touch devices, it doesn't add specificity
+                  '#media (hover: none)': {
+                      borderColor: 'rgba(0, 0, 0, 0.23)',
+                  },
+              },
+              '&$focused $notchedOutline': {
+                  borderColor: '#9c9c9c',
+                  borderWidth: 1,
+              },
+          },
+      },
+  }
+});
 
 const RenderFavoriteActivities = ({ user }) => {
   const [favoriteActivities, setFavoriteActivities] = useState([]);
@@ -37,29 +77,33 @@ const RenderFavoriteActivities = ({ user }) => {
   const activitiesList = favoriteActivities.map((activity) => {
     return (
       <li key={activity.id} className="activityitem">
-        <div className="activitycontent">
-          <div className="activity-picture-container">
-            <img src={activity.data.picture} className="activity-picture" />
-          </div>
-          <div className="activity-details">
-            <div className="activity-name">
-              <Link to={`/activities/${activity.id}`} className="activity-link">
-                <h5>{titleCase(activity.data.activityName)}</h5>
-              </ Link>
+        <div className="container-per-activity">
+          <div className="activitycontent">
+            <div className="activity-picture-container">
+              <img src={activity.data.picture} className="activity-picture" />
             </div>
-            <div className="activity-metadata">
-              <div className="activity-metadata-item">
-                <span>Destination:</span> {activity.data.destination}
+            <div className="activity-details">
+              <div className="activity-name">
+                <Link to={`/activities/${activity.id}`} className="activity-link">
+                  <h5>{titleCase(activity.data.activityName)}</h5>
+                </ Link>
               </div>
-              <div className="activity-metadata-item">
-                <span>Season:</span> {activity.data.season ? activity.data.season : 'All year round'}
+              <div className="activity-metadata">
+                <div className="activity-metadata-item">
+                  <i className="fa fa-plane"></i> <span>Destination:</span> {activity.data.destination}
+                </div>
+                <div className="metadata-season-category">
+                <div className="activity-metadata-item activity-metadata-item-season">
+                  <i className="fa fa-cloud"></i> <span>Season:</span> {activity.data.season ? activity.data.season : 'All year round'}
+                </div>
+                <div className="activity-metadata-item">
+                  <i className="fa fa-list-ul"></i> <span>Category:</span> {activity.data.category ? activity.data.category : 'All categories'}
+                </div>
+                </div>
               </div>
-              <div className="activity-metadata-item">
-                <span>Category:</span> {activity.data.category ? activity.data.category : 'All categories'}
+              <div>
+                {activity.data.shortDescription}
               </div>
-            </div>
-            <div>
-              {activity.data.shortDescription}
             </div>
           </div>
         </div>
@@ -72,7 +116,7 @@ const RenderFavoriteActivities = ({ user }) => {
       <h4>My Activities</h4>
       {
         favoriteActivities && (
-          <div>
+          <div className="fav-act-list-con">
             <ul className="activitieslist">
               {activitiesList}
             </ul>
@@ -153,11 +197,11 @@ const RenderFavoriteEquipmentList = ({ user }) => {
   });
 
   return (
-    <div className="favoriteequipmentlistcontainer">
+    <div className="favoriteequipmentlist">
       <h4>My Equipment List</h4>
       {
         items && (
-          <div>
+          <div className="favoriteequipmentlistcontainer">
             <ul className="equipmentlistlist">
               {listItems}
             </ul>
@@ -203,16 +247,27 @@ const RenderNotes = ({ user, setError }) => {
     }
   };
 
+  const handleChangeNotes = (event) => {
+    setNotes(event.target.value);
+};
+
   return (
     <div className="notescontainer">
       <h4>My Notes</h4>
       <div className="text">
         <form>
-          <textarea id="notepad" name="notes" value={notes}
-            placeholder="Start typing ..."
-            onChange={event => onChangeHandler(event)}>
-          </textarea>
-          <button onClick={event => {
+          <TextField
+          id="notepad"
+          name="notes"
+          label="Start typing ..."
+          multiline
+          rows={7}
+          style={{ width: 1070 }}
+          value={notes}
+          variant="outlined"  
+          onChange={handleChangeNotes}
+        />
+          <button className="clear-notes-button" onClick={event => {
             clearNotesInTrip(event, notes);
           }}>Clear notes</button>
         </form>
@@ -239,16 +294,18 @@ const TripTitle = ({ trip, setTrip, user }) => {
     }
 
     return (
-      <div>
+      <div className="trip-title-container">
         <h1>{user.displayName}'s trip to {destination}!</h1>
-        <div>
-          Trip start: {start}
-        </div>
-        <div>
-          Trip End: {end}
-        </div>
-        <div>
-          <button className="" onClick={event => deleteTripHandler(event)}>Delete this trip</button>
+        <div className="trip-metadata">
+          <div className="trip-metadata-item">
+            <span>Trip start:</span> {start}
+          </div>
+          <div className="trip-metadata-item">
+            <span>Trip End:</span> {end}
+          </div>
+          <div>
+            <button className="delete-trip-button" onClick={event => deleteTripHandler(event)}>Delete this trip</button>
+          </div>
         </div>
       </div>
     );
@@ -356,37 +413,39 @@ const MyTrip = () => {
 
 
   return (
+    <ThemeProvider theme={myTheme}>
     <div className="mytrip">
       <div className="background">
-        <div className="user-profile-container">
-          <div>
-            <img className="profile-picture"
-              src={photoURL || 'https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fprofile-pictures%2Fblank-profile-picture.png?alt=media&token=fd112c3c-e460-4e37-997b-36a914682bf9'} />
+        <div className="content-container">
+          <div className="user-profile-container">
+            <div className="user-picrute-container">
+              <img className="profile-picture"
+                src={photoURL || 'https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fprofile-pictures%2Fblank-profile-picture.png?alt=media&token=fd112c3c-e460-4e37-997b-36a914682bf9'} />
+            </div>
+            <div className="user-details-metadata">
+              <h2 className="">{displayName}</h2>
+              <h3 className="">{email}</h3>
+            </div>
+            <button className="signout-button" onClick={() => { auth.signOut() }}>Sign out <i className="fa fa-sign-out"></i></button>
           </div>
-          <div className="">
-            <h2 className="">{displayName}</h2>
-            <h3 className="">{email}</h3>
+          <div className="itinerary-form-or-title-container">
+            {trip && trip.destination ? <TripTitle trip={trip} setTrip={setTrip} user={user} /> : <ItineraryForm user={user} trip={trip} setTrip={setTrip} />}
           </div>
-          <button className="" onClick={() => { auth.signOut() }}>Sign out</button>
-        </div>
-        <div className="itinerary-form-or-title-container">
-          {trip && trip.destination ? <TripTitle trip={trip} setTrip={setTrip} user={user} /> : <ItineraryForm user={user} trip={trip} setTrip={setTrip} />}
-        </div>
-        <div className="favourite-activities-container">
-          <div className="activitieslistcontainer">
-            {trip && <RenderFavoriteActivities user={user} />}
+          <div className="activities-and-list-container">
+          <div className="favourite-activities-container">
+              {trip && <RenderFavoriteActivities user={user} />}
           </div>
-        </div>
-        <div className="favourite-equipment-list-container">
-          <div className="equipmentlistcontainer">
-            {trip && <RenderFavoriteEquipmentList user={user} />}
+          <div className="favourite-equipment-list-container">
+              {trip && <RenderFavoriteEquipmentList user={user} />}
           </div>
-        </div>
-        <div className="notes-container">
-          {trip && <RenderNotes user={user} setError={setError} />}
+          </div>
+          <div className="notes-container">
+            {trip && <RenderNotes user={user} setError={setError} />}
+          </div>
         </div>
       </div>
     </div>
+    </ThemeProvider>
   )
 };
 

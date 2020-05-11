@@ -133,24 +133,26 @@ button:focus {
 
 .activitysearch .container-per-activity {
     background-color: rgba(120, 116, 120, 0.219);
-    height: 150px;
+    height: 180px;
     width: 870px;
     border-radius: 20px;
-    padding: 10px;
+    padding: 25px;
     display: flex;
     flex-direction: row;
     justify-content: start;
+    margin-bottom: 20px;
 }
 
 .activitysearch .activity-container-checked {
     background-color: rgba(138, 202, 154, 0.219);
-    height: 150px;
+    height: 180px;
     width: 870px;
     border-radius: 20px;
-    padding: 10px; 
+    padding: 25px; 
     display: flex;
     flex-direction: row;
     justify-content: start;
+    margin-bottom: 20px;
 }
 
 .activitysearch .activitycontent {
@@ -170,7 +172,7 @@ button:focus {
 
 .activitysearch .activity-details {
     margin-left: 10px;
-    width: 650px;
+    width: 600px;
     padding: 15px;
 }
 
@@ -178,6 +180,10 @@ button:focus {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.activitysearch .activity-name {
     margin-bottom: 20px;
 }
 

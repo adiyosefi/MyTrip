@@ -192,3 +192,19 @@ button:focus {
     margin-left: 20px;
 }
 
+.equipmentlistsearch .list-success-message {
+    width: 160px;
+    color: rgb(12, 109, 12);
+    font-size: 12px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.equipmentlistsearch .list-error-message {
+    width: 160px;
+    color: rgb(179, 8, 8);
+    font-size: 12px;
+    text-align: center;
+    padding-top: 5px;
+}
+
