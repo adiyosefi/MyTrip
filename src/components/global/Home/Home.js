@@ -99,6 +99,7 @@ const Home = () => {
 
     const createTripHandler = async (event, destination, start, end, trip, setTrip) => {
         event.preventDefault();
+        if(user){
         if (trip == null || !trip) {
             if (destination && start && end) {
             try {
@@ -124,6 +125,11 @@ const Home = () => {
             setCreateTripError('You already have a trip!');
             window.location.href = '/mytrip';
         } 
+    }
+    else {
+        setCreateTripError('Signin first!');
+        window.location.href = '/signin';
+    }
     };
 
     const handleStartDateChange = (event) => {

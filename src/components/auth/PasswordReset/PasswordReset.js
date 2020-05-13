@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import {auth} from '../../../server/firebase';
+import './PasswordReset.css';
 
 
 const PasswordReset = () => {
@@ -26,7 +27,7 @@ const PasswordReset = () => {
       });
   };
   return (
-    <div className="">
+    <div className="passwordreset">
       <h1 className="">
         Reset your Password
       </h1>
@@ -62,7 +63,7 @@ const PasswordReset = () => {
           </button>
         </form>
         <Link
-         to ="/"
+         to ="/signin"
           className=""
         >
           &larr; back to sign in page

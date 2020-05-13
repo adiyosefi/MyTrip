@@ -1,15 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { UserContext } from "../../context/user";
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Box from '@material-ui/core/Box';
 import Loading from './../global/Loading';
 
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
 
   const currentUserState = useContext(UserContext);
-  if (currentUserState) {
+  
+  // if (currentUserState) {
     return (
       <Route
         {...rest}
@@ -22,11 +21,11 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
         }
       />
     );
-  }
+  // }
   // return spinner
-  return (
-    <Loading />
-  );
+  // return (
+  //   <Loading />
+  // );
 };
 
 export default PrivateRoute;
