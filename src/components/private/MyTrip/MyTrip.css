@@ -508,12 +508,14 @@
     color: rgb(12, 109, 12);
     font-size: 12px;
     text-align: center;
+    width: 190px;
 }
 
 .mytrip .error-no-trip {
     color: rgb(179, 8, 8);
     font-size: 12px;
     text-align: center;
+    width: 190px;
 }
 
 .mytrip .destination-input, .mytrip .start-date {

@@ -47,7 +47,7 @@
     border: solid 1px #f5f5f5;
     border-radius: 12px;
     width: 340px;
-    height: 340px;
+    height: 410px;
     margin-top: 270px;
     padding: 30px;
     text-align: center;
@@ -66,24 +66,10 @@
     align-items: center;
 }
 
-.home .form-container form .destination-input {
-    padding: 7px 10px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border: 2px solid rgba(203, 204, 188, 0.76);
-    border-radius: 4px;
-    text-align: left;
-    font-size: 14px;
-    font-family: inherit;
-    width: 230px;
-    outline: none;
+.home .destination-input {
+    margin-bottom: 20px;
 }
 
-
-.home .form-container form .destination-input:focus, .home .form-container form .start-date .start-date-input:focus,
-.home .form-container form .end-date .end-date-input:focus {
-    border: 2px solid #fea353;
-}
 
 .home .form-container form .start-date, .home .form-container form .end-date {
     display: flex;
@@ -91,18 +77,9 @@
     justify-content: center;
 }
 
-.home .form-container form .start-date .start-date-input, .home .form-container form .end-date .end-date-input {
-    outline: none;
-    border: 2px solid rgba(203, 204, 188, 0.76);
-    border-radius: 4px;
-    font-family: inherit;
-    padding: 7px;
-    width: 180px;
-}
 
-
-.home .form-container form .start-date {
-    margin-bottom: 10px;
+.home .start-date {
+    margin-bottom: 20px;
 }
 
 .home .form-container form .start-date label, .home .form-container form .end-date label {
@@ -122,18 +99,33 @@
     font-weight: 500;
     color: #FFFFFF;
     line-height: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: 5px 10px;
     background: #fea353;
     border: none;
     outline: none;
     cursor: pointer;
     border-radius: 12px;
     font-weight: bold;
+    width: 220px;
 }
 
 .home .form-container form  .form-button:hover {
     background: #fe8b1d;
 }
 
+.home .trip-success-message {
+    color: rgb(12, 109, 12);
+    font-size: 12px;
+    text-align: center;
+    margin-top: 5px;
+    width: 220px;
+}
+
+.home .error-no-trip {
+    color: rgb(179, 8, 8);
+    font-size: 12px;
+    text-align: center;
+    margin-top: 5px;
+    width: 220px;
+}
 

@@ -9,6 +9,8 @@ import { generateTripDocument, deleteTripFromUser, deleteActivityFromUserAcitivi
 import TextField from '@material-ui/core/TextField';
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 
 // HOOKS
 import { useFavoriteEquipmentList } from '../../../hooks/useFavoriteEquipmentList';
@@ -71,11 +73,8 @@ const RenderFavoriteActivities = ({ user }) => {
   function titleCase(str) {
     var splitStr = str.toLowerCase().split(' ');
     for (var i = 0; i < splitStr.length; i++) {
-      // You do not need to check if i is larger than splitStr length, as your for does that for you
-      // Assign it back to the array
       splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     }
-    // Directly return the joined string
     return splitStr.join(' ');
   }
 
@@ -332,8 +331,8 @@ const TripTitle = ({ trip, setTrip, user }) => {
 
 const ItineraryForm = ({ user, trip, setTrip }) => {
   const [destination, setDestination] = useState("");
-  const [start, setStart] = useState(null);
-  const [end, setEnd] = useState(null);
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
   
   const [createTripSuccess, setCreateTripSuccess] = useState(null);
   const [createTripError, setCreateTripError] = useState(null);
@@ -377,22 +376,22 @@ const classes = useStyles();
           setCreateTripError('Error creating trip');
         }
         setDestination("");
-        setStart(null);
-        setEnd(null);
+        setStart("");
+        setEnd("");
       }
       else {
-        setCreateTripError("Error creating trip- not all details entered");
+        setCreateTripError("Enter all details");
       }
     }
   };
 
-  const handleStartDateChange = (date) => {
-    setStart(date);
+  const handleStartDateChange = (event) => {
+    setStart(event.target.value);
     console.log(start);
   };
 
-  const handleEndDateChange = (date) => {
-    setEnd(date);
+  const handleEndDateChange = (event) => {
+    setEnd(event.target.value);
     console.log(end);
   };
 
@@ -406,29 +405,61 @@ const classes = useStyles();
       <form>
       <div className="form-content">
       <div className="destination-input">
-        <input required list="destination-of-trip" className="destination-input"
-          onChange={event => onChangeHandler(event)}
-          name="tripDestination" id="tripDestination" placeholder="Enter destination (Country)" />
-        <datalist id="destination-of-trip" className="destination-datalist">
-          <option value="Worldwide" defaultValue></option>
-          {countries.map(country => {
-            return (
-              <option value={country.name} key={country.code}></option>
-            );
-          })}
-        </datalist>
+      <Autocomplete
+                style={{ width: 300 }}
+                inputValue={destination}
+                onInputChange={(event, newDestination) => {
+                  setDestination(newDestination);
+                }}
+                options={countries}
+                classes={{
+                  option: classes.option,
+                }}
+                autoHighlight
+                getOptionLabel={(option) => option.label}
+                renderOption={(option) => (
+                  <>
+                    {option.label}
+                  </>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Destination"
+                    variant="outlined"
+                    inputProps={{
+                      ...params.inputProps,
+                      autoComplete: 'new-password', // disable autocomplete and autofill
+                    }}
+                  />
+                )}
+              />
         </div>
         <div className="start-date">
-          <label htmlFor="tripStart"> Start: </label>
-          <input id="tripStart" type="date" name="tripStart"
-            onChange={event => onChangeHandler(event)}
-            className="start-date-input" />
+        <TextField
+    id="tripStart"
+    variant="outlined"
+    label="Start date"
+    type="date"
+    value={start}
+    onChange={handleStartDateChange}
+    InputLabelProps={{
+      shrink: true,
+    }}
+  />          
         </div>
         <div className="end-date">
-          <label htmlFor="tripEnd"> End: </label>
-          <input id="tripEnd" type="date" name="tripEnd"
-            onChange={event => onChangeHandler(event)}
-            className="end-date-input" />
+        <TextField
+    id="tripEnd"
+    variant="outlined"
+    label="End date"
+    type="date"
+    value={end}
+    onChange={handleEndDateChange}
+    InputLabelProps={{
+      shrink: true,
+    }}
+  />          
         </div>
         </div>
         <div className="form-btn-error-container">

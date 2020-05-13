@@ -4,7 +4,47 @@ import './Home.css';
 import { countries } from './../../../server/countries';
 import { UserContext } from './../../../context/user';
 import { generateTripDocument } from './../../../server/firebase'
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
 
+const myTheme = createMuiTheme({
+    typography: {
+        fontFamily: 'Poppins, sans-serif'
+    },
+    overrides: {
+        MuiInputLabel: { // Name of the component ⚛️ / style sheet
+            root: { // Name of the rule
+                fontSize: 14,
+                "&$focused:not($error)": { // increase the specificity for the pseudo class
+                    color: "#9c9c9c"
+                },
+                '&:hover:not($error)': {
+                    color: "#9c9c9c",
+                }
+            }
+        },
+        MuiOutlinedInput: {
+            root: {
+                '& $notchedOutline': {
+                    borderColor: 'rgba(0, 0, 0, 0.23)',
+                },
+                '&:hover:not($disabled):not($focused):not($error) $notchedOutline': {
+                    borderColor: '#9c9c9c',
+                    // Reset on touch devices, it doesn't add specificity
+                    '#media (hover: none)': {
+                        borderColor: 'rgba(0, 0, 0, 0.23)',
+                    },
+                },
+                '&$focused $notchedOutline': {
+                    borderColor: '#9c9c9c',
+                    borderWidth: 1,
+                },
+            },
+        },
+    }
+  });
+  
 
 const Home = () => {
     const user = useContext(UserContext);
@@ -12,11 +52,25 @@ const Home = () => {
     console.log(user);
 
     const [destination, setDestination] = useState("");
-    const [start, setStart] = useState(null);
-    const [end, setEnd] = useState(null);
-    const [error, setError] = useState(null);
+    const [start, setStart] = useState("");
+    const [end, setEnd] = useState("");
+
+    const [createTripSuccess, setCreateTripSuccess] = useState(null);
+    const [createTripError, setCreateTripError] = useState(null);
+
     const [trip, setTrip] = useState((user && user.trip) ? user.trip : null);
     console.log(trip);
+
+    const useStyles = makeStyles(theme => ({
+        option: {
+            fontSize: 14,
+        },
+        selectRoot: {
+            textAlign: "left",
+        },
+    }));
+    
+    const classes = useStyles();
 
       // get trip data from document reference
   useEffect(() => {
@@ -41,8 +95,9 @@ const Home = () => {
             setEnd(value);
         }
     };
+    
 
-    const createTripHandler = async (event, destination, start, end, error, setError, trip, setTrip) => {
+    const createTripHandler = async (event, destination, start, end, trip, setTrip) => {
         event.preventDefault();
         if (trip == null || !trip) {
             if (destination && start && end) {
@@ -50,26 +105,39 @@ const Home = () => {
                 await generateTripDocument(user, destination, start, end);
                 setTrip(user.trip);
                 console.log('trip added');
+                setCreateTripSuccess('Trip created successfully!')
                 window.location.href = '/mytrip';
             }
-            catch (error) {
-                setError('Error creating trip');
+            catch (createTripError) {
+                setCreateTripError('Error creating trip');
             }
             setDestination("");
-            setStart(null);
-            setEnd(null);
+            setStart("");
+            setEnd("");
             }
             else {
-                setError('Error creating trip');
+                setCreateTripError('Enter all details');
                 console.log('Error creating trip');
             }
         }
         else {
+            setCreateTripError('You already have a trip!');
             window.location.href = '/mytrip';
         } 
     };
 
+    const handleStartDateChange = (event) => {
+        setStart(event.target.value);
+        console.log(start);
+      };
+    
+      const handleEndDateChange = (event) => {
+        setEnd(event.target.value);
+        console.log(end);
+      };
+
     return (
+        <ThemeProvider theme={myTheme}>
         <div className="home">
             <div className="background">
                 <div className="container">
@@ -83,39 +151,88 @@ const Home = () => {
                             Itinerary Planner
                         </div>
                         <form>
-                            <input list="destination-of-trip" className="destination-input"
-                                onChange={event => onChangeHandler(event)}
-                                name="tripDestination" id="tripDestination" placeholder="Enter destination (Country)" />
-                            <datalist id="destination-of-trip" className="destination-datalist">
-                                <option value="Worldwide" defaultValue></option>
-                                {countries.map(country => {
-                                    return (
-                                        <option value={country.name} key={country.code}></option>
-                                    );
-                                })}
-                            </datalist>
+                        <div className="destination-input">
+      <Autocomplete
+                style={{ width: 250 }}
+                inputValue={destination}
+                onInputChange={(event, newDestination) => {
+                  setDestination(newDestination);
+                }}
+                options={countries}
+                classes={{
+                  option: classes.option,
+                }}
+                autoHighlight
+                getOptionLabel={(option) => option.label}
+                renderOption={(option) => (
+                  <>
+                    {option.label}
+                  </>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Destination"
+                    variant="outlined"
+                    inputProps={{
+                      ...params.inputProps,
+                      autoComplete: 'new-password', // disable autocomplete and autofill
+                    }}
+                  />
+                )}
+              />
+        </div>
                             <div className="start-date">
-                                <label htmlFor="tripStart"> Start: </label>
-                                <input id="tripStart" type="date" name="tripStart"
-                                    onChange={event => onChangeHandler(event)}
-                                    className="start-date-input" />
+                            <TextField
+    id="tripStart"
+    variant="outlined"
+    label="Start date"
+    type="date"
+    style={{ width: 190 }}
+    value={start}
+    onChange={handleStartDateChange}
+    InputLabelProps={{
+      shrink: true,
+    }}
+  />      
                             </div>
                             <div className="end-date">
-                                <label htmlFor="tripEnd"> End: </label>
-                                <input id="tripEnd" type="date" name="tripEnd"
-                                    onChange={event => onChangeHandler(event)}
-                                    className="end-date-input" />
+                            <TextField
+    id="tripEnd"
+    variant="outlined"
+    label="End date"
+    type="date"
+    style={{ width: 190 }}
+    value={end}
+    onChange={handleEndDateChange}
+    InputLabelProps={{
+      shrink: true,
+    }}
+  />       
                             </div>
+                            <div className="form-btn-error-container">
                             <button name="form-submit"
                                 onClick={event => {
-                                    createTripHandler(event, destination, start, end, error, setError, trip, setTrip);
+                                    createTripHandler(event, destination, start, end, trip, setTrip);
                                 }}
-                                className="form-button">Start planning your trip</button>
+                                className="form-button">Start planning your trip!</button>
+                                {createTripSuccess &&
+                            <div className="trip-success-message">
+                            <i className="fa fa-check-circle"></i> {createTripSuccess}
+                            </div>
+                            }
+                            {createTripError && 
+                            <div className="error-no-trip">
+                            <i className="fa fa-large fa-exclamation-circle"></i> {createTripError}
+                            </div>
+                            }
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        </ThemeProvider>
     );
 };
 
