@@ -32,7 +32,7 @@
     margin-right: 20px;
     background-color: rgba(206, 214, 207, 0.9);
     height: 90px;
-    width: 350px;
+    width: fit-content;
     border-radius: 20px;
     padding: 15px;
     display: flex;
@@ -69,7 +69,7 @@
 
 .mytrip .signout-button {
     height: 40px;
-    width: 160px;
+    width: 110px;
     font-size: 12px;
     font-weight: bold;
     border-radius: 20px;
