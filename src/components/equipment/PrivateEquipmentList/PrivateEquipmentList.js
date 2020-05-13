@@ -6,6 +6,7 @@ import {UserContext} from './../../../context/user';
 import AddEquipmentListToDBForm from './../AddEquipmentListToDBForm/AddEquipmentListToDBForm'
 import {addFavoriteEquipmentListToUserTrip} from './../../../server/firebase';
 import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 // HOOKS
@@ -70,16 +71,20 @@ const RenderListItems = ({items, setItems, user}) => {
                            onChange={e => setInput(e.target.value)} />
                     <label htmlFor={`check-item-${item.id}`} className={`${item.checked ? 'item-line-through' : 'item-none'}
                      ${item.onEditMode ? 'hideP' : 'showP'}`}>{item.label} </label>
+                     <Tooltip title="Edit" arrow>
                     <button className={item.onEditMode ? 'hoverBtn' : 'editbtn'} onClick={
                         () => {handleEdit(item.id)}
                     }>
                         <i className="fa fa-pencil" aria-hidden="true"></i>
                     </button>
+                    </Tooltip>
+                    <Tooltip title="Remove" arrow>
                     <button className="removebtn" onClick={
                         () => {handleRemove(item.id)}
                     }>
                         <i className="fa fa-trash" aria-hidden="true"></i>
                     </button>
+                    </Tooltip>
                 </div>
             </li>
         );

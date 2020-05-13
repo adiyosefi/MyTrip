@@ -517,7 +517,7 @@ const MyTrip = () => {
               <h2 className="">{displayName}</h2>
               <h3 className="">{email}</h3>
             </div>
-            <button className="signout-button" onClick={() => { auth.signOut() }}>Sign out <i className="fa fa-sign-out"></i></button>
+            <button className="signout-button" onClick={() => { auth.signOut(); }}>Sign out <i className="fa fa-sign-out"></i></button>
           </div>
           <div className="itinerary-form-or-title-container">
             {trip && trip.destination ? <TripTitle trip={trip} setTrip={setTrip} user={user} /> : <ItineraryForm user={user} trip={trip} setTrip={setTrip} />}

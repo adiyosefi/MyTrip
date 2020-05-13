@@ -6,9 +6,15 @@ import Loading from './../global/Loading';
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const currentUserState = useContext(UserContext);
-  
-  // if (currentUserState) {
+
+  useEffect(() => {
+    
+  }, []);
+
+  if (currentUserState) {
     return (
       <Route
         {...rest}
@@ -21,11 +27,12 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
         }
       />
     );
-  // }
+ }
   // return spinner
-  // return (
-  //   <Loading />
-  // );
+  return (
+     <Loading />
+   );
+  
 };
 
 export default PrivateRoute;
