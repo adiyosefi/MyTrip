@@ -5,10 +5,10 @@ import { auth, getTripDocument } from "../../../server/firebase";
 import './MyTrip.css';
 import moment from 'moment';
 import { countries } from './../../../server/countries';
-import { generateTripDocument, deleteTripFromUser } from './../../../server/firebase'
+import { generateTripDocument, deleteTripFromUser, deleteActivityFromUserAcitivities } from './../../../server/firebase'
 import TextField from '@material-ui/core/TextField';
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
-
+import Tooltip from '@material-ui/core/Tooltip';
 
 // HOOKS
 import { useFavoriteEquipmentList } from '../../../hooks/useFavoriteEquipmentList';
@@ -61,7 +61,12 @@ const RenderFavoriteActivities = ({ user }) => {
     }
   }, []);
 
-
+  const deleteFavoriteActivity = (event, aid) => {
+    event.preventDefault();
+    const newList = favoriteActivities.filter(activity => activity.id !== aid);
+    setFavoriteActivities(newList);
+    deleteActivityFromUserAcitivities(user, aid);
+  }
 
   function titleCase(str) {
     var splitStr = str.toLowerCase().split(' ');
@@ -83,11 +88,20 @@ const RenderFavoriteActivities = ({ user }) => {
               <img src={activity.data.picture} className="activity-picture" />
             </div>
             <div className="activity-details">
+            <div className="activity-delete-and-title">
               <div className="activity-name">
                 <Link to={`/activities/${activity.id}`} className="activity-link">
                   <h5>{titleCase(activity.data.activityName)}</h5>
                 </ Link>
               </div>
+              <div className="activity-delete">
+                  <Tooltip title="Remove" arrow>
+                    <button className="activity-delete-button" onClick={event => deleteFavoriteActivity(event, activity.id)}>
+                      &times;
+                </button>
+                  </Tooltip>
+                </div>
+                </div>
               <div className="activity-metadata">
                 <div className="activity-metadata-item">
                   <i className="fa fa-plane"></i> <span>Destination:</span> {activity.data.destination}
@@ -181,16 +195,20 @@ const RenderFavoriteEquipmentList = ({ user }) => {
             onChange={e => setInput(e.target.value)} />
           <label htmlFor={`check-item-${item.id}`} className={`${item.checked ? 'item-line-through' : 'item-none'}
                    ${item.onEditMode ? 'hideP' : 'showP'}`}>{item.label} </label>
+          <Tooltip title="Edit" arrow>
           <button className={item.onEditMode ? 'hoverBtn' : 'editbtn'} onClick={
             () => { handleEdit(item.id) }
           }>
             <i className="fa fa-pencil" aria-hidden="true"></i>
           </button>
+          </Tooltip>
+          <Tooltip title="Remove" arrow>
           <button className="removebtn" onClick={
             () => { handleRemove(item.id) }
           }>
             <i className="fa fa-trash" aria-hidden="true"></i>
           </button>
+          </Tooltip>
         </div>
       </li>
     );
@@ -316,7 +334,20 @@ const ItineraryForm = ({ user, trip, setTrip }) => {
   const [destination, setDestination] = useState("");
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
-  const [error, setError] = useState(null);
+  
+  const [createTripSuccess, setCreateTripSuccess] = useState(null);
+  const [createTripError, setCreateTripError] = useState(null);
+
+  const useStyles = makeStyles(theme => ({
+    option: {
+        fontSize: 14,
+    },
+    selectRoot: {
+        textAlign: "left",
+    },
+}));
+
+const classes = useStyles();
 
   const onChangeHandler = event => {
     const { name, value } = event.currentTarget;
@@ -339,27 +370,42 @@ const ItineraryForm = ({ user, trip, setTrip }) => {
           await generateTripDocument(user, destination, start, end);
           setTrip(user.trip);
           console.log('trip added');
+          setCreateTripSuccess('Trip created successfully!')
           window.location.href = '/mytrip';
         }
-        catch (error) {
-          setError('Error creating trip');
+        catch (createTripError) {
+          setCreateTripError('Error creating trip');
         }
         setDestination("");
         setStart(null);
         setEnd(null);
       }
       else {
-        setError("Error creating trip- not all details entered");
+        setCreateTripError("Error creating trip- not all details entered");
       }
     }
   };
 
+  const handleStartDateChange = (date) => {
+    setStart(date);
+    console.log(start);
+  };
+
+  const handleEndDateChange = (date) => {
+    setEnd(date);
+    console.log(end);
+  };
+
+
   return (
     <div className="form-container">
       <div className="form-title">
-        Itinerary Planner
+      <h1>Plan your next trip!</h1>
       </div>
+      <div className="iti-form-container">
       <form>
+      <div className="form-content">
+      <div className="destination-input">
         <input required list="destination-of-trip" className="destination-input"
           onChange={event => onChangeHandler(event)}
           name="tripDestination" id="tripDestination" placeholder="Enter destination (Country)" />
@@ -371,6 +417,7 @@ const ItineraryForm = ({ user, trip, setTrip }) => {
             );
           })}
         </datalist>
+        </div>
         <div className="start-date">
           <label htmlFor="tripStart"> Start: </label>
           <input id="tripStart" type="date" name="tripStart"
@@ -383,15 +430,28 @@ const ItineraryForm = ({ user, trip, setTrip }) => {
             onChange={event => onChangeHandler(event)}
             className="end-date-input" />
         </div>
-        <div>
-          {error}
         </div>
+        <div className="form-btn-error-container">
+        <div className="form-btn-container">
         <button name="form-submit"
           onClick={event => {
             createTripHandler(event, destination, start, end);
           }}
-          className="form-button">Start planning your trip</button>
+          className="form-button">Start planning your trip!</button>
+          {createTripSuccess &&
+                            <div className="trip-success-message">
+                            <i className="fa fa-check-circle"></i> {createTripSuccess}
+                            </div>
+                            }
+                            {createTripError && 
+                            <div className="error-no-trip">
+                            <i className="fa fa-large fa-exclamation-circle"></i> {createTripError}
+                            </div>
+                            }
+          </div>
+          </div>
       </form>
+      </div>
     </div>
   );
 }

@@ -346,3 +346,21 @@ export const addFavoriteActivityToUserTrip = (user, activity) => {
 });
 }
 
+export const deleteActivityFromUserAcitivities = (user, aid) => {
+  const userRef = firestore.doc(`users/${user.uid}`);
+  const newList = user.trip.favoriteactivities.filter(activity => activity.id !== aid);
+
+  return userRef.update({
+    trip: {
+      ...user.trip,
+      favoriteactivities: newList
+    }
+})
+.then(function() {
+    console.log("User document successfully updated!");
+})
+.catch(function(error) {
+    // The document probably doesn't exist.
+    console.error("Error updating user document: ", error);
+});
+}
