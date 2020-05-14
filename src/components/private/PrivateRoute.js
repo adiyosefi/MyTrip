@@ -2,36 +2,26 @@ import React, { useContext, useState, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { UserContext } from "../../context/user";
 import Loading from './../global/Loading';
+import SignIn from "./../auth/SignIn/SignIn";
 
-
-const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
+const PrivateRoute = ({ component, ...options }) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const currentUserState = useContext(UserContext);
 
   useEffect(() => {
     
   }, []);
 
-  if (currentUserState) {
-    return (
-      <Route
-        {...rest}
-        render={routeProps =>
-          !!currentUserState ? (
-            <RouteComponent {...routeProps} />
-          ) : (
-              <Redirect to={"/signin"} />
-            )
-        }
-      />
-    );
- }
+    const currentUserState = useContext(UserContext);
+    const finalComponent = currentUserState ? component : SignIn;
+  
+    return <Route {...options} component={finalComponent} />;
+  
   // return spinner
-  return (
-     <Loading />
-   );
+  // return (
+  //    <Loading />
+  //  );
   
 };
 
