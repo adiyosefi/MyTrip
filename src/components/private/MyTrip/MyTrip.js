@@ -229,8 +229,10 @@ const RenderFavoriteEquipmentList = ({ user }) => {
   );
 }
 
-const RenderNotes = ({ user, setError }) => {
+const RenderNotes = ({ user }) => {
   const [notes, setNotes] = useNotes(user);
+
+  const [notesError, setNotesError] = useState(null);
 
   // useEffect(() => {
   //   console.log("from notes: ", notes)
@@ -253,7 +255,7 @@ const RenderNotes = ({ user, setError }) => {
       setNotes("");
       console.log('notes cleared in trip successfully-', notes);
     } else {
-      setError('notes is not filled');
+      setNotesError('Notes is not filled');
     }
   };
 
@@ -284,9 +286,16 @@ const RenderNotes = ({ user, setError }) => {
           variant="outlined"  
           onChange={handleChangeNotes}
         />
+        <div className="clear-notes-button-and-error">
           <button className="clear-notes-button" onClick={event => {
             clearNotesInTrip(event, notes);
           }}>Clear notes</button>
+          {notesError && 
+                            <div className="error-no-notes">
+                            <i className="fa fa-large fa-exclamation-circle"></i> {notesError}
+                            </div>
+                            }
+                            </div>
         </form>
       </div>
     </div>
@@ -492,7 +501,6 @@ const MyTrip = () => {
   const user = useContext(UserContext);
   const { photoURL, displayName, email } = user;
   const [trip, setTrip] = useState(user.trip);
-  const [error, setError] = useState(null);
 
   // get trip data from document reference
   useEffect(() => {
@@ -531,7 +539,7 @@ const MyTrip = () => {
           </div>
           </div>
           <div className="notes-container">
-            {trip && <RenderNotes user={user} setError={setError} />}
+            {trip && <RenderNotes user={user} />}
           </div>
         </div>
       </div>

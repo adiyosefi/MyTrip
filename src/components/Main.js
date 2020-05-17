@@ -18,6 +18,7 @@ import {UserProvider} from '../context/user';
 import PrivateRoute from './private/PrivateRoute';
 import ActivityDetails from './activity/ActivityDetails/ActivityDetails'
 import { getActivityWithIdDocument } from './../server/firebase'
+import { UserContext } from "./../context/user";
 
 
 const Main = (props) => {
@@ -32,16 +33,16 @@ const Main = (props) => {
                 <Switch>
                     <Route exact path="/home" component={Home} />
                     <Route exact path="/about" component={About} />
-                    <Route path="/equipmentlistsearch" component={EquipmentListSearch} />
+                    <Route exact path="/equipmentlistsearch" component={EquipmentListSearch} />
                     <PrivateRoute exact path="/privateequipmentlist" component={PrivateEquipmentList} />
                     <Route exact path="/activities" component={ActivitySearch} />
                     <Route path="/activities/:activityId" component={ActivityDetails} />
                     <Route exact path="/contact" component={Contact} />
-                    <PrivateRoute exact path="/mytrip" component={MyTrip} />
-                    <Route path="/signin" component={SignIn} />
-                    <Route path="/signup" component={SignUp} />
-                    <Route path="/passwordreset" component={PasswordReset} />
-                    <Redirect to="/home" />
+                    <PrivateRoute exact path="/mytrip" component={MyTrip}/>
+                    <Route exact path="/signin" component={SignIn} />
+                    <Route exact path="/signup" component={SignUp} />
+                    <Route exact path="/passwordreset" component={PasswordReset} />
+                    <Redirect from="/" to="/home" />
                 </Switch>
                 <Footer />
             </UserProvider>

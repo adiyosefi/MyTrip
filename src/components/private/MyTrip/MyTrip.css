@@ -437,6 +437,19 @@
     background: #fe8b1d;
 }
 
+.mytrip .clear-notes-button-and-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mytrip .error-no-notes {
+    color: rgb(179, 8, 8);
+    font-size: 12px;
+    text-align: center;
+    width: 140px;
+    margin-top: 10px;
+}
 
 .mytrip .form-container {
     margin-top: 40px;

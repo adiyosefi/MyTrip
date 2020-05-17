@@ -6,6 +6,7 @@ import SignIn from "./../auth/SignIn/SignIn";
 
 const PrivateRoute = ({ component, ...options }) => {
 
+
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -18,11 +19,30 @@ const PrivateRoute = ({ component, ...options }) => {
   
     return <Route {...options} component={finalComponent} />;
   
+  
+
+}
+
+  // const [isLoading, setIsLoading] = useState(true);
+
+  // useEffect(() => {
+  //   let mounted = true;
+  //   if (!mounted){
+  //     return (
+  //         <Loading />
+  //      );
+  //   }
+  //   if(mounted){
+  //   fetchUser();
+  //   }
+
+  //   return () => mounted = false;
+  // }, []);
+  
   // return spinner
   // return (
   //    <Loading />
   //  );
   
-};
 
 export default PrivateRoute;
