@@ -11,6 +11,7 @@ import MyTrip from './private/MyTrip/MyTrip';
 import ActivitySearch from './activity/ActivitySearch/ActivitySearch';
 import LoginModal from './auth/LoginModal/LoginModal';
 import { ModalProvider } from '../context/modal';
+import SignInUp from './auth/SignInUp/SignInUp';
 import SignIn from "./auth/SignIn/SignIn";
 import SignUp from "./auth/SignUp/SignUp";
 import PasswordReset from "./auth/PasswordReset/PasswordReset";
@@ -39,8 +40,7 @@ const Main = (props) => {
                     <Route path="/activities/:activityId" component={ActivityDetails} />
                     <Route exact path="/contact" component={Contact} />
                     <PrivateRoute exact path="/mytrip" component={MyTrip}/>
-                    <Route exact path="/signin" component={SignIn} />
-                    <Route exact path="/signup" component={SignUp} />
+                    <Route exact path="/signinup" component={SignInUp} />
                     <Route exact path="/passwordreset" component={PasswordReset} />
                     <Redirect from="/" to="/home" />
                 </Switch>

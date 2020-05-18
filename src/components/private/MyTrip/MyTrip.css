@@ -158,12 +158,20 @@
 .mytrip .favoriteactivitiescontainer h4 {
    color: white;
    margin-left: 15px;
+   text-decoration: underline;
 }
 
 .mytrip .fav-act-list-con {
     height: 400px;
     overflow: auto;
     padding: 15px;
+}
+
+.mytrip .no-activities-content {
+    color: white;
+    margin-left: 20px;
+    margin-top: 40px;
+    font-size: 18px;
 }
 
 .mytrip .container-per-activity {
@@ -272,6 +280,7 @@
 .mytrip .favoriteequipmentlist h4 {
     margin-bottom: 10px;
     color: white;
+    text-decoration: underline;
 }
 
 .mytrip .favoriteequipmentlistcontainer {
@@ -396,6 +405,17 @@
 
 .mytrip .notescontainer h4 {
     color: white;
+    text-decoration: underline;
+}
+
+.mytrip .link-to-activities {
+    font-weight: bold;
+    color: pink;
+}
+
+.mytrip .link-to-activities:hover {
+    color: rgb(175, 76, 93);
+    text-decoration: none;
 }
 
 .mytrip .notescontainer .text {
@@ -440,7 +460,7 @@
 .mytrip .clear-notes-button-and-error {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center ;
 }
 
 .mytrip .error-no-notes {

@@ -128,11 +128,23 @@ const RenderFavoriteActivities = ({ user }) => {
     <div className="favoriteactivitiescontainer">
       <h4>My Activities</h4>
       {
-        favoriteActivities && (
+        favoriteActivities.length !== 0  && (
           <div className="fav-act-list-con">
             <ul className="activitieslist">
               {activitiesList}
             </ul>
+          </div>
+        )
+      }
+      {
+        favoriteActivities.length === 0 && (
+          <div className="no-activities-content">
+            <div>
+            No favorite activities yet...
+            </div>
+            <div className="">
+          <Link to="/activities" className="link-to-activities">CLICK HERE</Link> to search and add activities
+        </div>
           </div>
         )
       }
@@ -217,11 +229,26 @@ const RenderFavoriteEquipmentList = ({ user }) => {
     <div className="favoriteequipmentlist">
       <h4>My Equipment List</h4>
       {
-        items && (
+        items.length !== 0 && (
           <div className="favoriteequipmentlistcontainer">
             <ul className="equipmentlistlist">
               {listItems}
             </ul>
+          </div>
+        )
+      }
+      {
+        items.length === 0 && (
+          <div className="no-items-content">
+            <div>
+            No favorite equipment list yet...
+            </div>
+            <div className="">
+          <Link to="/equipmentlistsearch" className="link-to-equipmentlists">CLICK HERE</Link> to search and add an equipment list
+        </div>
+        <div className="">
+          <Link to="/privateequipmentlist" className="link-to-equipmentlists">CLICK HERE</Link> to create your own equipment list
+        </div>
           </div>
         )
       }

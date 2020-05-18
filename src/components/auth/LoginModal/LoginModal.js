@@ -75,7 +75,7 @@ export function LoginModal() {
         if (email && password){
         auth.signInWithEmailAndPassword(email, password).catch(loginModalErrorMessage => {
             setLoginModalErrorMessage("Error signing in with password and email!");
-          console.loginModalErrorMessage("Error signing in with password and email", loginModalErrorMessage);
+          console.error("Error signing in with password and email", loginModalErrorMessage);
         });
         setLoginModalSuccessMessage('Signed in successfully! 🎉');
         toggleModal();
@@ -94,6 +94,8 @@ export function LoginModal() {
             setPasswordErrorBoolean(true);
             setPasswordErrorContent('Enter your password');
         }
+        setEmail("");
+        setPassword("");
       };
 
       const renderSignInModal = () => {
