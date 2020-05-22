@@ -178,7 +178,6 @@ const SignIn = () => {
 
   return (
     <>
-    {/* user ? <Redirect to="/mytrip" /> : renderSignIn()*/}
     {renderSignIn()}
     </>
   );

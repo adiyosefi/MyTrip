@@ -7,7 +7,7 @@ import SignIn from './../SignIn/SignIn'
 import SignUp from './../SignUp/SignUp'
 
 
-const SignInUp = () => {
+const RenderSignInUp = () => {
   return (
     <div className="signinup">
         <div className="background">
@@ -22,5 +22,13 @@ const SignInUp = () => {
         </div>
       </div>
   );
+}
+
+const SignInUp = () => {
+
+  return (
+     <RenderSignInUp /> 
+  );
 };
+
 export default SignInUp;

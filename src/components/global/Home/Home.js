@@ -128,7 +128,7 @@ const Home = () => {
     }
     else {
         setCreateTripError('Signin first!');
-        window.location.href = '/signin';
+        window.location.href = '/signinup';
     }
     };
 

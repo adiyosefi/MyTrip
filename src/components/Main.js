@@ -20,13 +20,14 @@ import PrivateRoute from './private/PrivateRoute';
 import ActivityDetails from './activity/ActivityDetails/ActivityDetails'
 import { getActivityWithIdDocument } from './../server/firebase'
 import { UserContext } from "./../context/user";
-
+import { AuthProvider } from "./../context/auth";
 
 const Main = (props) => {
 
     return (
         <>
             <UserProvider>
+                <AuthProvider>
                 <ModalProvider>
                     <Header />
                     <LoginModal />
@@ -45,6 +46,7 @@ const Main = (props) => {
                     <Redirect from="/" to="/home" />
                 </Switch>
                 <Footer />
+                </AuthProvider>
             </UserProvider>
         </>
     );

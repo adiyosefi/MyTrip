@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { UserContext } from "../../../context/user";
 import { auth, getTripDocument } from "../../../server/firebase";
 import './MyTrip.css';
@@ -240,13 +240,13 @@ const RenderFavoriteEquipmentList = ({ user }) => {
       {
         items.length === 0 && (
           <div className="no-items-content">
-            <div>
+            <div className="no-items-title">
             No favorite equipment list yet...
             </div>
-            <div className="">
+            <div className="no-items-link">
           <Link to="/equipmentlistsearch" className="link-to-equipmentlists">CLICK HERE</Link> to search and add an equipment list
         </div>
-        <div className="">
+        <div className="no-items-link">
           <Link to="/privateequipmentlist" className="link-to-equipmentlists">CLICK HERE</Link> to create your own equipment list
         </div>
           </div>
@@ -523,9 +523,7 @@ const classes = useStyles();
   );
 }
 
-
-const MyTrip = () => {
-  const user = useContext(UserContext);
+const RenderMyTrip = ({user}) => {
   const { photoURL, displayName, email } = user;
   const [trip, setTrip] = useState(user.trip);
 
@@ -536,7 +534,6 @@ const MyTrip = () => {
       setTrip(user.trip);
     }
   }, []);
-
 
   return (
     <ThemeProvider theme={myTheme}>
@@ -572,6 +569,15 @@ const MyTrip = () => {
       </div>
     </div>
     </ThemeProvider>
+  );
+}
+
+
+const MyTrip = () => {
+  const user = useContext(UserContext);
+
+  return (
+    <RenderMyTrip user={user} />
   )
 };
 

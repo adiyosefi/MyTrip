@@ -268,6 +268,40 @@
     text-decoration: underline;
 }
 
+.mytrip .no-items-content {
+    margin-top: 40px;
+    height: 400px;
+    width: 400px;
+    background-color: lightpink;
+    padding: 20px;
+    box-sizing: border-box;
+    -webkit-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    -moz-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+}
+
+.mytrip .no-items-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.mytrip .no-items-link {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.mytrip .link-to-equipmentlists {
+    font-weight: bold;
+    color: rgb(175, 76, 93);;
+}
+
+.mytrip .link-to-equipmentlists:hover {
+    color: rgb(196, 121, 133);
+    text-decoration: none;
+}
+
+
 .mytrip .favourite-equipment-list-container {
 }
 
