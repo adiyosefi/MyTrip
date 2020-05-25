@@ -55,9 +55,8 @@ const myTheme = createMuiTheme({
 const RenderEquipmentLists = ({ lists, user }) => {
     const [currentPage, setCurrentPage] = useState(1);
 
-    const [favListError, setFavListError] = useState(null);
-    const [favListSuccess, setFavListSuccess] = useState(null);
-
+    const [favListError, setFavListError] = useState([]);
+    const [favListSuccess, setFavListSuccess] = useState([]);
 
     const numberOfListsPerPage = 10;
 
@@ -70,6 +69,7 @@ const RenderEquipmentLists = ({ lists, user }) => {
     const indexOfLastList = currentPage * numberOfListsPerPage;
     const indexOfFirstList = indexOfLastList - numberOfListsPerPage;
     const currentLists = lists.slice(indexOfFirstList, indexOfLastList);
+
 
     const renderSeason = (season) => {
         return (
@@ -87,7 +87,7 @@ const RenderEquipmentLists = ({ lists, user }) => {
         );
     }
 
-    const handleSetFavoriteEquipmentList = async (event, user, items) => {
+    const handleSetFavoriteEquipmentList = async (event, user, items, listId) => {
         event.preventDefault();
         console.log('entered handleSetFavoriteEquipmentList');
         if (user.trip != null || user.trip) {
@@ -95,20 +95,28 @@ const RenderEquipmentLists = ({ lists, user }) => {
             try {
                 await addFavoriteEquipmentListToUserTrip(user, items);
                 console.log('trip updated');
-                setFavListSuccess('List added to your trip successfully!');
+                const newFavSuccess = favListSuccess.slice() //copy the array
+                newFavSuccess[listId] = 'List added to your trip successfully!' //execute the manipulations
+                setFavListSuccess(newFavSuccess);
+                console.log('fav success:',favListSuccess[listId]);
                 window.location.href = '/mytrip';
             }
             catch (favListError) {
-                setFavListError('Error creating adding list to trip');
+                const newFaveError = favListError.slice();
+                newFaveError[listId] = 'Error creating adding list to trip';
+                setFavListError(newFaveError);
             }
         } else {
-            setFavListError('Create trip first!');
-            console.log("error need to create trip first-", favListError);
+            const newFaveError = favListError.slice();
+            newFaveError[listId] = 'Create trip first!';
+            setFavListError(newFaveError);
+            console.log("error need to create trip first-", favListError[listId]);
             window.location.href = '/mytrip';
         }
     }
 
     const listsItems = currentLists.map((list) => {
+
         const eachListItems = list.data.list.map((item) => {
             return (
                 <li key={item.id} className="equipmentlistitem">
@@ -161,17 +169,17 @@ const RenderEquipmentLists = ({ lists, user }) => {
                     {user &&
                         <div>
                             <Button variant="contained" color="secondary" style={{ width: 160, textTransform: 'none', fontWeight: 'bold', fontSize: 14, borderRadius: '20px' }}
-                                onClick={e => handleSetFavoriteEquipmentList(e, user, list.data.list)}>
+                                onClick={e => handleSetFavoriteEquipmentList(e, user, list.data.list, list.id)}>
                                 Set as my favorite Equipment List
             </Button>
-                            {favListSuccess &&
+                            {favListSuccess[list.id] &&
                                 <div className="list-success-message">
-                                    <i className="fa fa-check-circle"></i> {favListSuccess}
+                                    <i className="fa fa-check-circle"></i> {favListSuccess[list.id]}
                                 </div>
                             }
-                            {favListError &&
+                            {favListError[list.id] &&
                                 <div className="list-error-message">
-                                    <i className="fa fa-exclamation-circle"></i> {favListError}
+                                    <i className="fa fa-exclamation-circle"></i> {favListError[list.id]}
                                 </div>
                             }
                         </div>
@@ -195,8 +203,6 @@ const RenderEquipmentLists = ({ lists, user }) => {
 
 
 }
-
-
 
 
 const EquipmentListSearch = () => {

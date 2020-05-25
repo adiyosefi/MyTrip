@@ -354,7 +354,7 @@ const TripTitle = ({ trip, setTrip, user }) => {
             <span>Trip start:</span> {start}
           </div>
           <div className="trip-metadata-item">
-            <span>Trip End:</span> {end}
+            <span>Trip end:</span> {end}
           </div>
           <div>
             <button className="delete-trip-button" onClick={event => deleteTripHandler(event)}>Delete this trip</button>
