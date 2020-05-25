@@ -196,7 +196,7 @@ const EquipmentListSearch = () => {
     const [destination, setDestination] = useState("");
     const [season, setSeason] = useState("");
     const [category, setCategory] = useState("");
-    const [error, setError] = useState(null);
+    const [searchError, setSearchError] = useState(null);
     const [resultsLists, setResultLists] = useState("");
 
     const [trip, setTrip] = useState(null);
@@ -220,13 +220,12 @@ const EquipmentListSearch = () => {
             try {
                 equipmentListsResults = await searchPublicEquipmentListDocuments(destination, season, category);
                 setResultLists(equipmentListsResults);
-                console.log("user's trip: ", trip)
-        if (user.trip) {
-        setTrip(user.trip);
-        }
+                if (user && user.trip) {
+                setTrip(user.trip);
+                } 
             }
-            catch (error) {
-                setError('Error searching public equipment lists');
+            catch (searchError) {
+                setSearchError('Error fetching public equipment lists');
             }
         }
 
@@ -259,8 +258,8 @@ const EquipmentListSearch = () => {
             equipmentListsResults = await searchPublicEquipmentListDocuments(destination, season, category);
             setResultLists(equipmentListsResults);
         }
-        catch (error) {
-            setError('Error searching public equipment lists');
+        catch (searchError) {
+            setSearchError('Error searching public equipment lists');
         }
 
         setDestination("");
@@ -377,13 +376,15 @@ const EquipmentListSearch = () => {
                                     </TextField>
                                 </div>
                                 <div>
-                                    {error}
-                                </div>
-                                <div>
                                     <button
                                         className="el-search-button"
                                         type="submit">
                                         Search</button>
+                                    {searchError && 
+                                    <div className="error-no-search">
+                                    <i className="fa fa-large fa-exclamation-circle"></i> {searchError}
+                                    </div>
+                                    }
                                 </div>
                             </form>
                             <div className="goto-ownlist">
