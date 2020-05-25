@@ -52,7 +52,8 @@ const myTheme = createMuiTheme({
     }
 });
 
-const RenderEquipmentLists = ({ lists, user }) => {
+const RenderEquipmentLists = ({ lists, user, trip }) => {
+
     const [currentPage, setCurrentPage] = useState(1);
 
     const [favListError, setFavListError] = useState([]);
@@ -71,26 +72,10 @@ const RenderEquipmentLists = ({ lists, user }) => {
     const currentLists = lists.slice(indexOfFirstList, indexOfLastList);
 
 
-    const renderSeason = (season) => {
-        return (
-            <div className="list-season">
-                <span>Season:</span> {season}
-            </div>
-        );
-    }
-
-    const renderCategory = (category) => {
-        return (
-            <div className="list-category">
-                <span>Category:</span> {category}
-            </div>
-        );
-    }
-
     const handleSetFavoriteEquipmentList = async (event, user, items, listId) => {
         event.preventDefault();
         console.log('entered handleSetFavoriteEquipmentList');
-        if (user.trip != null || user.trip) {
+        if (trip != null || trip) {
             console.log('entered trip is not null');
             try {
                 await addFavoriteEquipmentListToUserTrip(user, items);
@@ -213,6 +198,9 @@ const EquipmentListSearch = () => {
     const [category, setCategory] = useState("");
     const [error, setError] = useState(null);
     const [resultsLists, setResultLists] = useState("");
+
+    const [trip, setTrip] = useState(null);
+
     var equipmentListsResults;
 
     const useStyles = makeStyles(theme => ({
@@ -232,6 +220,10 @@ const EquipmentListSearch = () => {
             try {
                 equipmentListsResults = await searchPublicEquipmentListDocuments(destination, season, category);
                 setResultLists(equipmentListsResults);
+                console.log("user's trip: ", trip)
+        if (user.trip) {
+        setTrip(user.trip);
+        }
             }
             catch (error) {
                 setError('Error searching public equipment lists');
@@ -239,6 +231,7 @@ const EquipmentListSearch = () => {
         }
 
         fetchData();
+
     }, []);
 
     const handleChangeSeason = (event) => {
@@ -404,7 +397,7 @@ const EquipmentListSearch = () => {
                         <div className="results-title">
                             <h4>Search Results</h4>
                         </div>
-                        {resultsLists ? <RenderEquipmentLists lists={resultsLists} user={user} />
+                        {resultsLists ? <RenderEquipmentLists lists={resultsLists} user={user} trip={trip} />
                             :
                             <Loading />}
                     </div>
