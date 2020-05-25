@@ -30,3 +30,88 @@
     margin-left: 100px;
     margin-top: 100px;
 }
+
+.signinup .user-profile-cont {
+    margin-top: 100px;
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 400px;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signinup .user-profile-title {
+    margin-bottom: 20px;
+}
+
+.signinup .user-profile-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.signinup .profile-picture {
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+}
+
+.signinup .user-details-metadata {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 55px;
+ margin-left: 20px;
+}
+
+.signinup .user-details-metadata h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.signinup .user-details-metadata h3 {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.signinup .signout-button {
+    margin-top: 30px;
+    height: 40px;
+    width: 110px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: thin;
+    color: white;
+    border-color: transparent;
+    cursor: pointer;
+    background-color: rgb(179, 8, 8);
+    box-shadow: 0px 2px 2px 0px rgba(120,116,120,0.59);
+}
+
+.signinup .signout-button:hover {
+    background-color: rgb(209, 20, 20);
+}
+
+.signinup .here-link {
+    color: inherit;
+    font-weight: bold;
+}
+
+.signinup .here-link:hover {
+    color: #9c9c9c;
+    text-decoration: none;
+}
+
+.signinup .login-goto-yourtrip {
+    margin-top: 20px;
+    font-size: 17px;
+}

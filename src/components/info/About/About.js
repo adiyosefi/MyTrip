@@ -19,10 +19,9 @@ const About = () => {
                     </p>
                     <p>
                         We made a free online trip planner that can help you build a personalized itinerary for your next vacation.<br/>
-                        To plan with MyTrip, you tell it where you&apos;re going, your dates, and your sightseeing preferences. Within seconds, you'll receive a detailed list with trip routes, restaurants, attractions and more.
+                        To plan with MyTrip, you tell it where you&apos;re going and your dates. Within seconds, you'll receive a detailed list with trip routes, restaurants, attractions and more.
                     </p>
                     <p>
-                        You can also create a custom activity on your calendar. You can name the restaurant you want to eat at for lunch, the hotel you want to sleep in, or another activity that you couldn't find in our database.<br/>
                         The software provides a complete set of tools and recommendations so you can research the destination and make any desired changes to the itinerary.
                     </p>
                     <p>
@@ -43,10 +42,9 @@ const About = () => {
                         In order to start planning your trip, select a destination and the required dates.
                     </p>
                     <p>
-                        You can add to your calender custom activities or search for desired activities on our site.<br/>
+                        You can search for desired activities on our site, and add them to your trip's activities.<br/>
                         To search for activities you enter the search details and mark the activities you like from the search results. You can click on an activity to see its' details.<br/>
-                        After you've marked the wanted activities you'll see them in your trip page.<br/>
-                        Now you can drag activities from the favourite activities section to your calender.
+                        After you've marked the wanted activities you'll see them in your trip page.
                     </p>
                     <p>
                         If you want to make your own equipment list you type the items one by one to your list. If you want to get a recommended list you insert the search details and choose a list that suits your needs. <br/>

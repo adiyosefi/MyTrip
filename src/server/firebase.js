@@ -247,37 +247,37 @@ export const searchActivitiesDocuments = async (activityName, destination, seaso
   var categoryQuery = activitiesRef.where("category", "==", category);
   var searchResults;
   var searchResultsArray = [];
-  if (!activityName && !destination && !season && !category) {
+  if (!activityName && !destination && (!season || season === 'All year round') && !category) {
     searchResults = activitiesRef;
   } else if (activityName && destination && season && category){
     searchResults = nameQuery.destinationQuery.seasonQuery.categoryQuery;
   } else if (activityName && destination && season && !category) {
     searchResults = nameQuery.destinationQuery.seasonQuery;
-  } else if (activityName && destination && category && !season) {
+  } else if (activityName && destination && category && (!season || season === 'All year round')) {
     searchResults = nameQuery.destinationQuery.categoryQuery;
   } else if (activityName && season && category && !destination) {
     searchResults = nameQuery.seasonQuery.categoryQuery;
   } else if (!activityName && season && category && destination) {
     searchResults = destinationQuery.seasonQuery.categoryQuery;
-  } else if (activityName && destination && !season && !category) {
+  } else if (activityName && destination && (!season || season === 'All year round') && !category) {
     searchResults = nameQuery.destinationQuery;
   } else if (activityName && season && !destination && !category) {
     searchResults = nameQuery.seasonQuery;
-  } else if (activityName && category && !destination && !season) {
+  } else if (activityName && category && !destination && (!season || season === 'All year round')) {
     searchResults = nameQuery.categoryQuery;
-  } else if (!activityName && category && destination && !season) {
+  } else if (!activityName && category && destination && (!season || season === 'All year round')) {
     searchResults = destinationQuery.categoryQuery;
   } else if (!activityName && category && !destination && season) {
     searchResults = seasonQuery.categoryQuery;
   } else if (!activityName && !category && destination && season) {
     searchResults = seasonQuery.destinationQuery;
-  } else if (activityName && !category && !destination && !season) {
+  } else if (activityName && !category && !destination && (!season || season === 'All year round')) {
     searchResults = nameQuery;
-  } else if (!activityName && !category && destination && !season) {
+  } else if (!activityName && !category && destination && (!season || season === 'All year round')) {
     searchResults = destinationQuery;
   } else if (!activityName && !category && !destination && season) {
     searchResults = seasonQuery;
-  } else if (!activityName && category && !destination && !season) {
+  } else if (!activityName && category && !destination && (!season || season === 'All year round')) {
     searchResults = categoryQuery;
   } 
   const querySnapshot = await searchResults.get();

@@ -1,9 +1,9 @@
 .signin-container {
     background-color: rgba(255, 255, 255, 0.9);
-    height: 500px;
+    height: fit-content;
     width: 450px;
     border-radius: 20px;
-    padding: 20px;
+    padding: 40px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,6 +57,7 @@
 
 .signin-container .signin-success-message {
     margin-top: 20px;
+    margin-bottom: 20px;
     color: rgb(12, 109, 12);
     font-size: 12px;
     text-align: center;
@@ -65,22 +66,43 @@
 
 .signin-container .error-no-signin {
     margin-top: 20px;
+    margin-bottom: 20px;
     color: rgb(179, 8, 8);
     font-size: 12px;
     text-align: center;
     width: 190px;
 }
 
-.signin-container .forgot-link {
+.signin-container .forgot-password-button {
     color: inherit;
     font-weight: bold;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
-.signin-container .login-no-account {
-    margin-bottom: 10px;
+.signin-container .open-forgot-password-button {
+    color: #9c9c9c;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
-.signin-container .forgot-link:hover {
+.signin-container .forgot-password-button:hover {
     color: #9c9c9c;
     text-decoration: none;
+}
+
+.signin-container .open-forgot-password-button:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.signin-container .login-no-password {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

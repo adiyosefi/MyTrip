@@ -411,8 +411,8 @@ const ActivitySearch = () => {
                                             <MenuItem value='City trip'>
                                                 City trip
                             </MenuItem>
-                                            <MenuItem value='Relaxing Vacation'>
-                                                Relaxing Vacation
+                                            <MenuItem value='Relaxing vacation'>
+                                                Relaxing vacation
                             </MenuItem>
                                         </TextField>
                                     </div>

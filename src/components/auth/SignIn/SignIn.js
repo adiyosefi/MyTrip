@@ -5,6 +5,7 @@ import { UserContext } from '../../../context/user';
 import './SignIn.css';
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import PasswordReset from './../PasswordReset/PasswordReset'
 
 const myTheme = createMuiTheme({
   typography: {
@@ -56,6 +57,12 @@ const SignIn = () => {
     const [passwordErrorBoolean, setPasswordErrorBoolean] = useState(false);
     const [loginSuccessMessage, setLoginSuccessMessage] = useState(null);
     const [loginErrorMessage, setLoginErrorMessage] = useState(null);
+
+    const [isForgotPsaawordOpen, setIsForgotPsaawordOpen] = useState(false);
+
+function toggleIsForgotPsaawordOpen() {
+  setIsForgotPsaawordOpen(!isForgotPsaawordOpen);
+}
 
   const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget;
@@ -154,12 +161,7 @@ const SignIn = () => {
             onClick={signInWithGoogle}>
             Sign in with Google
         </button>
-        </div>
-            <div className="other-details-login">
-                <div className="login-no-password">
-                <Link to="passwordreset" className="forgot-link">Forgot Password?</Link>
-                </div>
-                {loginSuccessMessage &&
+        {loginSuccessMessage &&
                             <div className="signin-success-message">
                             <i className="fa fa-check-circle"></i> {loginSuccessMessage}
                             </div>
@@ -169,6 +171,16 @@ const SignIn = () => {
                             <i className="fa fa-large fa-exclamation-circle"></i> {loginErrorMessage}
                             </div>
                             }
+        </div>
+            <div className="other-details-login">
+                <div className="login-no-password">
+                <button onClick={toggleIsForgotPsaawordOpen} 
+                className={`${isForgotPsaawordOpen ? 'open-forgot-password-button' : 'forgot-password-button'}`}>
+                    {`${isForgotPsaawordOpen ? 'Close' : 'Forgot Password?'}`}</button>
+                <div>
+                    {isForgotPsaawordOpen && <PasswordReset />}
+                </div>
+                </div>
                 </div>
         </div>
       </div>
