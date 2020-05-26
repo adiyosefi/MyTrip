@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext, useContext } from 'react';
+import React, {useContext} from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
 import Header from './global/Header/Header';
 import Footer from './global/Footer/Footer';
@@ -12,22 +12,17 @@ import ActivitySearch from './activity/ActivitySearch/ActivitySearch';
 import LoginModal from './auth/LoginModal/LoginModal';
 import { ModalProvider } from '../context/modal';
 import SignInUp from './auth/SignInUp/SignInUp';
-import SignIn from "./auth/SignIn/SignIn";
-import SignUp from "./auth/SignUp/SignUp";
 import PasswordReset from "./auth/PasswordReset/PasswordReset";
 import {UserProvider} from '../context/user';
 import PrivateRoute from './private/PrivateRoute';
 import ActivityDetails from './activity/ActivityDetails/ActivityDetails'
-import { getActivityWithIdDocument } from './../server/firebase'
-import { UserContext } from "./../context/user";
-import { AuthProvider } from "./../context/auth";
+
 
 const Main = (props) => {
 
     return (
         <>
             <UserProvider>
-                <AuthProvider>
                 <ModalProvider>
                     <Header />
                     <LoginModal />
@@ -46,7 +41,6 @@ const Main = (props) => {
                     <Redirect from="/" to="/home" />
                 </Switch>
                 <Footer />
-                </AuthProvider>
             </UserProvider>
         </>
     );

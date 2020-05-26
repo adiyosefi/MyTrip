@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './ActivityDetails.css';
-import { Link } from 'react-router-dom';
 import { getActivityWithIdDocument } from './../../../server/firebase'
 import Loading from '../../global/Loading';
 import {addFavoriteActivityToUserTrip} from './../../../server/firebase'
@@ -8,7 +7,7 @@ import { UserContext } from './../../../context/user';
 
 const ActivityDetails = ({ match }) => {
 
-    const user = useContext(UserContext);
+    const {currentUser} = useContext(UserContext);
     const [activity, setActivity] = useState(null);
     const [favActivityError, setFavActivityError] = useState(null);
     const [favActivitySuccess, setFavActivitySuccess] = useState(null);
@@ -85,10 +84,10 @@ const ActivityDetails = ({ match }) => {
                         <div className="activity-metadata-item">
                         <i className="fa fa-large fa-list-ul"></i> <span>Category:</span> {activity.data.category ? activity.data.category : 'All categories'}
                         </div>
-                        {user && 
+                        {currentUser && 
                         <div className="submit-fav-act-button-container">
                         <button className="submit-fav-act-button"
-                        onClick={e => handleAddToFavoriteActivities(e, user, activity)}>
+                        onClick={e => handleAddToFavoriteActivities(e, currentUser, activity)}>
                             Set as my favorite activity
                             </button>
                             {favActivitySuccess &&
@@ -103,7 +102,7 @@ const ActivityDetails = ({ match }) => {
                             }
                         </div>}
                     </div>
-                    { (activity.data.type == 'Hiking-Trail') &&
+                    { (activity.data.type === 'Hiking-Trail') &&
                         <div className="activity-hiking-metadata">
                             <div className="activity-hiking-metadata-item">
                             <span>Activity type:</span> {activity.data.type}
@@ -122,7 +121,7 @@ const ActivityDetails = ({ match }) => {
                             </div>
                         </div>
                     }
-                    { (activity.data.type == 'Restaurant') &&
+                    { (activity.data.type === 'Restaurant') &&
                     <div>
                         <div className="activity-restaurant-metadata">
                             <div className="activity-restaurant-metadata-item">
@@ -140,12 +139,12 @@ const ActivityDetails = ({ match }) => {
                         <span>Phone:</span> {activity.data.phone}
                         </div>
                         <div className="activity-restaurant-metadata-item">
-                        <a href={activity.data.website} target='_blank'><span>Website </span><i className="fa fa-large fa-external-link"></i></a>
+                        <a href={activity.data.website} target='_blank' rel="noopener noreferrer"><span>Website </span><i className="fa fa-large fa-external-link"></i></a>
                         </div>
                         </div>
                     </div>
                     }
-                    { (activity.data.type == 'Attraction') &&
+                    { (activity.data.type === 'Attraction') &&
                     <div>
                         <div className="activity-attraction-metadata">
                             <div className="activity-attraction-metadata-item">
@@ -158,7 +157,7 @@ const ActivityDetails = ({ match }) => {
                         <span>Phone:</span> {activity.data.phone}
                         </div>
                         <div className="activity-attraction-metadata-item">
-                        <a href={activity.data.website} target='_blank'><span>Website </span><i className="fa fa-large fa-external-link"></i></a>
+                        <a href={activity.data.website} target='_blank' rel="noopener noreferrer"><span>Website </span><i className="fa fa-large fa-external-link"></i></a>
                         </div>
                         </div>
                     </div>
@@ -174,7 +173,7 @@ const ActivityDetails = ({ match }) => {
                     </div>
                     </div>
                     <div className="activity-picture-container">
-                        <img src={activity.data.picture} className="activity-picture"/>
+                        <img src={activity.data.picture} alt="activity-pic" className="activity-picture"/>
                     </div>
                     </div>
                 </div>

@@ -1,7 +1,12 @@
 
-import firebase from "firebase";
+import firebase from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
+import 'firebase/auth';        // for authentication
+import 'firebase/storage';     // for storage
+import 'firebase/database';    // for realtime database
+import 'firebase/firestore';   // for cloud firestore
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {

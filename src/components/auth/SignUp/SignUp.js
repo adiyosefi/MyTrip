@@ -1,11 +1,9 @@
-import React, { useState, useContext } from "react";
-import { Redirect, Link } from 'react-router-dom';
+import React, { useState } from "react";
 import { auth, storage, signInWithGoogle, generateUserDocument } from '../../../server/firebase'
-import { UserContext } from '../../../context/user';
 import FileUploader from "react-firebase-file-uploader";
 import './SignUp.css';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
 
@@ -47,7 +45,6 @@ const myTheme = createMuiTheme({
 });
 
 const SignUp = () => {
-  const user = useContext(UserContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -66,17 +63,6 @@ const SignUp = () => {
   const [photoURL, setPhotoURL] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
-
-  const onChangeHandler = event => {
-    const { name, value } = event.currentTarget;
-    if (name === "userEmail") {
-      setEmail(value);
-    } else if (name === "userPassword") {
-      setPassword(value);
-    } else if (name === "displayName") {
-      setDisplayName(value);
-    }
-  };
 
   const handleUploadStart = () => {
     setIsUploading(true);
@@ -250,7 +236,7 @@ const SignUp = () => {
                     {isUploading && <LinearProgress variant="determinate" value={uploadProgress} width={200} />}
                   </div>
                   <div className="picture-container">
-                    {photoURL && <img src={photoURL} className="user-picture" alt="Uploaded image" />}
+                    {photoURL && <img src={photoURL} className="user-picture" alt="uploaded-pic" />}
                   </div>
                 </div>
                 <div className="signup-button-and-messages">

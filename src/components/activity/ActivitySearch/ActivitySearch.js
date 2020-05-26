@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './ActivitySearch.css';
-import { v4 as uuidv4 } from 'uuid';
 import { UserContext } from './../../../context/user';
 import { countries } from './../../../server/countries';
 import { searchActivitiesDocuments, addFavoriteActivitiesToUserTrip } from './../../../server/firebase';
@@ -10,7 +9,6 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Loading from './../../global/Loading';
 
 
@@ -55,8 +53,6 @@ const RenderActivities = ({ activities, setActivities, user }) => {
     console.log("activities-", activities);
 
 
-    const [favoriteActivities, setFavoriteActivities] = useState([]);
-
     const [currentPage, setCurrentPage] = useState(1);
 
     const [favActivityError, setFavActivityError] = useState(null);
@@ -80,10 +76,10 @@ const RenderActivities = ({ activities, setActivities, user }) => {
         event.preventDefault();
         console.log('entered handleAddToFavoriteActivities');
         const filterActivities = activities.filter((activity) => {
-            return activity.checked == true;
+            return activity.checked === true;
         });
         console.log('filter activities', filterActivities);
-        if (user.trip != null || user.trip) {
+        if (user.trip !== null || user.trip) {
             console.log('entered trip is not null');
             if (filterActivities.length) {
                 try {
@@ -141,7 +137,7 @@ const RenderActivities = ({ activities, setActivities, user }) => {
                                     </div>}
                             </div>
                             <div className="activity-picture-container">
-                                <img src={activity.data.picture} className="activity-picture" />
+                                <img src={activity.data.picture} alt="activity-pic" className="activity-picture" />
                             </div>
                             <div className="activity-details">
                                 <div className="activity-name">
@@ -176,14 +172,14 @@ const RenderActivities = ({ activities, setActivities, user }) => {
             <div className="results-before-pagination">
                 <form onSubmit={e => handleAddToFavoriteActivities(e, user, activities)}>
                     <ul className="activitieslistslist">
-                        {currentActivities.length != 0 ? activitiesItems :
+                        {currentActivities.length !== 0 ? activitiesItems :
                         <div>
                             No results
                         </div>
                             }
                     </ul>
                     <div className="set-fav-act-button-con">
-                        {currentActivities.length != 0 && user && <div className="submit-fav-act-button-container">
+                        {currentActivities.length !== 0 && user && <div className="submit-fav-act-button-container">
                             <button className="submit-fav-act-button" type="submit">
                             Set as my favorite activities
                             </button>
@@ -212,7 +208,7 @@ const RenderActivities = ({ activities, setActivities, user }) => {
 
 
 const ActivitySearch = () => {
-    const user = useContext(UserContext);
+    const {currentUser} = useContext(UserContext);
 
     const [activityName, setActivityName] = useState("");
     const [destination, setDestination] = useState("");
@@ -251,19 +247,6 @@ const ActivitySearch = () => {
 
     }, []);
 
-
-    const onChangeHandler = event => {
-        const { name, value } = event.currentTarget;
-        if (name === "activityName") {
-            setActivityName(value);
-        } else if (name === "tripDestination") {
-            setDestination(value);
-        } else if (name === "season") {
-            setSeason(value);
-        } else if (name === "category") {
-            setCategory(value);
-        }
-    };
 
     const handleChangeName = (event) => {
         setActivityName(event.target.value);
@@ -439,7 +422,7 @@ const ActivitySearch = () => {
                             <h4>Search Results</h4>
                         </div>
                         {activitiesResults ?
-                            <RenderActivities activities={activitiesResults} setActivities={setActivitiesResults} user={user} />
+                            <RenderActivities activities={activitiesResults} setActivities={setActivitiesResults} user={currentUser} />
                             :
                             <Loading />}
                     </div>

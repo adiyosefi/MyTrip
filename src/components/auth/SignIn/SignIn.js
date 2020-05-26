@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Redirect, Link } from 'react-router-dom';
+import React, { useState } from "react";
 import { auth, signInWithGoogle } from '../../../server/firebase';
-import { UserContext } from '../../../context/user';
 import './SignIn.css';
-import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import PasswordReset from './../PasswordReset/PasswordReset'
 
@@ -46,7 +44,6 @@ const myTheme = createMuiTheme({
 
 
 const SignIn = () => {
-  const user = useContext(UserContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -63,17 +60,6 @@ const SignIn = () => {
 function toggleIsForgotPsaawordOpen() {
   setIsForgotPsaawordOpen(!isForgotPsaawordOpen);
 }
-
-  const onChangeHandler = (event) => {
-    const { name, value } = event.currentTarget;
-
-    if (name === 'userEmail') {
-      setEmail(value);
-    }
-    else if (name === 'userPassword') {
-      setPassword(value);
-    }
-  };
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);

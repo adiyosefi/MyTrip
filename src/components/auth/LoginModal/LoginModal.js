@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import './LoginModal.css';
 import { ModalContext } from '../../../context/modal';
 import TextField from '@material-ui/core/TextField';
-import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { auth, signInWithGoogle } from '../../../server/firebase';
 import { UserContext } from '../../../context/user';
 
@@ -57,7 +57,7 @@ export function LoginModal() {
     const [loginModalSuccessMessage, setLoginModalSuccessMessage] = useState(null);
     const [loginModalErrorMessage, setLoginModalErrorMessage] = useState(null);
 
-    const user = useContext(UserContext);
+    const {currentUser} = useContext(UserContext);
 
 
     const handleEmailChange = (event) => {
@@ -187,7 +187,7 @@ export function LoginModal() {
                     </div>
             <div className="other-details-login">
             <div className="login-hello">
-                    Hello {user.displayName}!
+                    Hello {currentUser.displayName}!
                 </div>
                 <div className="login-goto-yourtrip">
                 You're already signed in! Go to your trip <Link className="here-link" to="/mytrip">HERE</Link>.
@@ -207,7 +207,7 @@ export function LoginModal() {
     if (isModalOpen) {
         return (
             <>
-    { user ? renderSignedInModal() : renderSignInModal()}
+    { currentUser ? renderSignedInModal() : renderSignInModal()}
     </>
         );
     }

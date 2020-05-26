@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Redirect, Link } from 'react-router-dom';
-import { auth, signInWithGoogle } from '../../../server/firebase';
+import { auth } from '../../../server/firebase';
 import { UserContext } from '../../../context/user';
 import './SignInUp.css';
 import SignIn from './../SignIn/SignIn'
 import SignUp from './../SignUp/SignUp'
 import { AuthContext } from "../../../context/auth";
 import Loading from './../../global/Loading';
+import _ from 'underscore';
+
 
 const RenderUserProfile = ({ user }) => {
   const { photoURL, displayName, email } = user;
@@ -18,7 +20,7 @@ const RenderUserProfile = ({ user }) => {
       </div>
       <div className="user-profile-data">
       <div className="user-picrute-container">
-        <img className="profile-picture"
+        <img className="profile-picture" alt="user-profile"
           src={photoURL || 'https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fprofile-pictures%2Fblank-profile-picture.png?alt=media&token=fd112c3c-e460-4e37-997b-36a914682bf9'} />
       </div>
       <div className="user-details-metadata">
@@ -47,12 +49,12 @@ const RenderSignInUp = () => {
   );
 }
 
-const RenderPage = ({ user, isAuthenticated }) => {
+const RenderPage = ({ user }) => {
   return (
     <div className="signinup">
       <div className="background">
         <div className="content-container">
-          {isAuthenticated && user ? <RenderUserProfile user={user} /> : <RenderSignInUp />}
+          {!_.isEmpty(user) ? <RenderUserProfile user={user} /> : <RenderSignInUp />}
         </div>
       </div>
     </div>
@@ -60,11 +62,10 @@ const RenderPage = ({ user, isAuthenticated }) => {
 }
 
 const SignInUp = () => {
-  const user = useContext(UserContext);
-  const { isAuthenticated, isLoading } = useContext(AuthContext)
+  const {currentUser, isLoading} = useContext(UserContext);
 
   return (
-    isLoading ? <Loading /> : <RenderPage user={user} isAuthenticated={isAuthenticated}/>
+    isLoading ? <Loading /> : <RenderPage user={currentUser} />
   );
 };
 

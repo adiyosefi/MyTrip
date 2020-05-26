@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import './Home.css';
 import { countries } from './../../../server/countries';
 import { UserContext } from './../../../context/user';
@@ -47,9 +46,7 @@ const myTheme = createMuiTheme({
   
 
 const Home = () => {
-    const user = useContext(UserContext);
-
-    console.log(user);
+    const {currentUser} = useContext(UserContext);
 
     const [destination, setDestination] = useState("");
     const [start, setStart] = useState("");
@@ -58,8 +55,7 @@ const Home = () => {
     const [createTripSuccess, setCreateTripSuccess] = useState(null);
     const [createTripError, setCreateTripError] = useState(null);
 
-    const [trip, setTrip] = useState((user && user.trip) ? user.trip : null);
-    console.log(trip);
+    const [trip, setTrip] = useState((currentUser && currentUser.trip) ? currentUser.trip : null);
 
     const useStyles = makeStyles(theme => ({
         option: {
@@ -76,35 +72,23 @@ const Home = () => {
   useEffect(() => {
     let mounted = true;
     if(mounted){
-    if (user && user.trip) {
-        setTrip(user.trip);
-        console.log(trip);
+    if (currentUser && currentUser.trip) {
+        setTrip(currentUser.trip);
     }
     }
     return () => mounted = false;  
-  }, [user]);
+  }, [currentUser]);
 
-
-    const onChangeHandler = event => {
-        const { name, value } = event.currentTarget;
-        if (name === "tripDestination") {
-            setDestination(value);
-        } else if (name === "tripStart") {
-            setStart(value);
-        } else if (name === "tripEnd") {
-            setEnd(value);
-        }
-    };
     
 
     const createTripHandler = async (event, destination, start, end, trip, setTrip) => {
         event.preventDefault();
-        if(user){
+        if(currentUser){
         if (trip == null || !trip) {
             if (destination && start && end) {
             try {
-                await generateTripDocument(user, destination, start, end);
-                setTrip(user.trip);
+                await generateTripDocument(currentUser, destination, start, end);
+                setTrip(currentUser.trip);
                 console.log('trip added');
                 setCreateTripSuccess('Trip created successfully!')
                 window.location.href = '/mytrip';

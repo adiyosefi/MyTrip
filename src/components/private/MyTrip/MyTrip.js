@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { UserContext } from "../../../context/user";
-import { auth, getTripDocument } from "../../../server/firebase";
+import { auth } from "../../../server/firebase";
 import './MyTrip.css';
 import moment from 'moment';
 import { countries } from './../../../server/countries';
@@ -10,7 +10,8 @@ import TextField from '@material-ui/core/TextField';
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
+import { AuthContext } from './../../../context/auth';
+import Loading from './../../global/Loading';
 
 // HOOKS
 import { useFavoriteEquipmentList } from '../../../hooks/useFavoriteEquipmentList';
@@ -61,7 +62,7 @@ const RenderFavoriteActivities = ({ user }) => {
     if (user.trip.favoriteactivities) {
       setFavoriteActivities(user.trip.favoriteactivities);
     }
-  }, []);
+  }, [user.trip.favoriteactivities]);
 
   const deleteFavoriteActivity = (event, aid) => {
     event.preventDefault();
@@ -84,7 +85,7 @@ const RenderFavoriteActivities = ({ user }) => {
         <div className="container-per-activity">
           <div className="activitycontent">
             <div className="activity-picture-container">
-              <img src={activity.data.picture} className="activity-picture" />
+              <img src={activity.data.picture} alt="activity-pic" className="activity-picture" />
             </div>
             <div className="activity-details">
             <div className="activity-delete-and-title">
@@ -176,7 +177,7 @@ const RenderFavoriteEquipmentList = ({ user }) => {
   };
 
   const handleInputChange = (e, id) => {
-    if (inputState != "") {
+    if (inputState !== "") {
       if (e.which === 13) {
         setItems(items.map(item => ({
           ...item,
@@ -261,21 +262,6 @@ const RenderNotes = ({ user }) => {
 
   const [notesError, setNotesError] = useState(null);
 
-  // useEffect(() => {
-  //   console.log("from notes: ", notes)
-  //   setNotes(notes);
-  // }, []);
-
-  // const saveNotesToTrip = async (event, notes) => {
-  //   event.preventDefault();
-  //   if (notes) {
-  //     setNotes(notes);
-  //     console.log('notes added to trip successfully');
-  //   } else {
-  //     setError('notes is not filled');
-  //   }
-  // };
-
   const clearNotesInTrip = async (event, notes) => {
     event.preventDefault();
     if (notes) {
@@ -283,13 +269,6 @@ const RenderNotes = ({ user }) => {
       console.log('notes cleared in trip successfully-', notes);
     } else {
       setNotesError('Notes is not filled');
-    }
-  };
-
-  const onChangeHandler = event => {
-    const { name, value } = event.currentTarget;
-    if (name === "notes") {
-      setNotes(value);
     }
   };
 
@@ -383,17 +362,6 @@ const ItineraryForm = ({ user, trip, setTrip }) => {
 }));
 
 const classes = useStyles();
-
-  const onChangeHandler = event => {
-    const { name, value } = event.currentTarget;
-    if (name === "tripDestination") {
-      setDestination(value);
-    } else if (name === "tripStart") {
-      setStart(value);
-    } else if (name === "tripEnd") {
-      setEnd(value);
-    }
-  };
 
   const createTripHandler = async (event, destination, start, end) => {
     event.preventDefault();
@@ -525,7 +493,9 @@ const classes = useStyles();
 
 const RenderMyTrip = ({user}) => {
   const { photoURL, displayName, email } = user;
-  const [trip, setTrip] = useState(user.trip);
+  const [trip, setTrip] = useState((user && user.trip) ? user.trip : null);
+
+  console.log(trip, user.trip);
 
   // get trip data from document reference
   useEffect(() => {
@@ -533,7 +503,7 @@ const RenderMyTrip = ({user}) => {
     if (user.trip) {
       setTrip(user.trip);
     }
-  }, []);
+  }, [user]);
 
   return (
     <ThemeProvider theme={myTheme}>
@@ -542,7 +512,7 @@ const RenderMyTrip = ({user}) => {
         <div className="content-container">
           <div className="user-profile-container">
             <div className="user-picrute-container">
-              <img className="profile-picture"
+              <img className="profile-picture" alt="user-profile"
                 src={photoURL || 'https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fprofile-pictures%2Fblank-profile-picture.png?alt=media&token=fd112c3c-e460-4e37-997b-36a914682bf9'} />
             </div>
             <div className="user-details-metadata">
@@ -574,10 +544,13 @@ const RenderMyTrip = ({user}) => {
 
 
 const MyTrip = () => {
-  const user = useContext(UserContext);
+  const {currentUser, isLoading} = useContext(UserContext);
 
   return (
-    <RenderMyTrip user={user} />
+    isLoading ?
+    <Loading/>
+    :
+    <RenderMyTrip user={currentUser} />                      
   )
 };
 

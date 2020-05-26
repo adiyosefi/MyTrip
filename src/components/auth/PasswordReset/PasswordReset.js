@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
 import {auth} from '../../../server/firebase';
 import './PasswordReset.css';
 import TextField from '@material-ui/core/TextField';

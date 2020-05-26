@@ -1,7 +1,6 @@
-import React, { useCallback, useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './EquipmentListSearch.css';
-import { v4 as uuidv4 } from 'uuid';
 import { searchPublicEquipmentListDocuments } from './../../../server/firebase';
 import { UserContext } from './../../../context/user';
 import { countries } from './../../../server/countries';
@@ -191,7 +190,7 @@ const RenderEquipmentLists = ({ lists, user, trip }) => {
 
 
 const EquipmentListSearch = () => {
-    const user = useContext(UserContext);
+    const {currentUser} = useContext(UserContext);
 
     const [destination, setDestination] = useState("");
     const [season, setSeason] = useState("");
@@ -199,7 +198,7 @@ const EquipmentListSearch = () => {
     const [searchError, setSearchError] = useState(null);
     const [resultsLists, setResultLists] = useState("");
 
-    const [trip, setTrip] = useState(null);
+    const [trip, setTrip] = useState((currentUser && currentUser.trip) ? currentUser.trip : null);
 
     var equipmentListsResults;
 
@@ -220,8 +219,8 @@ const EquipmentListSearch = () => {
             try {
                 equipmentListsResults = await searchPublicEquipmentListDocuments(destination, season, category);
                 setResultLists(equipmentListsResults);
-                if (user && user.trip) {
-                setTrip(user.trip);
+                if (currentUser && currentUser.trip) {
+                setTrip(currentUser.trip);
                 } 
             }
             catch (searchError) {
@@ -231,7 +230,7 @@ const EquipmentListSearch = () => {
 
         fetchData();
 
-    }, []);
+    }, [currentUser]);
 
     const handleChangeSeason = (event) => {
         setSeason(event.target.value);
@@ -239,17 +238,6 @@ const EquipmentListSearch = () => {
 
     const handleChangeCategory = (event) => {
         setCategory(event.target.value);
-    };
-
-    const onChangeHandler = event => {
-        const { name, value } = event.currentTarget;
-        if (name === "tripDestination") {
-            setDestination(value);
-        } else if (name === "season") {
-            setSeason(value);
-        } else if (name === "category") {
-            setCategory(value);
-        }
     };
 
     const searchPublicEquipmentListDB = async (event, destination, season, category, setResultLists) => {
@@ -398,7 +386,7 @@ const EquipmentListSearch = () => {
                         <div className="results-title">
                             <h4>Search Results</h4>
                         </div>
-                        {resultsLists ? <RenderEquipmentLists lists={resultsLists} user={user} trip={trip} />
+                        {resultsLists ? <RenderEquipmentLists lists={resultsLists} user={currentUser} trip={trip} />
                             :
                             <Loading />}
                     </div>

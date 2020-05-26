@@ -1,36 +1,58 @@
 import React, { useEffect, useState, createContext } from "react";
 import {auth, generateUserDocument} from '../server/firebase';
 
-export const UserContext = createContext(null);
+const defaultUser = {};
+export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(defaultUser);
+
+  console.log(currentUser);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  // useEffect(() => {
+  //   let mounted = true;
+  //   if(mounted){
+  //   fetchUser();
+  //   }
+
+  //   return () => mounted = false;
+  // }, []);
+
+  function onAuthStateChange(setCurrentUser) {
+    return auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const user = await generateUserDocument(userAuth);
+        setCurrentUser(user);
+      } else {
+        setCurrentUser({});
+      }
+      setIsLoading(false);
+    });
+  }
+  
 
   useEffect(() => {
-    let mounted = true;
-    if(mounted){
-    fetchUser();
-    }
-
-    return () => mounted = false;
+   onAuthStateChange(setCurrentUser);
   }, []);
 
-  const fetchUser = () => {
-    auth.onAuthStateChanged(async userAuth => {
-        const user = await generateUserDocument(userAuth);
-        console.log(user)
-        setCurrentUser(user);
-      })
-      //console.log(currentUserState);
-  };
+  // const fetchUser = () => {
+  //   auth.onAuthStateChanged(async userAuth => {
+  //       const user = await generateUserDocument(userAuth);
+  //       console.log(user)
+  //       setCurrentUser({
+  //         userInfo: user,
+  //         loggedIn: !!userAuth
+  //       });
+  //       console.log(currentUser);
+  //     })
+  // };
 
   return (
     <UserContext.Provider
-      value={
-        currentUser
-      }
+      value={{
+        currentUser, isLoading
+      }}
     >
       {children}
     </UserContext.Provider>

@@ -22,7 +22,6 @@ const RenderListItems = ({items, setItems, user}) => {
             ...item,
             checked: item.id === id ? !item.checked : item.checked
         })));
-        //updateUserAddNewItems(user, items);
     }, [setItems, items]);
 
     const handleEdit = useCallback(id => {
@@ -30,24 +29,21 @@ const RenderListItems = ({items, setItems, user}) => {
             ...item,
             onEditMode: item.id === id ? !item.onEditMode : item.onEditMode
         })));
-        //updateUserAddNewItems(user, items);
     }, [setItems, items]);
 
     const handleRemove = (id) => {
         const newList = items.filter(item => item.id !== id);
         setItems(newList);
-        //updateUserAddNewItems(user, items);
     };
 
     const handleInputChange = (e, id) => {
-        if (inputState != "") {
+        if (inputState !== "") {
             if (e.which === 13) {
                 setItems(items.map(item => ({
                     ...item,
                     label: item.id === id ? e.target.value : item.label,
                     onEditMode: item.id === id ? !item.onEditMode : item.onEditMode
                 })));
-                //updateUserAddNewItems(user, items);
                 setInput("");
             }
         }
@@ -155,44 +151,32 @@ catch (error) {
 
 
 const PrivateEquipmentList = () => {
-    const user = useContext(UserContext);
+    const {currentUser} = useContext(UserContext);
 
-    const [items, setItems] = usePrivateEquipmentList(user);
+    const [items, setItems] = usePrivateEquipmentList(currentUser);
 
     const [labelstate, setLabel] = useState("");
     const [error, setError] = useState("");
 
     const handleClick = () => {
-        if (labelstate != "") {
+        if (labelstate !== "") {
             const newItem = {id: uuidv4(), label: labelstate, checked: false, onEditMode: false};
             setItems([
                 ...items,
                 newItem
             ]);
-            /*try {
-                updateUserAddNewItems(user, items);
-              }
-              catch(error){
-                setError('Error adding new item');
-              }*/
             setLabel("");
         }
     }
 
     const handleKeyUp = (e) => {
-        if (labelstate != "") {
+        if (labelstate !== "") {
             if (e.which === 13) {
                 const newItem = {id: uuidv4(), label: labelstate, checked: false, onEditMode: false};
                 setItems([
                     ...items,
                     newItem
                 ]);
-                /*try {
-                    updateUserAddNewItems(user, items);
-                  }
-                  catch(error){
-                    setError('Error adding new item');
-                  }*/
                 setLabel("");
             }
         }
@@ -221,10 +205,10 @@ const PrivateEquipmentList = () => {
             <div className="contentcontainer">
                 <div className="listcontainer">
                     <h4>My Equipment List</h4>
-                    <RenderListItems items={items} setItems={setItems} user={user}/>
+                    <RenderListItems items={items} setItems={setItems} user={currentUser}/>
                 </div>
                 <div className="listbuttonscontainer">
-                {items.length ? <ListButtons items={items} user={user} error={error} setError={setError}/> : null}
+                {items.length ? <ListButtons items={items} user={currentUser} error={error} setError={setError}/> : null}
                 </div>
             </div>
         </div>
