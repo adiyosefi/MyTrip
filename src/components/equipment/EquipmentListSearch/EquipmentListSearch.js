@@ -12,6 +12,7 @@ import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/sty
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Loading from './../../global/Loading';
+import _ from 'underscore';
 
 
 const myTheme = createMuiTheme({
@@ -150,7 +151,7 @@ const RenderEquipmentLists = ({ lists, user, trip }) => {
                     </li>
                 </div>
                 <div className="fav-list-button">
-                    {user &&
+                    {!_.isEmpty(user) &&
                         <div>
                             <Button variant="contained" color="secondary" style={{ width: 160, textTransform: 'none', fontWeight: 'bold', fontSize: 14, borderRadius: '20px' }}
                                 onClick={e => handleSetFavoriteEquipmentList(e, user, list.data.list, list.id)}>

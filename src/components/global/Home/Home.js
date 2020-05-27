@@ -6,6 +6,8 @@ import { generateTripDocument } from './../../../server/firebase'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
+import _ from 'underscore';
+
 
 const myTheme = createMuiTheme({
     typography: {
@@ -83,7 +85,7 @@ const Home = () => {
 
     const createTripHandler = async (event, destination, start, end, trip, setTrip) => {
         event.preventDefault();
-        if(currentUser){
+        if(!_.isEmpty(currentUser)){
         if (trip == null || !trip) {
             if (destination && start && end) {
             try {

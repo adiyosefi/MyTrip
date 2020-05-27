@@ -4,6 +4,8 @@ import { getActivityWithIdDocument } from './../../../server/firebase'
 import Loading from '../../global/Loading';
 import {addFavoriteActivityToUserTrip} from './../../../server/firebase'
 import { UserContext } from './../../../context/user';
+import _ from 'underscore';
+
 
 const ActivityDetails = ({ match }) => {
 
@@ -84,7 +86,7 @@ const ActivityDetails = ({ match }) => {
                         <div className="activity-metadata-item">
                         <i className="fa fa-large fa-list-ul"></i> <span>Category:</span> {activity.data.category ? activity.data.category : 'All categories'}
                         </div>
-                        {currentUser && 
+                        {!_.isEmpty(currentUser) && 
                         <div className="submit-fav-act-button-container">
                         <button className="submit-fav-act-button"
                         onClick={e => handleAddToFavoriteActivities(e, currentUser, activity)}>

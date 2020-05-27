@@ -10,6 +10,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Loading from './../../global/Loading';
+import _ from 'underscore';
 
 
 const myTheme = createMuiTheme({
@@ -127,7 +128,7 @@ const RenderActivities = ({ activities, setActivities, user }) => {
                     <div className={`${activity.checked ? 'activity-container-checked' : 'container-per-activity'}`}>
                         <div className="activitycontent">
                             <div className="checkbox-container">
-                                {user &&
+                                {!_.isEmpty(user) &&
                                     <div className="pretty p-icon p-round">
                                         <input type="checkbox" id={`check-item-${activity.id}`} onClick={() => toggleChecked(activity.id)} />
                                         <div className="state">
@@ -179,7 +180,7 @@ const RenderActivities = ({ activities, setActivities, user }) => {
                             }
                     </ul>
                     <div className="set-fav-act-button-con">
-                        {currentActivities.length !== 0 && user && <div className="submit-fav-act-button-container">
+                        {currentActivities.length !== 0 && !_.isEmpty(user) && <div className="submit-fav-act-button-container">
                             <button className="submit-fav-act-button" type="submit">
                             Set as my favorite activities
                             </button>
@@ -410,9 +411,6 @@ const ActivitySearch = () => {
                                     </div>
                                 </div>
                             </form>
-                            {/*<div className="goto-ownactivity">
-                            Have your own activity? Add it <Link className="goto-ownactivity-link" to="/privateactivity"> Here </Link>
-                                </div>*/}
                         </div>
                     </div>
                 </div>
