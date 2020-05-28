@@ -19,7 +19,6 @@ import ActivityDetails from './activity/ActivityDetails/ActivityDetails'
 
 
 const Main = (props) => {
-
     return (
         <>
             <UserProvider>
