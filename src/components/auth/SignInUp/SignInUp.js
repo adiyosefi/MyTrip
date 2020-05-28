@@ -5,7 +5,6 @@ import { UserContext } from '../../../context/user';
 import './SignInUp.css';
 import SignIn from './../SignIn/SignIn'
 import SignUp from './../SignUp/SignUp'
-import { AuthContext } from "../../../context/auth";
 import Loading from './../../global/Loading';
 import _ from 'underscore';
 

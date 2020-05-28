@@ -10,7 +10,6 @@ import TextField from '@material-ui/core/TextField';
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { AuthContext } from './../../../context/auth';
 import Loading from './../../global/Loading';
 
 // HOOKS

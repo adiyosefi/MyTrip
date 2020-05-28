@@ -3,7 +3,7 @@ import { firestore } from '../server/firebase';
 
 export const useFavoriteEquipmentList = (user) => {
 
-    const [items, setItems] = useState([]); //useState() hook, sets initial state to an empty array
+    const [items, setItems] = useState([]);
 
     const userRef = firestore.doc(`users/${user.uid}`);
 

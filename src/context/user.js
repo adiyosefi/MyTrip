@@ -10,14 +10,6 @@ export const UserProvider = ({ children }) => {
   console.log(currentUser);
   const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   let mounted = true;
-  //   if(mounted){
-  //   fetchUser();
-  //   }
-
-  //   return () => mounted = false;
-  // }, []);
 
   function onAuthStateChange(setCurrentUser) {
     return auth.onAuthStateChanged(async userAuth => {
@@ -30,23 +22,11 @@ export const UserProvider = ({ children }) => {
       setIsLoading(false);
     });
   }
-  
 
   useEffect(() => {
    onAuthStateChange(setCurrentUser);
   }, []);
 
-  // const fetchUser = () => {
-  //   auth.onAuthStateChanged(async userAuth => {
-  //       const user = await generateUserDocument(userAuth);
-  //       console.log(user)
-  //       setCurrentUser({
-  //         userInfo: user,
-  //         loggedIn: !!userAuth
-  //       });
-  //       console.log(currentUser);
-  //     })
-  // };
 
   return (
     <UserContext.Provider

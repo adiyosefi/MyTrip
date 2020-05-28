@@ -3,7 +3,7 @@ import { firestore } from '../server/firebase';
 
 export const useNotes = (user) => {
 
-    const [notes, setNotes] = useState(""); //useState() hook, sets initial state to an empty array
+    const [notes, setNotes] = useState("");
 
     const userRef = firestore.doc(`users/${user.uid}`);
 
