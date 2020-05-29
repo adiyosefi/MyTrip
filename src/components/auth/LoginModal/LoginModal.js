@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { auth, signInWithGoogle } from '../../../server/firebase';
 import { UserContext } from '../../../context/user';
+import _ from "underscore";
 
 
 const myTheme = createMuiTheme({
@@ -207,7 +208,7 @@ export function LoginModal() {
     if (isModalOpen) {
         return (
             <>
-    { currentUser ? renderSignedInModal() : renderSignInModal()}
+    { !_.isEmpty(currentUser) ? renderSignedInModal() : renderSignInModal()}
     </>
         );
     }
