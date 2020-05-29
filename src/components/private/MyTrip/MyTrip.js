@@ -15,6 +15,7 @@ import Loading from './../../global/Loading';
 // HOOKS
 import { useFavoriteEquipmentList } from '../../../hooks/useFavoriteEquipmentList';
 import { useNotes } from '../../../hooks/useNotes';
+import _ from "underscore";
 
 const myTheme = createMuiTheme({
   typography: {
@@ -521,18 +522,18 @@ const RenderMyTrip = ({user}) => {
             <button className="signout-button" onClick={() => { auth.signOut(); }}>Sign out <i className="fa fa-sign-out"></i></button>
           </div>
           <div className="itinerary-form-or-title-container">
-            {trip && trip.destination ? <TripTitle trip={trip} setTrip={setTrip} user={user} /> : <ItineraryForm user={user} trip={trip} setTrip={setTrip} />}
+            {!_.isEmpty(trip) ? <TripTitle trip={trip} setTrip={setTrip} user={user} /> : <ItineraryForm user={user} trip={trip} setTrip={setTrip} />}
           </div>
           <div className="activities-and-list-container">
           <div className="favourite-activities-container">
-              {trip && <RenderFavoriteActivities user={user} />}
+              {!_.isEmpty(trip) && <RenderFavoriteActivities user={user} />}
           </div>
           <div className="favourite-equipment-list-container">
-              {trip && <RenderFavoriteEquipmentList user={user} />}
+              {!_.isEmpty(trip) && <RenderFavoriteEquipmentList user={user} />}
           </div>
           </div>
           <div className="notes-container">
-            {trip && <RenderNotes user={user} />}
+            {!_.isEmpty(trip) && <RenderNotes user={user} />}
           </div>
         </div>
       </div>
@@ -543,13 +544,10 @@ const RenderMyTrip = ({user}) => {
 
 
 const MyTrip = () => {
-  const {currentUser, isLoading} = useContext(UserContext);
+  const {currentUser} = useContext(UserContext);
 
   return (
-    isLoading ?
-    <Loading/>
-    :
-    <RenderMyTrip user={currentUser} />                      
+    <RenderMyTrip user={currentUser} />
   )
 };
 
