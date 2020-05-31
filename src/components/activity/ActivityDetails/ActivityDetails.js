@@ -5,16 +5,18 @@ import Loading from '../../global/Loading';
 import {addFavoriteActivityToUserTrip} from './../../../server/firebase'
 import { UserContext } from './../../../context/user';
 import _ from 'underscore';
+import HikingTrailDetails from "./HikingTrailDetails";
+import RestaurantDetails from "./RestaurantDetails";
+import AttractionDetails from "./AttractionDetails";
+import SetAsFavoriteActivityButton from "./SetAsFavoriteActivityButton";
 
 
 const ActivityDetails = ({ match }) => {
 
     const {currentUser} = useContext(UserContext);
     const [activity, setActivity] = useState(null);
-    const [favActivityError, setFavActivityError] = useState(null);
-    const [favActivitySuccess, setFavActivitySuccess] = useState(null);
 
-    var tempActivity;
+    let tempActivity;
 
     useEffect(() => {
         async function fetchData() {
@@ -39,31 +41,7 @@ const ActivityDetails = ({ match }) => {
         return splitStr.join(' ');
     }
 
-    const handleAddToFavoriteActivities = async (event, user, activity) => {
-        event.preventDefault();
-        console.log('entered handleAddToFavoriteActivities');
-        if (user.trip != null || user.trip) {
-            console.log('entered trip is not null');
-            if (activity) {
-                try {
-                    await addFavoriteActivityToUserTrip(user, activity);
-                    console.log('trip updated');
-                    setFavActivitySuccess('Activity added to your trip successfully!');
-                    window.location.href = '/mytrip';
-                }
-                catch (favActivityError) {
-                    setFavActivityError('Error saving favorite activity');
-                }
-            } else {
-                setFavActivityError('Select activities first!');
-                console.log("error need to choose activiries first-", favActivityError);
-            }
-        } else {
-            setFavActivityError('Create trip first!');
-            console.log("error need to create trip first-", favActivityError);
-            window.location.href = '/mytrip';
-        }
-    }
+
 
     if (activity) {
         return (
@@ -87,82 +65,17 @@ const ActivityDetails = ({ match }) => {
                             <i className="fa fa-large fa-list-ul"></i> <span>Category:</span> {activity.data.category ? activity.data.category : 'All categories'}
                         </div>
                         {!_.isEmpty(currentUser) &&
-                        <div className="submit-fav-act-button-container">
-                            <button className="submit-fav-act-button"
-                                    onClick={e => handleAddToFavoriteActivities(e, currentUser, activity)}>
-                                Set as my favorite activity
-                            </button>
-                            {favActivitySuccess &&
-                            <div className="activity-success-message">
-                                <i className="fa fa-check-circle"></i> {favActivitySuccess}
-                            </div>
-                            }
-                            {favActivityError &&
-                            <div className="activity-error-message">
-                                <i className="fa fa-exclamation-circle"></i> {favActivityError}
-                            </div>
-                            }
-                        </div>}
+                            <SetAsFavoriteActivityButton currentUser={currentUser} activity={activity} />
+                        }
                     </div>
                     { (activity.data.type === 'Hiking-Trail') &&
-                    <div className="activity-hiking-metadata">
-                        <div className="activity-hiking-metadata-item">
-                            <span>Activity type:</span> {activity.data.type}
-                        </div>
-                        <div className="activity-hiking-metadata-item">
-                            <span>Route:</span> {activity.data.route}
-                        </div>
-                        <div className="activity-hiking-metadata-item">
-                            <span>Difficulty:</span> {activity.data.difficulty}
-                        </div>
-                        <div className="activity-hiking-metadata-item">
-                            <span>Extension:</span> {activity.data.extension}
-                        </div>
-                        <div className="activity-hiking-metadata-item">
-                            <span>Time average:</span> {activity.data.timeAverage}
-                        </div>
-                    </div>
+                        <HikingTrailDetails activity={activity}/>
                     }
                     { (activity.data.type === 'Restaurant') &&
-                    <div>
-                        <div className="activity-restaurant-metadata">
-                            <div className="activity-restaurant-metadata-item">
-                                <span>Activity type:</span> {activity.data.type}
-                            </div>
-                            <div className="activity-restaurant-metadata-item">
-                                <span>Cuisines:</span> {activity.data.cuisines}
-                            </div>
-                            <div className="activity-restaurant-metadata-item">
-                                <span>Price Range:</span> {activity.data.priceRange}
-                            </div>
-                        </div>
-                        <div className="activity-restaurant-metadata-contact">
-                            <div className="activity-restaurant-metadata-item">
-                                <span>Phone:</span> {activity.data.phone}
-                            </div>
-                            <div className="activity-restaurant-metadata-item">
-                                <a href={activity.data.website} target='_blank' rel="noopener noreferrer"><span>Website </span><i className="fa fa-large fa-external-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                        <RestaurantDetails activity={activity}/>
                     }
                     { (activity.data.type === 'Attraction') &&
-                    <div>
-                        <div className="activity-attraction-metadata">
-                            <div className="activity-attraction-metadata-item">
-                                <span>Activity type:</span> {activity.data.type}
-                            </div>
-                            <div className="activity-attraction-metadata-item">
-                                <span>Suggested duration:</span> {activity.data.suggestedDuration}
-                            </div>
-                            <div className="activity-attraction-metadata-item">
-                                <span>Phone:</span> {activity.data.phone}
-                            </div>
-                            <div className="activity-attraction-metadata-item">
-                                <a href={activity.data.website} target='_blank' rel="noopener noreferrer"><span>Website </span><i className="fa fa-large fa-external-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                        <AttractionDetails activity={activity}/>
                     }
                     <div className="activity-address-description-picture">
                         <div className="activity-address-description">
