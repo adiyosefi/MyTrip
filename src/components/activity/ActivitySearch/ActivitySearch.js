@@ -129,32 +129,32 @@ const RenderActivities = ({ activities, setActivities, user }) => {
                         <div className="activitycontent">
                             <div className="checkbox-container">
                                 {!_.isEmpty(user) &&
-                                    <div className="pretty p-icon p-round">
-                                        <input type="checkbox" id={`check-item-${activity.id}`} onClick={() => toggleChecked(activity.id)} />
-                                        <div className="state">
-                                            <i className="icon mdi mdi-check"></i>
-                                            <label></label>
-                                        </div>
-                                    </div>}
+                                <div className="pretty p-icon p-round">
+                                    <input type="checkbox" id={`check-item-${activity.id}`} onClick={() => toggleChecked(activity.id)} />
+                                    <div className="state">
+                                        <i className="icon mdi mdi-check"></i>
+                                        <label></label>
+                                    </div>
+                                </div>}
                             </div>
                             <div className="activity-picture-container">
                                 <img src={activity.data.picture} alt="activity-pic" className="activity-picture" />
                             </div>
                             <div className="activity-details">
                                 <div className="activity-name">
-                                <Link to={`/activities/${activity.id}`} className="activity-link">
-                                <h5>{titleCase(activity.data.activityName)}</h5>
-                                </ Link>
+                                    <Link to={`/activities/${activity.id}`} className="activity-link">
+                                        <h5>{titleCase(activity.data.activityName)}</h5>
+                                    </ Link>
                                 </div>
                                 <div className="activity-metadata">
                                     <div className="activity-metadata-item">
-                                    <i className="fa fa-plane"></i> <span>Destination:</span> {activity.data.destination}
+                                        <i className="fa fa-plane"></i> <span>Destination:</span> {activity.data.destination}
                                     </div>
                                     <div className="activity-metadata-item">
-                                    <i className="fa fa-cloud"></i> <span>Season:</span> {activity.data.season ? activity.data.season : 'All year round'}
+                                        <i className="fa fa-cloud"></i> <span>Season:</span> {activity.data.season ? activity.data.season : 'All year round'}
                                     </div>
                                     <div className="activity-metadata-item">
-                                    <i className="fa fa-list-ul"></i> <span>Category:</span> {activity.data.category ? activity.data.category : 'All categories'}
+                                        <i className="fa fa-list-ul"></i> <span>Category:</span> {activity.data.category ? activity.data.category : 'All categories'}
                                     </div>
                                 </div>
                                 <div>
@@ -174,34 +174,34 @@ const RenderActivities = ({ activities, setActivities, user }) => {
                 <form onSubmit={e => handleAddToFavoriteActivities(e, user, activities)}>
                     <ul className="activitieslistslist">
                         {currentActivities.length !== 0 ? activitiesItems :
-                        <div>
-                            No results
-                        </div>
-                            }
+                            <div>
+                                No results
+                            </div>
+                        }
                     </ul>
                     <div className="set-fav-act-button-con">
                         {currentActivities.length !== 0 && !_.isEmpty(user) && <div className="submit-fav-act-button-container">
                             <button className="submit-fav-act-button" type="submit">
-                            Set as my favorite activities
+                                Set as my favorite activities
                             </button>
                             {favActivitySuccess &&
                             <div className="activity-success-message">
-                            <i className="fa fa-check-circle"></i> {favActivitySuccess}
+                                <i className="fa fa-check-circle"></i> {favActivitySuccess}
                             </div>
                             }
-                            {favActivityError && 
+                            {favActivityError &&
                             <div className="error-no-activities">
-                            <i className="fa fa-large fa-exclamation-circle"></i> {favActivityError}
+                                <i className="fa fa-large fa-exclamation-circle"></i> {favActivityError}
                             </div>
                             }
-                            </div>
-                          }
+                        </div>
+                        }
                     </div>
                 </form>
             </div>
             <div>
                 <Pagination className="MuiPagination-root" count={numberOfPages} onChange={handleChange} page={currentPage}
-                    showFirstButton showLastButton />
+                            showFirstButton showLastButton />
             </div>
         </div>
     );
@@ -285,23 +285,23 @@ const ActivitySearch = () => {
                     <div className="container">
                         <div className="title">
                             Search Activity
-                    </div>
+                        </div>
                         <div className="formcontainer">
                             <form className="el-search-form"
-                                onSubmit={event => {
-                                    searchActivitiesDB(event, activityName, destination, season, category, setActivitiesResults);
-                                }}>
+                                  onSubmit={event => {
+                                      searchActivitiesDB(event, activityName, destination, season, category, setActivitiesResults);
+                                  }}>
                                 <div className="name-search">
                                     <TextField id="activityName"
-                                        style={{ width: 300 }}
-                                        label="Activity name..."
-                                        variant="outlined"
-                                        onChange={handleChangeName}
-                                        InputProps={{
-                                            classes: {
-                                                root: classes.selectRoot,
-                                            }
-                                        }}
+                                               style={{ width: 300 }}
+                                               label="Activity name..."
+                                               variant="outlined"
+                                               onChange={handleChangeName}
+                                               InputProps={{
+                                                   classes: {
+                                                       root: classes.selectRoot,
+                                                   }
+                                               }}
                                     />
                                 </div>
                                 <div className="select-inputs">
@@ -356,19 +356,19 @@ const ActivitySearch = () => {
                                         >
                                             <MenuItem value=''>
                                                 All Year Round
-                            </MenuItem>
+                                            </MenuItem>
                                             <MenuItem value='Summer'>
                                                 Summer
-                            </MenuItem>
+                                            </MenuItem>
                                             <MenuItem value='Winter'>
                                                 Winter
-                            </MenuItem>
+                                            </MenuItem>
                                             <MenuItem value='Fall'>
                                                 Fall
-                            </MenuItem>
+                                            </MenuItem>
                                             <MenuItem value='Spring'>
                                                 Spring
-                            </MenuItem>
+                                            </MenuItem>
                                         </TextField>
                                     </div>
                                     <div className="category-input">
@@ -388,16 +388,16 @@ const ActivitySearch = () => {
                                         >
                                             <MenuItem value=''>
                                                 All Categories
-                            </MenuItem>
+                                            </MenuItem>
                                             <MenuItem value='Adventure trip'>
                                                 Adventure trip
-                            </MenuItem>
+                                            </MenuItem>
                                             <MenuItem value='City trip'>
                                                 City trip
-                            </MenuItem>
+                                            </MenuItem>
                                             <MenuItem value='Relaxing vacation'>
                                                 Relaxing vacation
-                            </MenuItem>
+                                            </MenuItem>
                                         </TextField>
                                     </div>
                                     <div>

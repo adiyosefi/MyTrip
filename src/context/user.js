@@ -24,17 +24,17 @@ export const UserProvider = ({ children }) => {
   }
 
   useEffect(() => {
-   onAuthStateChange(setCurrentUser);
+    onAuthStateChange(setCurrentUser);
   }, []);
 
 
   return (
-    <UserContext.Provider
-      value={{
-        currentUser, isLoading
-      }}
-    >
-      {children}
-    </UserContext.Provider>
+      <UserContext.Provider
+          value={{
+            currentUser, isLoading
+          }}
+      >
+        {children}
+      </UserContext.Provider>
   );
 };

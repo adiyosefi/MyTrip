@@ -10,8 +10,8 @@ export const useNotes = (user) => {
     useEffect(() => {
         userRef.onSnapshot(function(doc) {
             if (doc.data().trip){
-            console.log("Current data: ", doc.data());
-            setNotes(doc.data().trip.notes);
+                console.log("Current data: ", doc.data());
+                setNotes(doc.data().trip.notes);
             }
         });
     }, []);

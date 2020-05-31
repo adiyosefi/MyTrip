@@ -67,19 +67,19 @@ const RenderListItems = ({items, setItems, user}) => {
                            onChange={e => setInput(e.target.value)} />
                     <label htmlFor={`check-item-${item.id}`} className={`${item.checked ? 'item-line-through' : 'item-none'}
                      ${item.onEditMode ? 'hideP' : 'showP'}`}>{item.label} </label>
-                     <Tooltip title="Edit" arrow>
-                    <button className={item.onEditMode ? 'hoverBtn' : 'editbtn'} onClick={
-                        () => {handleEdit(item.id)}
-                    }>
-                        <i className="fa fa-pencil" aria-hidden="true"></i>
-                    </button>
+                    <Tooltip title="Edit" arrow>
+                        <button className={item.onEditMode ? 'hoverBtn' : 'editbtn'} onClick={
+                            () => {handleEdit(item.id)}
+                        }>
+                            <i className="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
                     </Tooltip>
                     <Tooltip title="Remove" arrow>
-                    <button className="removebtn" onClick={
-                        () => {handleRemove(item.id)}
-                    }>
-                        <i className="fa fa-trash" aria-hidden="true"></i>
-                    </button>
+                        <button className="removebtn" onClick={
+                            () => {handleRemove(item.id)}
+                        }>
+                            <i className="fa fa-trash" aria-hidden="true"></i>
+                        </button>
                     </Tooltip>
                 </div>
             </li>
@@ -104,47 +104,47 @@ const RenderListItems = ({items, setItems, user}) => {
 const ListButtons = ({items, user, error, setError}) => {
     const [isAddEquipmentListToDBFormOpen, setIsAddEquipmentListToDBFormOpen] = useState(false);
 
-function toggleAddEquipmentListToDBForm() {
-setIsAddEquipmentListToDBFormOpen(!isAddEquipmentListToDBFormOpen);
-}
+    function toggleAddEquipmentListToDBForm() {
+        setIsAddEquipmentListToDBFormOpen(!isAddEquipmentListToDBFormOpen);
+    }
 
-const handleSetFavoriteEquipmentList = async (event, user, items) => {
-event.preventDefault();
-console.log('entered handleSetFavoriteEquipmentList');
-if (user.trip != null || user.trip) {
-console.log('entered trip is not null');
-try {
-  await addFavoriteEquipmentListToUserTrip(user, items);
-  console.log('trip updated');
-  window.location.href = '/mytrip';
-}
-catch (error) {
-  setError('Error creating trip');
-}
-} else {
-    setError('Create trip first!');
-    console.log("error need to create trip first-" , error);
-    window.location.href = '/mytrip';
-}
-}
+    const handleSetFavoriteEquipmentList = async (event, user, items) => {
+        event.preventDefault();
+        console.log('entered handleSetFavoriteEquipmentList');
+        if (user.trip != null || user.trip) {
+            console.log('entered trip is not null');
+            try {
+                await addFavoriteEquipmentListToUserTrip(user, items);
+                console.log('trip updated');
+                window.location.href = '/mytrip';
+            }
+            catch (error) {
+                setError('Error creating trip');
+            }
+        } else {
+            setError('Create trip first!');
+            console.log("error need to create trip first-" , error);
+            window.location.href = '/mytrip';
+        }
+    }
     return (
         <div className="buttons-container">
             <div className="set-as-fav-el-button">
-            <Button variant="contained" color="secondary" style={{ width: 180, fontWeight: 'bold',
-             fontSize: 14, fontFamily: 'Poppins, sans-serif', textTransform: 'none', borderRadius: '20px' }}
-            onClick={e => handleSetFavoriteEquipmentList(e, user, items)}>
-                Set as my favorite Equipment List
-            </Button>
+                <Button variant="contained" color="secondary" style={{ width: 180, fontWeight: 'bold',
+                    fontSize: 14, fontFamily: 'Poppins, sans-serif', textTransform: 'none', borderRadius: '20px' }}
+                        onClick={e => handleSetFavoriteEquipmentList(e, user, items)}>
+                    Set as my favorite Equipment List
+                </Button>
             </div>
-                <button onClick={toggleAddEquipmentListToDBForm} 
-                className={`${isAddEquipmentListToDBFormOpen ? 'open-add-to-el-db-button' : 'add-to-el-db-button'}`}>
-                    {`${isAddEquipmentListToDBFormOpen ? 'Close' : 'Add to our Equipment Lists Database'}`}</button>
-                <div>
-                    {isAddEquipmentListToDBFormOpen && <AddEquipmentListToDBForm 
+            <button onClick={toggleAddEquipmentListToDBForm}
+                    className={`${isAddEquipmentListToDBFormOpen ? 'open-add-to-el-db-button' : 'add-to-el-db-button'}`}>
+                {`${isAddEquipmentListToDBFormOpen ? 'Close' : 'Add to our Equipment Lists Database'}`}</button>
+            <div>
+                {isAddEquipmentListToDBFormOpen && <AddEquipmentListToDBForm
                     displayName={user.displayName}
                     equipmentList={items}
-                     toggleAddEquipmentListToDBForm={toggleAddEquipmentListToDBForm}/>}
-                </div>
+                    toggleAddEquipmentListToDBForm={toggleAddEquipmentListToDBForm}/>}
+            </div>
         </div>
     );
 }
@@ -196,7 +196,7 @@ const PrivateEquipmentList = () => {
                             handleClick(labelstate);
                         }}>
                             <input type="text" className="elforminput" onKeyUp={handleKeyUp} value={labelstate}
-                             onChange={e => setLabel(e.target.value)} placeholder="Item name..."/>
+                                   onChange={e => setLabel(e.target.value)} placeholder="Item name..."/>
                             <button type="submit" className="elformbutton">Add to list</button>
                         </form>
                     </div>
@@ -208,7 +208,7 @@ const PrivateEquipmentList = () => {
                     <RenderListItems items={items} setItems={setItems} user={currentUser}/>
                 </div>
                 <div className="listbuttonscontainer">
-                {items.length ? <ListButtons items={items} user={currentUser} error={error} setError={setError}/> : null}
+                    {items.length ? <ListButtons items={items} user={currentUser} error={error} setError={setError}/> : null}
                 </div>
             </div>
         </div>

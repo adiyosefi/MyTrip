@@ -10,13 +10,13 @@ const ModalProvider = (props) => {
   }
 
   return (
-    <ModalContext.Provider value={{
-      isModalOpen,
-      toggleModal
-    }}
-    >
-      {props.children}
-    </ModalContext.Provider>
+      <ModalContext.Provider value={{
+        isModalOpen,
+        toggleModal
+      }}
+      >
+        {props.children}
+      </ModalContext.Provider>
   );
 }
 

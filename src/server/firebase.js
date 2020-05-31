@@ -8,15 +8,15 @@ import 'firebase/database';    // for realtime database
 import 'firebase/firestore';   // for cloud firestore
 
 
-// Your web app's Firebase configuration
+// Web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyARBtk7HSSb-K9G4u8I57YZPLeaoHd_gow",
-  authDomain: "equiomentlist.firebaseapp.com",
-  databaseURL: "https://equiomentlist.firebaseio.com",
-  projectId: "equiomentlist",
-  storageBucket: "equiomentlist.appspot.com",
-  messagingSenderId: "207522967360",
-  appId: "1:207522967360:web:a090eed9bef331d47214a5"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
@@ -71,18 +71,18 @@ const getUserDocument = async uid => {
 export const generateTripDocument = async (user, destination, start, end) => {
   if (!user) return;
   const userRef = firestore.doc(`users/${user.uid}`);
-    try {
-      await userRef.update({
-        trip: {
-          destination: destination,
-          start: start, 
-          end: end
-        }
-      });
-    } catch (error) {
-      console.error("Error updating user document", error);
-    }
-  
+  try {
+    await userRef.update({
+      trip: {
+        destination: destination,
+        start: start,
+        end: end
+      }
+    });
+  } catch (error) {
+    console.error("Error updating user document", error);
+  }
+
   return userRef;
 };
 
@@ -91,30 +91,30 @@ export const deleteTripFromUser = (user, trip) => {
   const userRef = firestore.doc(`users/${user.uid}`);
   return userRef.update({
     trip: null
-})
-.then(function() {
-    console.log("User document successfully updated!");
-})
-.catch(function(error) {
-    // The document probably doesn't exist.
-    console.error("Error updating user document: ", error);
-});
+  })
+      .then(function() {
+        console.log("User document successfully updated!");
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating user document: ", error);
+      });
 }
 
 // generate public equipment list document
 export const generatePublicEquipmentListDocument = async (displayName, destination, season, category, equipmentList) => {
   var equipmentListRef = firestore.collection("equipmentlists").doc();
-    try {
-      await equipmentListRef.set({
-        displayName: displayName,
-        destination: destination,
-        season: season, 
-        category: category,
-        list: equipmentList
-      });
-    } catch (error) {
-      console.error("Error creating equipmentlist document", error);
-    }
+  try {
+    await equipmentListRef.set({
+      displayName: displayName,
+      destination: destination,
+      season: season,
+      category: category,
+      list: equipmentList
+    });
+  } catch (error) {
+    console.error("Error creating equipmentlist document", error);
+  }
   return equipmentListRef;
 }
 
@@ -142,11 +142,11 @@ export const searchPublicEquipmentListDocuments = async (destination, season, ca
     searchResults = seasonQuery;
   } else if (category && !destination && !season) {
     searchResults = categoryQuery;
-  } 
+  }
   const querySnapshot = await searchResults.get();
   querySnapshot.forEach((doc) => {
-        console.log(doc.id, ' => ', doc.data());
-        searchResultsArray.push({id: doc.id, data: doc.data()});
+    console.log(doc.id, ' => ', doc.data());
+    searchResultsArray.push({id: doc.id, data: doc.data()});
   });
   return searchResultsArray;
 }
@@ -161,14 +161,14 @@ export const addFavoriteEquipmentListToUserTrip = (user, items) => {
       ...user.trip,
       favoriteequipmentlist: items
     }
-})
-.then(function() {
-    console.log("Trip document successfully updated!");
-})
-.catch(function(error) {
-    // The document probably doesn't exist.
-    console.error("Error updating trip document: ", error);
-});
+  })
+      .then(function() {
+        console.log("Trip document successfully updated!");
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating trip document: ", error);
+      });
 }
 
 
@@ -213,11 +213,11 @@ export const searchActivitiesDocuments = async (activityName, destination, seaso
     searchResults = seasonQuery;
   } else if (!activityName && category && !destination && (!season || season === 'All year round')) {
     searchResults = categoryQuery;
-  } 
+  }
   const querySnapshot = await searchResults.get();
   querySnapshot.forEach((doc) => {
-        console.log(doc.id, ' => ', doc.data());
-        searchResultsArray.push({id: doc.id, data: doc.data()});
+    console.log(doc.id, ' => ', doc.data());
+    searchResultsArray.push({id: doc.id, data: doc.data()});
   });
   return searchResultsArray;
 }
@@ -229,14 +229,14 @@ export const addFavoriteActivitiesToUserTrip = (user, favoriteActivities) => {
       ...user.trip,
       favoriteactivities: favoriteActivities
     }
-})
-.then(function() {
-    console.log("Trip document successfully updated!");
-})
-.catch(function(error) {
-    // The document probably doesn't exist.
-    console.error("Error updating trip document: ", error);
-});
+  })
+      .then(function() {
+        console.log("Trip document successfully updated!");
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating trip document: ", error);
+      });
 }
 
 
@@ -260,14 +260,14 @@ export const addFavoriteActivityToUserTrip = (user, activity) => {
       ...user.trip,
       favoriteactivities: [...user.trip.favoriteactivities, activity]
     }
-})
-.then(function() {
-    console.log("Trip document successfully updated!");
-})
-.catch(function(error) {
-    // The document probably doesn't exist.
-    console.error("Error updating trip document: ", error);
-});
+  })
+      .then(function() {
+        console.log("Trip document successfully updated!");
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating trip document: ", error);
+      });
 }
 
 export const deleteActivityFromUserAcitivities = (user, aid) => {
@@ -279,12 +279,12 @@ export const deleteActivityFromUserAcitivities = (user, aid) => {
       ...user.trip,
       favoriteactivities: newList
     }
-})
-.then(function() {
-    console.log("User document successfully updated!");
-})
-.catch(function(error) {
-    // The document probably doesn't exist.
-    console.error("Error updating user document: ", error);
-});
+  })
+      .then(function() {
+        console.log("User document successfully updated!");
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating user document: ", error);
+      });
 }

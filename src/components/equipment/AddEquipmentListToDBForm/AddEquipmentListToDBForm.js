@@ -52,26 +52,6 @@ export function AddEquipmentListToDBForm({ displayName, equipmentList, toggleAdd
     const [errorBoolean, setErrorBoolean] = useState(false);
     const [successMessage, setSuccessMessage] = useState(null);
 
-    // const useStyles = makeStyles({
-    //     outlinedRoot: {
-    //         '&:hover $notchedOutline': {
-    //             borderColor: 'red',
-    //         },
-    //         '&$focused $notchedOutline': {
-    //             borderColor: 'green',
-    //           },
-    //     },
-    //     notchedOutline: {},
-    //     focused: {},
-    //     option: {
-    //         fontSize: 14,
-    //         '& > span': {
-    //           marginRight: 10,
-    //           fontSize: 18,
-    //         }
-    //       },
-    //   });
-
     const useStyles = makeStyles(theme => ({
         option: {
             fontSize: 14,

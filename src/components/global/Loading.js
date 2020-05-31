@@ -21,9 +21,9 @@ const Loading = () => {
 
     return (
         <Box display="flex" justifyContent="center" alignItems="center" m={1}
-                                p={1} width={1} height={600} bgcolor="background.paper">
-                                <CircularProgress variant="determinate" value={progress} />
-                            </Box>
+             p={1} width={1} height={600} bgcolor="background.paper">
+            <CircularProgress variant="determinate" value={progress} />
+        </Box>
     );
 };
 

@@ -11,8 +11,8 @@ export const usePrivateEquipmentList = (user) => {
     useEffect(() => {
         userRef.onSnapshot(function(doc) {
             if (doc.data().privateequipmentlist){
-            console.log("Current data: ", doc.data());
-            setItems(doc.data().privateequipmentlist);
+                console.log("Current data: ", doc.data());
+                setItems(doc.data().privateequipmentlist);
             }
         });
     }, []);

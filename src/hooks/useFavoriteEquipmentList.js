@@ -10,12 +10,12 @@ export const useFavoriteEquipmentList = (user) => {
     useEffect(() => {
         userRef.onSnapshot(function(doc) {
             if (doc.data().trip) {
-            if (doc.data().trip.favoriteequipmentlist){
-            console.log("Current data: ", doc.data());
-            setItems(doc.data().trip.favoriteequipmentlist);
+                if (doc.data().trip.favoriteequipmentlist){
+                    console.log("Current data: ", doc.data());
+                    setItems(doc.data().trip.favoriteequipmentlist);
+                }
             }
-        }
-    });
+        });
     }, []);
 
     const syncItems = useCallback(data => {

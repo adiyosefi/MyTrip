@@ -152,22 +152,22 @@ const RenderEquipmentLists = ({ lists, user, trip }) => {
                 </div>
                 <div className="fav-list-button">
                     {!_.isEmpty(user) &&
-                        <div>
-                            <Button variant="contained" color="secondary" style={{ width: 160, textTransform: 'none', fontWeight: 'bold', fontSize: 14, borderRadius: '20px' }}
+                    <div>
+                        <Button variant="contained" color="secondary" style={{ width: 160, textTransform: 'none', fontWeight: 'bold', fontSize: 14, borderRadius: '20px' }}
                                 onClick={e => handleSetFavoriteEquipmentList(e, user, list.data.list, list.id)}>
-                                Set as my favorite Equipment List
-            </Button>
-                            {favListSuccess[list.id] &&
-                                <div className="list-success-message">
-                                    <i className="fa fa-check-circle"></i> {favListSuccess[list.id]}
-                                </div>
-                            }
-                            {favListError[list.id] &&
-                                <div className="list-error-message">
-                                    <i className="fa fa-exclamation-circle"></i> {favListError[list.id]}
-                                </div>
-                            }
+                            Set as my favorite Equipment List
+                        </Button>
+                        {favListSuccess[list.id] &&
+                        <div className="list-success-message">
+                            <i className="fa fa-check-circle"></i> {favListSuccess[list.id]}
                         </div>
+                        }
+                        {favListError[list.id] &&
+                        <div className="list-error-message">
+                            <i className="fa fa-exclamation-circle"></i> {favListError[list.id]}
+                        </div>
+                        }
+                    </div>
                     }
                 </div>
             </div>
@@ -181,12 +181,10 @@ const RenderEquipmentLists = ({ lists, user, trip }) => {
             </ul>
             <div className="pagination-component">
                 <Pagination className="MuiPagination-root" count={numberOfPages} onChange={handleChange} page={currentPage}
-                    showFirstButton showLastButton />
+                            showFirstButton showLastButton />
             </div>
         </div>
     );
-
-
 }
 
 
@@ -221,8 +219,8 @@ const EquipmentListSearch = () => {
                 equipmentListsResults = await searchPublicEquipmentListDocuments(destination, season, category);
                 setResultLists(equipmentListsResults);
                 if (currentUser && currentUser.trip) {
-                setTrip(currentUser.trip);
-                } 
+                    setTrip(currentUser.trip);
+                }
             }
             catch (searchError) {
                 setSearchError('Error fetching public equipment lists');
@@ -263,12 +261,12 @@ const EquipmentListSearch = () => {
                     <div className="container">
                         <div className="title">
                             Search an Equipment List
-                    </div>
+                        </div>
                         <div className="formcontainer">
                             <form className="el-search-form"
-                                onSubmit={event => {
-                                    searchPublicEquipmentListDB(event, destination, season, category, setResultLists);
-                                }}>
+                                  onSubmit={event => {
+                                      searchPublicEquipmentListDB(event, destination, season, category, setResultLists);
+                                  }}>
                                 <div className="destination-input">
                                     <Autocomplete
                                         style={{ width: 300 }}
@@ -320,19 +318,19 @@ const EquipmentListSearch = () => {
                                     >
                                         <MenuItem value=''>
                                             All Year Round
-                            </MenuItem>
+                                        </MenuItem>
                                         <MenuItem value='Summer'>
                                             Summer
-                            </MenuItem>
+                                        </MenuItem>
                                         <MenuItem value='Winter'>
                                             Winter
-                            </MenuItem>
+                                        </MenuItem>
                                         <MenuItem value='Fall'>
                                             Fall
-                            </MenuItem>
+                                        </MenuItem>
                                         <MenuItem value='Spring'>
                                             Spring
-                            </MenuItem>
+                                        </MenuItem>
                                     </TextField>
                                 </div>
                                 <div className="category-input">
@@ -352,16 +350,16 @@ const EquipmentListSearch = () => {
                                     >
                                         <MenuItem value=''>
                                             All Categories
-                            </MenuItem>
+                                        </MenuItem>
                                         <MenuItem value='Adventure trip'>
                                             Adventure trip
-                            </MenuItem>
+                                        </MenuItem>
                                         <MenuItem value='City trip'>
                                             City trip
-                            </MenuItem>
+                                        </MenuItem>
                                         <MenuItem value='Relaxing vacation'>
                                             Relaxing vacation
-                            </MenuItem>
+                                        </MenuItem>
                                     </TextField>
                                 </div>
                                 <div>
@@ -369,9 +367,9 @@ const EquipmentListSearch = () => {
                                         className="el-search-button"
                                         type="submit">
                                         Search</button>
-                                    {searchError && 
+                                    {searchError &&
                                     <div className="error-no-search">
-                                    <i className="fa fa-large fa-exclamation-circle"></i> {searchError}
+                                        <i className="fa fa-large fa-exclamation-circle"></i> {searchError}
                                     </div>
                                     }
                                 </div>
