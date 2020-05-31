@@ -244,3 +244,10 @@ button:focus {
     font-size: 12px;
     text-align: center;
 }
+
+.activitysearch .search-error-message {
+    width: 100px;
+    color: rgb(179, 8, 8);
+    font-size: 12px;
+    text-align: center;
+}
