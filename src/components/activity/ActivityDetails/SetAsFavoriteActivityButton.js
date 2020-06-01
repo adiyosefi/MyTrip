@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {addFavoriteActivityToUserTrip} from "../../../server/firebase";
 import './ActivityDetails.css';
+import _ from 'underscore';
 
 
 const SetAsFavoriteActivityButton = ({currentUser, activity}) => {
@@ -13,18 +14,23 @@ const SetAsFavoriteActivityButton = ({currentUser, activity}) => {
         if (user.trip != null || user.trip) {
             console.log('entered trip is not null');
             if (activity) {
-                try {
-                    await addFavoriteActivityToUserTrip(user, activity);
-                    console.log('trip updated');
-                    setFavActivitySuccess('Activity added to your trip successfully!');
-                    window.location.href = '/mytrip';
-                }
-                catch (favActivityError) {
-                    setFavActivityError('Error saving favorite activity');
+                if (_.isEmpty(user.trip.favoriteactivities) || !user.trip.favoriteactivities ||
+                    (user.trip.favoriteactivities && _.where(user.trip.favoriteactivities, {id: activity.id}) == null)) {
+                    try {
+                        await addFavoriteActivityToUserTrip(user, activity);
+                        console.log('trip updated');
+                        setFavActivitySuccess('Activity added to your trip successfully!');
+                        window.location.href = '/mytrip';
+                    } catch (favActivityError) {
+                        setFavActivityError('Error saving favorite activity');
+                    }
+                } else {
+                    setFavActivityError('This activity has already been inserted!');
+                    console.log("error duplicate activity-", favActivityError);
                 }
             } else {
                 setFavActivityError('Select activities first!');
-                console.log("error need to choose activiries first-", favActivityError);
+                console.log("error need to choose activities first-", favActivityError);
             }
         } else {
             setFavActivityError('Create trip first!');

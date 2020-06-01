@@ -1,5 +1,87 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+<h1 align="center">MyTrip</h1>
+
+<p align="center">
+  
+<img src="https://img.shields.io/badge/made%20by-adinomberg-blue.svg" >
+
+<img src="https://img.shields.io/badge/react-16.12.0-green">
+
+<img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
+
+<img src="https://img.shields.io/github/commit-activity/w/adinomberg/MyTrip">
+</p>
+
+<img src="./readme_assets/h2.png" width="100%">
+
+<h2 align="center"><a  href="https://mytrip.netlify.app">Live Demo</a></h2>
+
+## Description
+
+<p align="center">
+<img src="https://media.giphy.com/media/7OWdOQupgCClrZb19P/giphy.gif" width="80%"></p>
+
+MyTrip is....
+
+## How to start planning your next trip?
+
+### Signup / Signin with Google
+
+- **Drag** the card or the card pile you want to move.
+- **Drop** the dragged card pile on the target and if the move is legal card will move
+- 
+
+### dddd
+
+- **Click** on the card or card pile you want to move .The pile turns to **blue**.
+- **Click** on the
+  destination card and if the move is legal the cards will
+  stack below the target.
+
+## About the project.
+
+### React.js
+
+- 
+
+### CSS
+
+- Each and every component is 100% css except the use of Material UI in some places.
+
+  <p align="center"><img  src="./readme_assets/4.png" width="30%"></p>
+
+
+<p align="center"><img  src="./readme_assets/menu.png" width="70%"></p>
+
+# Main Components
+
+## **Home**
+
+<p align="center">
+<img  src="./readme_assets/3.png" width="80%">
+</p>
+<!-- <img src="./readme_assets/3.png" width="50%"> -->
+
+## **MyTrip**
+
+<p align="center">
+<img  src="./readme_assets/5.png" width="80%">
+</p>
+
+## **ActivitySearch**
+
+<p align="center">
+<img  src="./readme_assets/1.png" width="80%">
+</p>
+
+# Project setup
+
+```
+yarn install
+yarn start
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -66,3 +148,15 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+
+## Future scope
+
+- Add winning animation.
+
+## Support on Beerpay
+
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/silent-lad/VueSolitaire/badge.svg?style=beer-square)](https://beerpay.io/silent-lad/VueSolitaire) [![Beerpay](https://beerpay.io/silent-lad/VueSolitaire/make-wish.svg?style=flat-square)](https://beerpay.io/silent-lad/VueSolitaire?focus=wish)

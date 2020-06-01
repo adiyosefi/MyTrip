@@ -32,7 +32,7 @@ const ActivitiesResults = ({ activities, setActivities, user }) => {
     const handleAddToFavoriteActivities = async (event, user, activities) => {
         event.preventDefault();
         console.log('entered handleAddToFavoriteActivities');
-        var newAFavActArray;
+        var newFavActArray;
         const filterActivities = activities.filter((activity) => {
             return activity.checked === true;
         });
@@ -41,12 +41,15 @@ const ActivitiesResults = ({ activities, setActivities, user }) => {
             console.log('entered trip is not null');
             if (filterActivities.length) {
                 if (user.trip.favoriteactivities) {
-                    newAFavActArray = user.trip.favoriteactivities.concat(filterActivities);
+                    const notUniqueActArray = user.trip.favoriteactivities.concat(filterActivities);
+                    newFavActArray = notUniqueActArray.filter((obj, pos, arr) => {
+                        return arr.map(mapObj => mapObj.id).indexOf(obj.id) === pos;
+                    });
                 } else {
-                    newAFavActArray = filterActivities;
+                    newFavActArray = filterActivities;
                 }
                 try {
-                    await addFavoriteActivitiesToUserTrip(user, newAFavActArray);
+                    await addFavoriteActivitiesToUserTrip(user, newFavActArray);
                     console.log('trip updated');
                     setFavActivitySuccess('Activities added to your trip successfully!');
                     window.location.href = '/mytrip';
