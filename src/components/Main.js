@@ -17,7 +17,7 @@ import PrivateRoute from './private/PrivateRoute';
 import ActivityDetails from './activity/ActivityDetails/ActivityDetails'
 
 
-const Main = (props) => {
+const Main = () => {
     return (
         <>
             <UserProvider>
