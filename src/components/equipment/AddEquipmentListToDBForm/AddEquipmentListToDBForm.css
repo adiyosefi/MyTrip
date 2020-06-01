@@ -1,7 +1,7 @@
 .addequipmentlisttodbform form {
     width: 290px;
-    height: 320px;
-    padding: 20px;
+    height: 350px;
+    padding: 30px;
     position: absolute;
     left: -50px;
     background-color: white;
@@ -58,6 +58,17 @@
     background-color: rgb(12, 109, 12);
 }
 
-.success-mess {
+.addequipmentlisttodbform .success-messe  {
+    width: 180px;
     color: rgb(12, 109, 12);
+    font-size: 12px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.addequipmentlisttodbform .error-messe {
+    width: 180px;
+    color: rgb(179, 8, 8);
+    font-size: 12px;
+    text-align: center;
 }

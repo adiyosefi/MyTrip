@@ -15,6 +15,7 @@ export function AddEquipmentListToDBForm({ displayName, equipmentList, toggleAdd
     const [category, setCategory] = useState("");
     const [errorContent, setErrorContent] = useState(null);
     const [errorBoolean, setErrorBoolean] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
 
     const useStyles = makeStyles(theme => ({
@@ -45,11 +46,9 @@ export function AddEquipmentListToDBForm({ displayName, equipmentList, toggleAdd
                 generatePublicEquipmentListDocument(displayName, destination, season, category, equipmentList);
                 console.log('list created successfully');
                 setSuccessMessage('List added successfully!');
-                // redirect to list page
             }
-            catch (errorBoolean) {
-                setErrorBoolean(true);
-                setErrorContent('Error generating public equipment list');
+            catch (errorMessage) {
+                setErrorMessage('Error generating public equipment list');
             }
         } else {
             setErrorBoolean(true);
@@ -161,9 +160,16 @@ export function AddEquipmentListToDBForm({ displayName, equipmentList, toggleAdd
                                 createPublicEquipmentListToDB(event, displayName, destination, season, category, equipmentList);
                             }}>
                             Add List to our Database!</button>
-                    </div>
-                    <div className="success-mess">
-                        {successMessage}
+                        {successMessage &&
+                        <div className="success-messe">
+                            <i className="fa fa-check-circle"></i> {successMessage}
+                        </div>
+                        }
+                        {errorMessage &&
+                        <div className="error-messe">
+                            <i className="fa fa-exclamation-circle"></i> {errorMessage}
+                        </div>
+                        }
                     </div>
                 </form>
             </div>
