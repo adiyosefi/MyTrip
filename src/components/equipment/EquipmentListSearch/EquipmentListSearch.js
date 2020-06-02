@@ -200,7 +200,7 @@ const EquipmentListSearch = () => {
                                 </div>
                             </form>
                             <div className="goto-ownlist">
-                                Have your own list? Add it <Link className="goto-ownlist-link" to="/privateequipmentlist"> Here </Link>
+                                Have your own list? Add it <Link className="goto-ownlist-link" to="/personalequipmentlist"> Here </Link>
                             </div>
                         </div>
                     </div>

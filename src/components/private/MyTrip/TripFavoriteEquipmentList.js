@@ -102,7 +102,7 @@ const TripFavoriteEquipmentList = ({ user }) => {
                             <Link to="/equipmentlistsearch" className="link-to-equipmentlists">CLICK HERE</Link> to search and add an equipment list
                         </div>
                         <div className="no-items-link">
-                            <Link to="/privateequipmentlist" className="link-to-equipmentlists">CLICK HERE</Link> to create your own equipment list
+                            <Link to="/personalequipmentlist" className="link-to-equipmentlists">CLICK HERE</Link> to create your own equipment list
                         </div>
                     </div>
                 )

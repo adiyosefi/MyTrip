@@ -4,7 +4,7 @@ import Header from './global/Header/Header';
 import Footer from './global/Footer/Footer';
 import Home from './global/Home/Home';
 import About from './info/About/About';
-import PrivateEquipmentList from './equipment/PrivateEquipmentList/PrivateEquipmentList';
+import PersonalEquipmentList from './equipment/PersonalEquipmentList/PersonalEquipmentList';
 import Contact from './info/Contact/Contact';
 import EquipmentListSearch from './equipment/EquipmentListSearch/EquipmentListSearch';
 import MyTrip from './private/MyTrip/MyTrip';
@@ -29,7 +29,7 @@ const Main = () => {
                     <Route exact path="/home" component={Home} />
                     <Route exact path="/about" component={About} />
                     <Route exact path="/equipmentlistsearch" component={EquipmentListSearch} />
-                    <PrivateRoute exact path="/privateequipmentlist" component={PrivateEquipmentList} />
+                    <PrivateRoute exact path="/personalequipmentlist" component={PersonalEquipmentList} />
                     <Route exact path="/activities" component={ActivitySearch} />
                     <Route path="/activities/:activityId" component={ActivityDetails} />
                     <Route exact path="/contact" component={Contact} />

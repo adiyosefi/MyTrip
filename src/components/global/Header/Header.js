@@ -15,7 +15,7 @@ const Header = () => {
                 <li className="navitem-equipment"><NavLink to="/equipmentlistsearch" className="navitem dropbtn">Equipment Lists</NavLink>
                     <ul className="equipment-dropdown">
                         <li><NavLink to="/equipmentlistsearch" className="equipment-dropdown-item">Search Equipment List</NavLink></li>
-                        <li><NavLink to="/privateequipmentlist" className="equipment-dropdown-item">Add Equipment List</NavLink></li>
+                        <li><NavLink to="/personalequipmentlist" className="equipment-dropdown-item">Add Equipment List</NavLink></li>
                     </ul>
                 </li>
                 <li><NavLink to="/activities" className="navitem">Activities</NavLink></li>

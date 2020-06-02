@@ -1,4 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 <h1 align="center">MyTrip</h1>
 
@@ -13,66 +12,123 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 <img src="https://img.shields.io/github/commit-activity/w/adinomberg/MyTrip">
 </p>
 
-<img src="./readme_assets/h2.png" width="100%">
+<p align="center">
+<img src="./readme_assets/logo.png" width="50%"></p>
 
 <h2 align="center"><a  href="https://mytrip.netlify.app">Live Demo</a></h2>
 
 ## Description
 
 <p align="center">
-<img src="" width="80%">GIF</p>
+<img src="https://media.giphy.com/media/RktnOTcM28fxisP9im/giphy.gif" width="80%"></p>
 
-MyTrip is....
+<p align="center">
+<img src="https://media.giphy.com/media/fZ3BJATDdntDpPjKcl/giphy.gif" width="80%"></p>
+
+MyTrip is a free online trip planner that can help you build a personalized itinerary for your next vacation.
+You can save the restaurants you'll want to eat in, the hiking trails you'll want to explore, and the attractions you'll want to enjoy - all in one place!
+You can also create and save your personal equipment list or search for an equipment list in our database (full of users' lists from trips around the world).
+If there are details you don't want to forget such as important phone numbers, you can save them in your trip notes section.
 
 ## How to start planning your next trip?
 
 ### Signup / Signin with Google
 
-- **Drag** the card or the card pile you want to move.
-- **Drop** the dragged card pile on the target and if the move is legal card will move
-- 
+- If you don't have an account yet, click on the "Plan your trip" button on the right corner of the screen.
+- Sign up with your email and password, you can also add a profile picture.
+- If you don't want to create an account, you can also sign in with your Google account.
 
-### dddd
+<p align="center">
+<img src="./readme_assets/signinup.png" width="80%"></p>
 
-- **Click** on the card or card pile you want to move .The pile turns to **blue**.
-- **Click** on the
-  destination card and if the move is legal the cards will
-  stack below the target.
 
-## About the project.
+### Create your trip
+
+- Use the form in the Home page or click on the "Plan your trip" button on the right corner of the screen.
+- Enter your **Destination** and **Start and End dates**, and create a new trip!
+
+<p align="center">
+<img src="./readme_assets/createtripform.png" width="80%"></p>
+<p align="center">
+<img src="./readme_assets/homepage.png" width="80%"></p>
+
+### Add favorite activities to your trip
+
+- In the Activities page you can choose activities according to your trip destination, season and category, and add them to your trip.
+- You can also click on the activity title and see more information about it, and add it to your trip.
+
+<p align="center">
+<img src="./readme_assets/activities.png" width="80%"></p>
+
+### Add an equipment list to your trip
+
+- In the Search an Equipment List page you can search for an equipment list according to your trip destination, season and category, and add it to your trip.
+- You can also click on the "Add Equipment List" menu item, create your own equipment list, and add it to your trip.
+- You can contribute to our site by adding your equipment list to out site database and help other travelers like you.
+
+<p align="center">
+<img src="./readme_assets/searchequipmentlist.png" width="80%"></p>
+
+<p align="center">
+<img src="./readme_assets/createequipmentlist.png" width="80%"></p>
+
+### Add and edit notes
+
+- In your trip page you can write notes that will be saved immediately in your trip page.
+- You can click on the "Clear notes" button if you wish to delete all the notes you wrote.
+
+## Technologies used in the project
 
 ### React.js
 
-- 
+- The project was created with create-react-app.
 
 ### CSS
 
-- Each and every component is 100% css except the use of Material UI in some places.
+- Each and every component is styled with CSS, and some components also use Material UI in some places.
+- The website is not responsive yet (compatible for desktop only).
 
-  <p align="center"><img  src="./readme_assets/4.png" width="30%"></p>
+### Firebase
 
-
-<p align="center"><img  src="./readme_assets/menu.png" width="70%"></p>
+- the project concentrates on the client side.
+- The server side of the app is implemented with Firebase Firestore.
 
 # Main Components
 
 ## **Home**
 
 <p align="center">
-<img  src="./readme_assets/3.png" width="80%">
+<img  src="./readme_assets/homepage.png" width="80%">
 </p>
-<!-- <img src="./readme_assets/3.png" width="50%"> -->
 
 ## **MyTrip**
 
 <p align="center">
-<img  src="./readme_assets/5.png" width="80%">
+<img  src="./readme_assets/mytrip.png" width="80%">
 </p>
 
 ## **ActivitySearch**
 
 <p align="center">
-<img  src="./readme_assets/1.png" width="80%">
+<img src="https://media.giphy.com/media/YpqZd5iHE92lIl1HsI/giphy.gif" width="80%"></p>
+
+
+## **EquipmentListSearch**
+
+<p align="center">
+<img src="https://media.giphy.com/media/RfMCxKjYASrsK36TV4/giphy.gif" width="80%"></p>
+
+
+## **PersonalEquipmentList**
+
+<p align="center">
+<img src="./readme_assets/createequipmentlist.png" width="80%"></p>
+
+
+## **SignInUp**
+
+<p align="center">
+<img  src="./readme_assets/signinup.png" width="80%">
 </p>
 
 # Project setup
@@ -151,12 +207,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 
 
-## Future scope
+# Future scope
 
-- Add winning animation.
+- Add users' comments on activities.
+- Make the site responsive for mobile devices and tablets.
 
-## Support on Beerpay
-
-Hey dude! Help me out for a couple of :beers:!
-
-[![Beerpay](https://beerpay.io/silent-lad/VueSolitaire/badge.svg?style=beer-square)](https://beerpay.io/silent-lad/VueSolitaire) [![Beerpay](https://beerpay.io/silent-lad/VueSolitaire/make-wish.svg?style=flat-square)](https://beerpay.io/silent-lad/VueSolitaire?focus=wish)
