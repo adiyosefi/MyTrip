@@ -7,7 +7,7 @@ import {countries} from "../../../server/countries";
 import TextField from "@material-ui/core/TextField";
 
 
-const TripItineraryForm = ({ user, trip, setTrip }) => {
+const TripItineraryForm = ({ user, trip }) => {
     const [destination, setDestination] = useState("");
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
@@ -34,7 +34,6 @@ const TripItineraryForm = ({ user, trip, setTrip }) => {
             if (destination && start && end) {
                 try {
                     await generateTripDocument(user, destination, start, end);
-                    setTrip(user.trip);
                     console.log('trip added');
                     setCreateTripSuccess('Trip created successfully!')
                     window.location.href = '/mytrip';

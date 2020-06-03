@@ -16,17 +16,8 @@ const MyTrip = () => {
   const {currentUser} = useContext(UserContext);
 
   const { photoURL, displayName, email } = currentUser;
-  const [trip, setTrip] = useState((currentUser && currentUser.trip) ? currentUser.trip : null);
-
-  console.log(trip, currentUser.trip);
-
-  // get trip data from document reference
-  useEffect(() => {
-    console.log("from myTrip: ", trip)
-    if (currentUser.trip) {
-      setTrip(currentUser.trip);
-    }
-  }, [currentUser]);
+  const trip = (currentUser && currentUser.trip) ? currentUser.trip : null;
+  console.log("trip", currentUser.trip);
 
   return (
       <ThemeProvider theme={myTheme}>
@@ -37,9 +28,9 @@ const MyTrip = () => {
                 <MyTripUserProfile photoURL={photoURL} displayName={displayName} email={email}/>
               </div>
               <div className="itinerary-form-or-title-container">
-                {!_.isEmpty(trip) ? <TripTitle trip={trip} setTrip={setTrip} user={currentUser} />
+                {!_.isEmpty(trip) ? <TripTitle trip={trip} user={currentUser} />
                 :
-                    <TripItineraryForm user={currentUser} trip={trip} setTrip={setTrip} />}
+                    <TripItineraryForm user={currentUser} trip={trip} />}
               </div>
               <div className="activities-and-list-container">
                 <div className="favourite-activities-container">

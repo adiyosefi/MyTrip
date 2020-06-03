@@ -23,10 +23,15 @@ const ActivityDetails = ({ match }) => {
             try {
                 tempActivity = await getActivityWithIdDocument(match.params.activityId);
                 console.log(tempActivity);
-                setActivity(tempActivity);
+                if (_.isEmpty(tempActivity.data)) {
+                    setActivity(null);
+                    window.location.href = '/activities';
+                } else {
+                    setActivity(tempActivity);
+                }
             }
             catch (error) {
-                console.log('Error getting public activities');
+                console.log('Error getting public activities', error);
             }
         }
         fetchData();
@@ -40,8 +45,6 @@ const ActivityDetails = ({ match }) => {
         }
         return splitStr.join(' ');
     }
-
-
 
     if (activity) {
         return (

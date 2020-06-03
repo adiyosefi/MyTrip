@@ -20,7 +20,8 @@ const Home = () => {
     const [createTripSuccess, setCreateTripSuccess] = useState(null);
     const [createTripError, setCreateTripError] = useState(null);
 
-    const [trip, setTrip] = useState((currentUser && currentUser.trip) ? currentUser.trip : null);
+    const trip = (currentUser && currentUser.trip) ? currentUser.trip : null;
+
 
     const useStyles = makeStyles(theme => ({
         option: {
@@ -33,27 +34,13 @@ const Home = () => {
 
     const classes = useStyles();
 
-    // get trip data from document reference
-    useEffect(() => {
-        let mounted = true;
-        if(mounted){
-            if (currentUser && currentUser.trip) {
-                setTrip(currentUser.trip);
-            }
-        }
-        return () => mounted = false;
-    }, [currentUser]);
-
-
-
-    const createTripHandler = async (event, destination, start, end, trip, setTrip) => {
+    const createTripHandler = async (event, destination, start, end, trip) => {
         event.preventDefault();
         if(!_.isEmpty(currentUser)){
             if (trip == null || !trip) {
                 if (destination && start && end) {
                     try {
                         await generateTripDocument(currentUser, destination, start, end);
-                        setTrip(currentUser.trip);
                         console.log('trip added');
                         setCreateTripSuccess('Trip created successfully!')
                         window.location.href = '/mytrip';
@@ -168,7 +155,7 @@ const Home = () => {
                                 <div className="form-btn-error-container">
                                     <button name="form-submit"
                                             onClick={event => {
-                                                createTripHandler(event, destination, start, end, trip, setTrip);
+                                                createTripHandler(event, destination, start, end, trip);
                                             }}
                                             className="form-button">Start planning your trip!</button>
                                     {createTripSuccess &&

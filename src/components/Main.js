@@ -27,11 +27,11 @@ const Main = () => {
                 </ModalProvider>
                 <Switch>
                     <Route exact path="/home" component={Home} />
-                    <Route exact path="/about" component={About} />
-                    <Route exact path="/equipmentlistsearch" component={EquipmentListSearch} />
-                    <PrivateRoute exact path="/personalequipmentlist" component={PersonalEquipmentList} />
-                    <Route exact path="/activities" component={ActivitySearch} />
+                    <Route path="/about" component={About} />
+                    <Route path="/equipmentlistsearch" component={EquipmentListSearch} />
+                    <PrivateRoute path="/personalequipmentlist" component={PersonalEquipmentList} />
                     <Route path="/activities/:activityId" component={ActivityDetails} />
+                    <Route exact path="/activities" component={ActivitySearch} />
                     <Route exact path="/contact" component={Contact} />
                     <PrivateRoute exact path="/mytrip" component={MyTrip}/>
                     <Route exact path="/signinup" component={SignInUp} />
