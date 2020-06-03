@@ -7,8 +7,6 @@
 
 <img src="https://img.shields.io/badge/react-16.12.0-green">
 
-<img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
-
 <img src="https://img.shields.io/github/commit-activity/w/adinomberg/MyTrip">
 </p>
 
