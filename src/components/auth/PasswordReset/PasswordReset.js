@@ -3,14 +3,12 @@ import {auth} from '../../../server/firebase';
 import './PasswordReset.css';
 import TextField from '@material-ui/core/TextField';
 
-
 const PasswordReset = () => {
     const [email, setEmail] = useState("");
     const [emailHasBeenSent, setEmailHasBeenSent] = useState(false);
     const [emailErrorBoolean, setEmailErrorBoolean] = useState(false);
     const [emailErrorContent, setEmailErrorContent] = useState(null);
     const [error, setError] = useState(null);
-
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -81,4 +79,5 @@ const PasswordReset = () => {
         </div>
     );
 };
+
 export default PasswordReset;

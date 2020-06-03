@@ -5,7 +5,6 @@ import TextField from "@material-ui/core/TextField";
 // HOOKS
 import {useNotes} from "../../../hooks/useNotes";
 
-
 const TripNotes = ({ user }) => {
     const [notes, setNotes] = useNotes(user);
 
@@ -15,7 +14,6 @@ const TripNotes = ({ user }) => {
         event.preventDefault();
         if (notes) {
             setNotes("");
-            console.log('notes cleared in trip successfully-', notes);
         } else {
             setNotesError('Notes is not filled');
         }

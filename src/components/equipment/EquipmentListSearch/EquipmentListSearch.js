@@ -12,7 +12,6 @@ import Loading from './../../global/Loading';
 import {myTheme} from './../../../themes/myTheme';
 import EquipmentListsSearchResults from "./EquipmentListsSearchResults";
 
-
 const EquipmentListSearch = () => {
     const {currentUser} = useContext(UserContext);
 

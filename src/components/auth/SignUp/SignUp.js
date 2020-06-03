@@ -7,7 +7,6 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import {myTheme} from './../../../themes/myTheme';
 
-
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +33,6 @@ const SignUp = () => {
 
   const handleUploadError = (error) => {
     setIsUploading(false);
-    console.error(error);
   }
 
   const handleUploadSuccess = (filename) => {
@@ -45,7 +43,6 @@ const SignUp = () => {
         .child(filename)
         .getDownloadURL()
         .then(url => setPhotoURL(url));
-    console.log(photoURL);
   }
 
   const handleProgress = (progress) => {
@@ -112,7 +109,6 @@ const SignUp = () => {
 
   const handleNameChange = (event) => {
     setDisplayName(event.target.value);
-    console.log("handleNameChange", displayName);
   };
 
   const handleEmailChange = (event) => {

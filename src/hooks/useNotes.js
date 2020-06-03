@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { firestore } from '../server/firebase';
 
 export const useNotes = (user) => {
-
     const [notes, setNotes] = useState("");
 
     const userRef = firestore.doc(`users/${user.uid}`);
@@ -10,14 +9,12 @@ export const useNotes = (user) => {
     useEffect(() => {
         userRef.onSnapshot(function(doc) {
             if (doc.data().trip){
-                console.log("Current data: ", doc.data());
                 setNotes(doc.data().trip.notes);
             }
         });
     }, []);
 
     const syncNotes = useCallback(data => {
-        console.log(data);
         userRef.update({
             trip: {
                 ...user.trip,

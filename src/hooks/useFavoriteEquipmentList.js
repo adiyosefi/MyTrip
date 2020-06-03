@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { firestore } from '../server/firebase';
 
 export const useFavoriteEquipmentList = (user) => {
-
     const [items, setItems] = useState([]);
 
     const userRef = firestore.doc(`users/${user.uid}`);
@@ -11,7 +10,6 @@ export const useFavoriteEquipmentList = (user) => {
         userRef.onSnapshot(function(doc) {
             if (doc.data().trip) {
                 if (doc.data().trip.favoriteequipmentlist){
-                    console.log("Current data: ", doc.data());
                     setItems(doc.data().trip.favoriteequipmentlist);
                 }
             }
@@ -19,7 +17,6 @@ export const useFavoriteEquipmentList = (user) => {
     }, []);
 
     const syncItems = useCallback(data => {
-        console.log(data);
         userRef.update({
             trip: {
                 ...user.trip,

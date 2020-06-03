@@ -3,7 +3,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 
 const Loading = () => {
-
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
@@ -17,7 +16,6 @@ const Loading = () => {
             clearInterval(timer);
         };
     }, []);
-
 
     return (
         <Box display="flex" justifyContent="center" alignItems="center" m={1}

@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import {auth} from "../../../server/firebase";
 
 const SignedInModal = ({currentUser, toggleModal}) => {
-
     return (
         <div className="loginmodal">
             <div className="overlay">

@@ -3,7 +3,6 @@ import './MyTrip.css';
 import moment from "moment";
 import {deleteTripFromUser} from "../../../server/firebase";
 
-
 const TripTitle = ({ trip, user }) => {
     if (trip != null) {
         const { destination } = trip;

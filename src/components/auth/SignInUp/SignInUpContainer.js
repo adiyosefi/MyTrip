@@ -3,7 +3,6 @@ import './SignInUp.css';
 import SignIn from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
 
-
 const SignInUpContainer = () => {
     return (
         <>

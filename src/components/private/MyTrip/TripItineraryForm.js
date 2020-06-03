@@ -6,7 +6,6 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import {countries} from "../../../server/countries";
 import TextField from "@material-ui/core/TextField";
 
-
 const TripItineraryForm = ({ user, trip }) => {
     const [destination, setDestination] = useState("");
     const [start, setStart] = useState("");
@@ -28,13 +27,10 @@ const TripItineraryForm = ({ user, trip }) => {
 
     const createTripHandler = async (event, destination, start, end) => {
         event.preventDefault();
-        console.log('entered tripHandler');
         if (trip == null || !trip) {
-            console.log('entered trip is null');
             if (destination && start && end) {
                 try {
                     await generateTripDocument(user, destination, start, end);
-                    console.log('trip added');
                     setCreateTripSuccess('Trip created successfully!')
                     window.location.href = '/mytrip';
                 }
@@ -53,14 +49,11 @@ const TripItineraryForm = ({ user, trip }) => {
 
     const handleStartDateChange = (event) => {
         setStart(event.target.value);
-        console.log(start);
     };
 
     const handleEndDateChange = (event) => {
         setEnd(event.target.value);
-        console.log(end);
     };
-
 
     return (
         <div className="form-container">

@@ -7,7 +7,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import {searchActivitiesDocuments} from "../../../server/firebase";
 import {makeStyles} from "@material-ui/core/styles";
 
-
 const SearchActivityForm = ({activityName, setActivityName, destination, setDestination, season, setSeason, category,
                                 setCategory, searchError, setSearchError, setActivitiesResults, activitiesSearchResults}) => {
 

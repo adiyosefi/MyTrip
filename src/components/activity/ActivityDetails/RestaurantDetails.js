@@ -1,7 +1,6 @@
 import React from 'react';
 import './ActivityDetails.css';
 
-
 const RestaurantDetails = ({activity}) => {
     return (
         <div>

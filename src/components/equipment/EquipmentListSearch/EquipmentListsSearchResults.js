@@ -5,9 +5,7 @@ import _ from "underscore";
 import Button from "@material-ui/core/Button";
 import {Pagination} from "@material-ui/lab";
 
-
 const EquipmentListsSearchResults = ({ lists, user, trip }) => {
-
     const [currentPage, setCurrentPage] = useState(1);
 
     const [favListError, setFavListError] = useState([]);

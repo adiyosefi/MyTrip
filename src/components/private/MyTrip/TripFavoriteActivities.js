@@ -4,12 +4,10 @@ import {deleteActivityFromUserAcitivities} from "../../../server/firebase";
 import {Link} from "react-router-dom";
 import Tooltip from "@material-ui/core/Tooltip";
 
-
 const TripFavoriteActivities = ({ user }) => {
     const [favoriteActivities, setFavoriteActivities] = useState([]);
 
     useEffect(() => {
-        console.log("from RenderFavoriteActivities: ", user.trip.favoriteactivities)
         if (user.trip.favoriteactivities) {
             setFavoriteActivities(user.trip.favoriteactivities);
         }

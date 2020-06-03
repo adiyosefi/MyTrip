@@ -3,12 +3,10 @@ import './PersonalEquipmentList.css';
 import { v4 as uuidv4 } from 'uuid';
 import {UserContext} from './../../../context/user';
 
-
 // HOOKS
 import {usePersonalEquipmentList} from '../../../hooks/usePersonalEquipmentList';
 import PersonalEquipmentListItems from "./PersonalEquipmentListItems";
 import PersonalEquipmentListButtons from "./PersonalEquipmentListButtons";
-
 
 const PersonalEquipmentList = () => {
     const {currentUser} = useContext(UserContext);
@@ -41,7 +39,6 @@ const PersonalEquipmentList = () => {
             }
         }
     }
-
 
     return (
         <div className="equipmentlist">

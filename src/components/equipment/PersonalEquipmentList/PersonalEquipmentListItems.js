@@ -2,7 +2,6 @@ import React, {useCallback, useState} from 'react';
 import './PersonalEquipmentList.css';
 import Tooltip from "@material-ui/core/Tooltip";
 
-
 const PersonalEquipmentListItems = ({items, setItems, user}) => {
     const [inputState, setInput] = useState("");
 

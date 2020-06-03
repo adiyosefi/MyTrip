@@ -5,7 +5,6 @@ import _ from 'underscore';
 import Loading from "../global/Loading";
 
 const PrivateRoute = ({ component: Component, ...otherProps }) => {
-
   const { currentUser, isLoading } = useContext(UserContext);
 
   return (
@@ -28,6 +27,5 @@ const PrivateRoute = ({ component: Component, ...otherProps }) => {
     />
   )
 }
-
 
 export default PrivateRoute;

@@ -6,10 +6,7 @@ import {Link} from "react-router-dom";
 import SetAsFavoriteActivityButtonSearch from "./SetAsFavoriteActivityButtonSearch";
 import {Pagination} from "@material-ui/lab";
 
-
 const ActivitiesResults = ({ activities, setActivities, user }) => {
-    console.log("activities-", activities);
-
     const [currentPage, setCurrentPage] = useState(1);
 
     const [favActivityError, setFavActivityError] = useState(null);
@@ -31,14 +28,11 @@ const ActivitiesResults = ({ activities, setActivities, user }) => {
 
     const handleAddToFavoriteActivities = async (event, user, activities) => {
         event.preventDefault();
-        console.log('entered handleAddToFavoriteActivities');
         var newFavActArray;
         const filterActivities = activities.filter((activity) => {
             return activity.checked === true;
         });
-        console.log('filter activities', filterActivities);
         if (user.trip !== null || user.trip) {
-            console.log('entered trip is not null');
             if (filterActivities.length) {
                 if (user.trip.favoriteactivities) {
                     const notUniqueActArray = user.trip.favoriteactivities.concat(filterActivities);
@@ -50,7 +44,6 @@ const ActivitiesResults = ({ activities, setActivities, user }) => {
                 }
                 try {
                     await addFavoriteActivitiesToUserTrip(user, newFavActArray);
-                    console.log('trip updated');
                     setFavActivitySuccess('Activities added to your trip successfully!');
                     window.location.href = '/mytrip';
                 }
@@ -59,11 +52,9 @@ const ActivitiesResults = ({ activities, setActivities, user }) => {
                 }
             } else {
                 setFavActivityError('Select activities first!');
-                console.log("error need to choose activiries first-", favActivityError);
             }
         } else {
             setFavActivityError('Create trip first!');
-            console.log("error need to create trip first-", favActivityError);
             window.location.href = '/mytrip';
         }
     }

@@ -7,9 +7,7 @@ export const UserContext = createContext({});
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(defaultUser);
 
-  console.log(currentUser);
   const [isLoading, setIsLoading] = useState(true);
-
 
   function onAuthStateChange(setCurrentUser) {
     return auth.onAuthStateChanged(async userAuth => {
@@ -26,7 +24,6 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     onAuthStateChange(setCurrentUser);
   }, []);
-
 
   return (
       <UserContext.Provider

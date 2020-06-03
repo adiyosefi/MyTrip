@@ -24,12 +24,10 @@ const SignInModal = ({toggleModal}) => {
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
-        console.log("email", email);
     };
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
-        console.log("password", password);
     };
 
     const signInWithEmailAndPasswordHandler = (event, email, password) => {
@@ -37,7 +35,6 @@ const SignInModal = ({toggleModal}) => {
         if (email && password){
             auth.signInWithEmailAndPassword(email, password).catch(loginModalErrorMessage => {
                 setLoginModalErrorMessage("Error signing in with password and email!");
-                console.error("Error signing in with password and email", loginModalErrorMessage);
             });
             setLoginModalSuccessMessage('Signed in successfully! 🎉');
             toggleModal();

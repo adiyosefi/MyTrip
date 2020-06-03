@@ -16,7 +16,6 @@ import {UserProvider} from '../context/user';
 import PrivateRoute from './private/PrivateRoute';
 import ActivityDetails from './activity/ActivityDetails/ActivityDetails'
 
-
 const Main = () => {
     return (
         <>

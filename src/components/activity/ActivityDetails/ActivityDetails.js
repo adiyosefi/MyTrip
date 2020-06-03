@@ -22,7 +22,6 @@ const ActivityDetails = ({ match }) => {
         async function fetchData() {
             try {
                 tempActivity = await getActivityWithIdDocument(match.params.activityId);
-                console.log(tempActivity);
                 if (_.isEmpty(tempActivity.data)) {
                     setActivity(null);
                     window.location.href = '/activities';

@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 // HOOKS
 import {useFavoriteEquipmentList} from "../../../hooks/useFavoriteEquipmentList";
 
-
 const TripFavoriteEquipmentList = ({ user }) => {
     const [items, setItems] = useFavoriteEquipmentList(user);
     const [inputState, setInput] = useState("");

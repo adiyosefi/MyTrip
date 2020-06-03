@@ -6,7 +6,6 @@ import _ from "underscore";
 import SignedInModal from "./SignedInModal";
 import SignInModal from "./SignInModal";
 
-
 export function LoginModal() {
     const {isModalOpen, toggleModal} = useContext(ModalContext);
 

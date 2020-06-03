@@ -11,13 +11,11 @@ import TripFavoriteActivities from "./TripFavoriteActivities";
 import TripFavoriteEquipmentList from "./TripFavoriteEquipmentList";
 import TripNotes from "./TripNotes";
 
-
 const MyTrip = () => {
   const {currentUser} = useContext(UserContext);
 
   const { photoURL, displayName, email } = currentUser;
   const trip = (currentUser && currentUser.trip) ? currentUser.trip : null;
-  console.log("trip", currentUser.trip);
 
   return (
       <ThemeProvider theme={myTheme}>

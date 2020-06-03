@@ -6,7 +6,6 @@ import 'firebase/storage';     // for storage
 import 'firebase/database';    // for realtime database
 import 'firebase/firestore';   // for cloud firestore
 
-
 // Web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -20,7 +19,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
-
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
@@ -84,7 +82,6 @@ export const generateTripDocument = async (user, destination, start, end) => {
 
   return userRef;
 };
-
 
 export const deleteTripFromUser = (user, trip) => {
   const userRef = firestore.doc(`users/${user.uid}`);
@@ -151,8 +148,6 @@ export const searchPublicEquipmentListDocuments = async (destination, season, ca
   return searchResultsArray;
 }
 
-
-
 // add favorite equipment list field to user's trip
 export const addFavoriteEquipmentListToUserTrip = (user, items) => {
   const userRef = firestore.doc(`users/${user.uid}`);
@@ -170,8 +165,6 @@ export const addFavoriteEquipmentListToUserTrip = (user, items) => {
         console.error("Error updating trip document: ", error);
       });
 }
-
-
 
 export const searchActivitiesDocuments = async (activityName, destination, season, category) => {
   var activitiesRef = firestore.collection("activities");
@@ -238,7 +231,6 @@ export const addFavoriteActivitiesToUserTrip = (user, favoriteActivities) => {
         console.error("Error updating trip document: ", error);
       });
 }
-
 
 export const getActivityWithIdDocument = async (id) => {
   if (!id) return null;

@@ -8,7 +8,6 @@ import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/sty
 import MenuItem from '@material-ui/core/MenuItem';
 import {myTheme} from './../../../themes/myTheme';
 
-
 export function AddEquipmentListToDBForm({ displayName, equipmentList, toggleAddEquipmentListToDBForm }) {
     const [destination, setDestination] = useState("");
     const [season, setSeason] = useState("");
@@ -29,7 +28,6 @@ export function AddEquipmentListToDBForm({ displayName, equipmentList, toggleAdd
     }));
 
     const classes = useStyles();
-
 
     const handleChangeSeason = (event) => {
         setSeason(event.target.value);
@@ -59,7 +57,6 @@ export function AddEquipmentListToDBForm({ displayName, equipmentList, toggleAdd
         setSeason("");
         setCategory("");
     };
-
 
     return (
         <ThemeProvider theme={myTheme}>

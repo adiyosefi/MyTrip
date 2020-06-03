@@ -8,7 +8,6 @@ import {myTheme} from './../../../themes/myTheme';
 import SearchActivityForm from "./SearchActivityForm";
 import ActivitiesResults from "./ActivitiesResults";
 
-
 const ActivitySearch = () => {
     const {currentUser} = useContext(UserContext);
 

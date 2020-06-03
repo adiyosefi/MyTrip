@@ -3,7 +3,6 @@ import './SignInUp.css';
 import {auth} from "../../../server/firebase";
 import {Link} from "react-router-dom";
 
-
 const UserProfileContainer = ({user}) => {
     const { photoURL, displayName, email } = user;
 

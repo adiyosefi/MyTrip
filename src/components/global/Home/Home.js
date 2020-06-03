@@ -5,10 +5,9 @@ import { UserContext } from './../../../context/user';
 import { generateTripDocument } from './../../../server/firebase'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
+import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import _ from 'underscore';
 import {myTheme} from './../../../themes/myTheme';
-
 
 const Home = () => {
     const {currentUser} = useContext(UserContext);
@@ -41,7 +40,6 @@ const Home = () => {
                 if (destination && start && end) {
                     try {
                         await generateTripDocument(currentUser, destination, start, end);
-                        console.log('trip added');
                         setCreateTripSuccess('Trip created successfully!')
                         window.location.href = '/mytrip';
                     }
@@ -54,7 +52,6 @@ const Home = () => {
                 }
                 else {
                     setCreateTripError('Enter all details');
-                    console.log('Error creating trip');
                 }
             }
             else {
@@ -70,12 +67,10 @@ const Home = () => {
 
     const handleStartDateChange = (event) => {
         setStart(event.target.value);
-        console.log(start);
     };
 
     const handleEndDateChange = (event) => {
         setEnd(event.target.value);
-        console.log(end);
     };
 
     return (

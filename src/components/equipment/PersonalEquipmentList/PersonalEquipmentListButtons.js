@@ -4,7 +4,6 @@ import {addFavoriteEquipmentListToUserTrip} from "../../../server/firebase";
 import Button from "@material-ui/core/Button";
 import AddEquipmentListToDBForm from "../AddEquipmentListToDBForm/AddEquipmentListToDBForm";
 
-
 const PersonalEquipmentListButtons = ({items, user, error, setError}) => {
     const [isAddEquipmentListToDBFormOpen, setIsAddEquipmentListToDBFormOpen] = useState(false);
 
@@ -31,6 +30,7 @@ const PersonalEquipmentListButtons = ({items, user, error, setError}) => {
             window.location.href = '/mytrip';
         }
     }
+
     return (
         <div className="buttons-container">
             <div className="set-as-fav-el-button">

@@ -1,7 +1,6 @@
 import React from 'react';
 import './ActivityDetails.css';
 
-
 const HikingTrailDetails = ({activity}) => {
     return (
         <div className="activity-hiking-metadata">
