@@ -1,0 +1,115 @@
+.signup-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        height: fit-content;
+        width: 450px;
+        border-radius: 20px;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+}
+
+.signup-container .signup-form form, .signup-container .signup-with-google {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.signup-container .login-no-account {
+    margin-bottom: 15px;
+}
+
+.signup-container .name-input, .signup-container .email-input {
+    margin-bottom: 10px;
+}
+
+.signup-container .password-input{
+    margin-bottom: 15px;
+}
+
+.signup-container .picture-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.signup-container .picture-progress {
+    margin-bottom: 10px;
+}
+
+.signup-container .picture-label {
+    background-color: steelblue;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.signup-container .picture-label:hover {
+    background-color: rgb(100, 151, 194);
+}
+
+.signup-container .user-picture {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+}
+
+.signup-container .picture-uploader {
+    width: 200px;
+}
+
+.signup-container .picture-uploader:focus {
+    outline: none;
+}
+
+.signup-container .signup-title {
+    margin-bottom: 10px;
+}
+
+.signup-container .or-paragraph {
+    margin-bottom: 5px;
+}
+
+.signup-container .signup-button, .signup-container .signup-google-button {
+    height: 40px;
+    width: 190px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: thin;
+    color: white;
+    border-color: transparent;
+    cursor: pointer;
+    background-color: rgb(7, 59, 7);
+    box-shadow: 0px 2px 2px 0px rgba(120,116,120,0.59);
+}
+
+.signup-container .signup-button:hover, .signup-container .signup-google-button:hover {
+    background-color: rgb(12, 109, 12);
+}
+
+.signup-container .signup-success-message {
+    margin-top: 5px;
+    color: rgb(12, 109, 12);
+    font-size: 12px;
+    text-align: center;
+    width: 190px;
+}
+
+.signup-container .error-no-signup {
+    margin-top: 5px;
+    color: rgb(179, 8, 8);
+    font-size: 12px;
+    text-align: center;
+    width: 190px;
+}

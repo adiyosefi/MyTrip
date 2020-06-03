@@ -1,0 +1,590 @@
+.mytrip {
+
+}
+
+.mytrip .background {
+    background: url("https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fbackgrounds%2FMyTrip.jpg?alt=media&token=88596b7c-3a84-4cc1-91cc-ddcc95ac37cc");
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0%;
+}
+
+.mytrip .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10px;
+    width: 100vw;
+}
+
+
+.mytrip .user-profile-container {
+    margin-top: 110px;
+    margin-left: 10px;
+    margin-right: 20px;
+    background-color: rgba(206, 214, 207, 0.9);
+    height: 90px;
+    width: fit-content;
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.mytrip .profile-picture {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+}
+
+.mytrip .user-details-metadata {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 55px;
+ margin-left: 15px;
+ margin-right: 15px;
+}
+
+.mytrip .user-details-metadata h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.mytrip .user-details-metadata h3 {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.mytrip .signout-button {
+    height: 40px;
+    width: 110px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: thin;
+    color: white;
+    border-color: transparent;
+    cursor: pointer;
+    background-color: rgb(179, 8, 8);
+    box-shadow: 0px 2px 2px 0px rgba(120,116,120,0.59);
+}
+
+.mytrip .signout-button:hover {
+    background-color: rgb(209, 20, 20);
+}
+
+.mytrip .itinerary-form-or-title-container {
+    align-self: center;
+}
+
+.mytrip .trip-title-container {
+    margin-top: 40px;
+    margin-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.mytrip .trip-title-container h1 {
+    font-size: 50px;
+    text-shadow: 2px 2px 4px rgba(203, 204, 188, 0.959);
+    font-weight: bold;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+}
+
+.mytrip .trip-metadata {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mytrip .trip-metadata-item {
+    margin-right: 10px;
+}
+
+.mytrip .trip-metadata-item span {
+    text-decoration: underline;
+}
+
+.mytrip .delete-trip-button {
+    height: 40px;
+    width: 140px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: thin;
+    color: white;
+    border-color: transparent;
+    cursor: pointer;
+    background-color: rgb(179, 8, 8);
+    box-shadow: 0px 2px 2px 0px rgba(120,116,120,0.59);
+}
+
+.mytrip .delete-trip-button:hover {
+    background-color: rgb(209, 20, 20);
+}
+
+.mytrip .activities-and-list-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100vw;
+}
+
+.mytrip .favoriteactivitiescontainer {
+    margin-left: 10px;
+    padding: 10px;
+}
+
+.mytrip .favoriteactivitiescontainer h4 {
+   color: white;
+   margin-left: 15px;
+   text-decoration: underline;
+}
+
+.mytrip .fav-act-list-con {
+    height: 400px;
+    overflow: auto;
+    padding: 15px;
+}
+
+.mytrip .no-activities-content {
+    color: white;
+    margin-left: 20px;
+    margin-top: 40px;
+    font-size: 18px;
+}
+
+.mytrip .container-per-activity {
+    background-color: rgba(206, 214, 207, 0.9);
+    height: 200px;
+    width: 700px;
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin-bottom: 20px;
+}
+
+.mytrip .activitycontent {
+    max-height: 180px;
+    width: 650px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.mytrip .activity-picture {
+    width: 180px;
+    max-height: 120px;
+    border-radius: 10px;
+}
+
+.mytrip .activity-details {
+    margin-left: 10px;
+    width: 600px;
+}
+
+.mytrip .activity-metadata {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.mytrip .metadata-season-category {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.mytrip .activity-delete-and-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+
+.mytrip .activity-name .activity-link {
+    font-weight: bolder;
+    font-size: 20px;
+    color: black;
+}
+
+.mytrip .activity-name .activity-link h5 {
+    width: fit-content;
+}
+
+.mytrip .activity-name .activity-link:hover {
+    text-decoration: none;
+    color: rgb(23, 126, 74);
+}
+
+.mytrip .activity-delete-button {
+    height: fit-content;
+    width: fit-content;
+    border: transparent;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+    margin-right: -15px;
+    margin-top: -15px;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    color: rgb(54, 54, 54);
+}
+
+.mytrip .activity-delete-button:hover {
+    background-color: rgba(169, 169, 169, 0.507);
+}
+
+
+.mytrip .activity-metadata-item span {
+    text-decoration: underline;
+}
+
+.mytrip .no-items-content {
+    margin-top: 40px;
+    height: 400px;
+    width: 400px;
+    background-color: lightpink;
+    padding: 20px;
+    box-sizing: border-box;
+    -webkit-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    -moz-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+}
+
+.mytrip .no-items-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.mytrip .no-items-link {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.mytrip .link-to-equipmentlists {
+    font-weight: bold;
+    color: rgb(175, 76, 93);;
+}
+
+.mytrip .link-to-equipmentlists:hover {
+    color: rgb(196, 121, 133);
+    text-decoration: none;
+}
+
+
+.mytrip .favourite-equipment-list-container {
+}
+
+.mytrip .favoriteequipmentlist {
+    margin-right: 50px;
+    padding: 10px;
+}
+
+
+.mytrip .favoriteequipmentlist h4 {
+    margin-bottom: 10px;
+    color: white;
+    text-decoration: underline;
+}
+
+.mytrip .favoriteequipmentlistcontainer {
+    height: 400px;
+    width: 400px;
+    background-color: lightpink;
+    padding: 20px;
+    box-sizing: border-box;
+    -webkit-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    -moz-box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    box-shadow: -2px -2px 16px -1px rgba(120,116,120,0.59);
+    overflow: auto;
+}
+
+.mytrip .equipmentlistlist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.mytrip .equipmentlistitem {
+    background-color: #ffe9ee;
+    height: 40px;
+    width: 100%;
+    border: 1px solid #ffdde4;
+    padding: 0 10px;
+}
+
+.mytrip .equipmentlistitem:hover {
+    background-color: #ffdde4;
+}
+
+.mytrip .equipmentlistitemcontent {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    display: flex;
+}
+
+.state label {
+    display: none;
+}
+
+.mytrip .equipmentlistitemcontent label {
+    margin-bottom: 0;
+}
+
+.hideP {
+    display: none;
+}
+
+.item-line-through {
+    text-decoration: line-through;
+}
+
+.item-none {
+    text-decoration: none;
+}
+
+.mytrip .equipmentlistitemcontent .editbtn, .mytrip .equipmentlistitemcontent .hoverBtn {
+    height: fit-content;
+    width: fit-content;
+    margin-left: auto;
+    float: right;
+    border: none;
+    outline:none;
+    background-color:transparent;
+    cursor: pointer;
+    margin-right: 7px;
+}
+
+.showEditInput {
+    height: 30px;
+    width: 180px;
+    margin-left: -8px;
+    padding: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: thin;
+    border-color: #ffdde4;
+}
+
+.showEditInput:focus {
+   outline: none;
+}
+
+.hideEditInput {
+    display: none;
+}
+
+.editbtn{
+    color: darkgray;
+}
+
+.hoverBtn {
+    color: black;
+}
+
+.mytrip .equipmentlistitemcontent .editbtn:hover {
+    color: black;
+}
+
+.mytrip .equipmentlistitemcontent .removebtn {
+    height: fit-content;
+    width: fit-content;
+    border: none;
+    outline:none;
+    background-color:transparent;
+    color: darkgray;
+    cursor: pointer;
+}
+
+.mytrip .equipmentlistitemcontent .removebtn:hover {
+    color: black;
+}
+
+.mytrip .notescontainer {
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+.mytrip .notescontainer h4 {
+    color: white;
+    text-decoration: underline;
+}
+
+.mytrip .link-to-activities {
+    font-weight: bold;
+    color: pink;
+}
+
+.mytrip .link-to-activities:hover {
+    color: rgb(175, 76, 93);
+    text-decoration: none;
+}
+
+.mytrip .notescontainer .text {
+    background-color: rgba(206, 214, 207, 0.9);
+    height: 200px;
+    width: 93vw;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.mytrip .notescontainer .text form {
+    display: flex;
+    flex-direction: row;
+}
+
+.mytrip .clear-notes-button {
+    margin-left: 10px;
+    height: 40px;
+    width: 140px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 30px;
+    padding: 0px 10px;
+    background: #fea353;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0px 2px 2px 0px rgba(120,116,120,0.59);
+    font-weight: bold;
+
+}
+
+.mytrip .clear-notes-button:hover {
+    background: #fe8b1d;
+}
+
+.mytrip .clear-notes-button-and-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+}
+
+.mytrip .error-no-notes {
+    color: rgb(179, 8, 8);
+    font-size: 12px;
+    text-align: center;
+    width: 140px;
+    margin-top: 10px;
+}
+
+.mytrip .form-container {
+    margin-top: 40px;
+    margin-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mytrip .form-title h1 {
+    font-size: 50px;
+    text-shadow: 2px 2px 4px rgba(203, 204, 188, 0.959);
+    font-weight: bold;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: 30px;
+}
+
+.mytrip .iti-form-container {
+    background-color: rgba(206, 214, 207, 0.9);
+    height: 170px;
+    width: 750px;
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;    
+}
+
+.mytrip .iti-form-container form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+
+.mytrip .form-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;  
+}
+
+.mytrip .form-button {
+    height: 40px;
+    width: 190px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: thin;
+    color: white;
+    border-color: transparent;
+    cursor: pointer;
+    background-color: rgb(7, 59, 7);
+    box-shadow: 0px 2px 2px 0px rgba(120,116,120,0.59);
+}
+
+.mytrip .form-button:hover {
+    background-color: rgb(12, 109, 12);
+}
+
+.mytrip .trip-success-message {
+    color: rgb(12, 109, 12);
+    font-size: 12px;
+    text-align: center;
+    width: 190px;
+}
+
+.mytrip .error-no-trip {
+    color: rgb(179, 8, 8);
+    font-size: 12px;
+    text-align: center;
+    width: 190px;
+}
+
+.mytrip .destination-input, .mytrip .start-date {
+    margin-right: 10px;
+}

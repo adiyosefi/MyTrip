@@ -1,0 +1,48 @@
+
+.contact .background {
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/equiomentlist.appspot.com/o/images%2Fbackgrounds%2FContact.jpg?alt=media&token=718c16d5-e004-4836-833e-768f1f0d51ed");
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    background-position: center top;
+    z-index: -1;
+}
+
+.contact .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -200px;
+    margin-left: 100px;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.contact .title {
+    color: white;
+    font-weight: bold;
+    margin-top: 500px;
+    width: fit-content;
+    font-size: 50px;
+    position: relative;
+    height: fit-content;
+}
+
+.contact .contentcontainer {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 40px;
+}
+
+.contact .contentcontainer .first-para, .contact .contentcontainer .contact-para {
+    margin-bottom: 10px;
+}
+
+.contact .contentcontainer .phone, .contact .contentcontainer .email {
+    margin-left: 10px;
+}
+
+.contact .contentcontainer .address {
+    margin-left: 12px;
+}

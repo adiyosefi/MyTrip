@@ -93,6 +93,7 @@ export const deleteTripFromUser = (user, trip) => {
   })
       .then(function() {
         console.log("User document successfully updated!");
+        window.location.href = '/mytrip';
       })
       .catch(function(error) {
         // The document probably doesn't exist.
