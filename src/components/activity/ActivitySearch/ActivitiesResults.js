@@ -128,13 +128,7 @@ const ActivitiesResults = ({ activities, setActivities, user }) => {
             <div className="results-before-pagination">
                 <form onSubmit={e => handleAddToFavoriteActivities(e, user, activities)}>
                     <ul className="activitieslistslist">
-                        {currentActivities.length !== 0 ?
-                            activitiesItems
-                            :
-                            <div>
-                                No results
-                            </div>
-                        }
+                        {currentActivities.length !== 0 ? activitiesItems : null}
                     </ul>
                     <div className="set-fav-act-button-con">
                         {currentActivities.length !== 0 && !_.isEmpty(user) &&

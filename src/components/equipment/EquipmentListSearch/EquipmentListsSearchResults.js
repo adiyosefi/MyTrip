@@ -53,7 +53,6 @@ const EquipmentListsSearchResults = ({ lists, user, trip }) => {
     }
 
     const listsItems = currentLists.map((list) => {
-
         const eachListItems = list.data.list.map((item) => {
             return (
                 <li key={item.id} className="equipmentlistitem">
