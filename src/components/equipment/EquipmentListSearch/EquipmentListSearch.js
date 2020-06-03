@@ -22,7 +22,7 @@ const EquipmentListSearch = () => {
     const [searchError, setSearchError] = useState(null);
     const [resultsLists, setResultLists] = useState("");
 
-    const [trip, setTrip] = useState((currentUser && currentUser.trip) ? currentUser.trip : null);
+    const trip = (currentUser && currentUser.trip) ? currentUser.trip : null;
 
     var equipmentListsResults;
 
@@ -43,9 +43,6 @@ const EquipmentListSearch = () => {
             try {
                 equipmentListsResults = await searchPublicEquipmentListDocuments(destination, season, category);
                 setResultLists(equipmentListsResults);
-                if (currentUser && currentUser.trip) {
-                    setTrip(currentUser.trip);
-                }
             }
             catch (searchError) {
                 setSearchError('Error fetching public equipment lists');
