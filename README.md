@@ -25,7 +25,7 @@
 <p align="center">
 <img src="https://media.giphy.com/media/fZ3BJATDdntDpPjKcl/giphy.gif" width="80%"></p>
 
-MyTrip is a free online trip planner that can help you build a personalized itinerary for your next vacation.
+MyTrip is a free online trip planner that can help you plan and prepare for your next vacation.
 You can save the restaurants you'll want to eat in, the hiking trails you'll want to explore, and the attractions you'll want to enjoy - all in one place!
 You can also create and save your personal equipment list or search for an equipment list in our database (full of users' lists from trips around the world).
 If there are details you don't want to forget such as important phone numbers, you can save them in your trip notes section.
@@ -82,16 +82,18 @@ If there are details you don't want to forget such as important phone numbers, y
 ### React.js
 
 - The project was created with create-react-app.
+- I used **React** (with **Hooks**) for fast and dynamic components.
+- State management is done with React **Context**, for easy and simple state management.
 
 ### CSS
 
-- Each and every component is styled with CSS, and some components also use Material UI in some places.
+- Each and every component is styled with **CSS**, and some components also use **Material-UI** in some places.
 - The website is not responsive yet (compatible for desktop only).
 
 ### Firebase
 
 - the project concentrates on the client side.
-- The server side of the app is implemented with Firebase Firestore.
+- The server side of the app is implemented with **Firebase Cloud Firestore**.
 
 # Main Components
 
