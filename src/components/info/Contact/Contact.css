@@ -21,6 +21,7 @@
 
 .contact .title {
     color: white;
+    text-shadow: 2px 2px 4px rgba(203, 204, 188, 0.959);
     font-weight: bold;
     margin-top: 500px;
     width: fit-content;
