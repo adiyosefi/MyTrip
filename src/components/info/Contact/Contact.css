@@ -13,7 +13,6 @@
     flex-direction: column;
     align-items: center;
     margin-top: -200px;
-    margin-left: 100px;
     height: 100vh;
     width: 100vw;
     position: relative;
@@ -31,9 +30,7 @@
 }
 
 .contact .contentcontainer {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-left: 40px;
+    padding: 50px;
 }
 
 .contact .contentcontainer .first-para, .contact .contentcontainer .contact-para {
@@ -46,4 +43,11 @@
 
 .contact .contentcontainer .address {
     margin-left: 12px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .contact .contentcontainer {
+        padding: 30px;
+    }
 }
