@@ -76,7 +76,6 @@
     justify-content: center;
 }
 
-
 .home .start-date {
     margin-bottom: 20px;
 }
@@ -90,7 +89,6 @@
 .home .form-container form .end-date {
     margin-bottom: 25px;
 }
-
 
 .home .form-container form .form-button {
     font-size: 16px;
@@ -128,3 +126,49 @@
     width: 220px;
 }
 
+@media only screen and (max-width: 800px) {
+    .home .background {
+        height: 100vh;
+        width: 100vw;
+        background-position: center top;
+    }
+    .home .title {
+        margin: 210px 100px 100px 20px;
+    }
+    .home .title .mytrip-title {
+        font-size: 40px;
+        width: 300px;
+        height: 100px;
+    }
+    .home .title p {
+        font-size: 18px;
+        width: 300px;
+        margin-top: 40px;
+    }
+    .home .form-container {
+        margin-top: 160px;
+        padding: 20px;
+        height: 380px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .home .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: fit-content;
+    }
+    .home .background {
+        height: fit-content;
+
+    }
+    .home .title {
+        margin: 200px 0px 20px 0px;
+    }
+    .home .form-container {
+        margin-top: 100px;
+        margin-bottom: 20px;
+    }
+}

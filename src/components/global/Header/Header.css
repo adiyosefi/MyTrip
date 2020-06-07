@@ -135,10 +135,6 @@
     margin-left: auto;
 }
 
-/*.header .nav-container ul.collapsed li:nth-last-child(2) {*/
-/*    margin-left: auto;*/
-/*}*/
-
 .header .navlist .button-login {
     margin-right: 20px;
     cursor: pointer;
@@ -175,10 +171,8 @@
 
 @media only screen and (max-width: 600px) {
     .header .navlist {
-        height: auto;
         min-height: 60px;
         display: block;
-        position: relative;
     }
     .header .logo {
         width: 100%;
