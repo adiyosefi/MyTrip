@@ -129,7 +129,6 @@ button:focus {
     align-items: center;
 }
 
-
 .equipmentlistsearch .listcontainer {
     height: 200px;
     width: 500px;
@@ -214,5 +213,70 @@ button:focus {
     font-size: 12px;
     text-align: center;
     padding-top: 5px;
+}
+
+@media only screen and (max-width: 800px) {
+    .equipmentlistsearch .background {
+        height: fit-content;
+    }
+    .equipmentlistsearch .container {
+        height: fit-content;
+        padding-bottom: 20px;
+    }
+    .equipmentlistsearch .title {
+        margin-top: 250px;
+    }
+    .equipmentlistsearch .formcontainer {
+        margin-top: 30px;
+        height: fit-content;
+        width: fit-content;
+        padding: 40px;
+    }
+    .equipmentlistsearch .formcontainer form {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .equipmentlistsearch .destination-input {
+        margin-right: 0px;
+    }
+    .equipmentlistsearch .season-input {
+        margin-right: 0px;
+        margin-bottom: 10px;
+    }
+    .equipmentlistsearch .category-input {
+        margin-right: 0px;
+        margin-bottom: 10px;
+    }
+    .equipmentlistsearch .el-search-button {
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .equipmentlistsearch .title {
+        font-size: 40px;
+    }
+    .equipmentlistsearch .formcontainer {
+        padding: 10px;
+    }
+    .equipmentlistsearch .listcontainer {
+        width: 300px;
+        padding: 20px;
+    }
+    .equipmentlistsearch .equipmentlistlist {
+        padding: 0;
+        width: 90%;
+    }
+    .equipmentlistsearch .each-list-and-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .equipmentlistsearch .fav-list-button {
+        margin-left: 0px;
+        margin-bottom: 50px;
+    }
 }
 

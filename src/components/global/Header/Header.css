@@ -164,9 +164,11 @@
         margin-right: 10px;
     }
     .header .navitem {
-        margin: 0px 10px;
+        margin: 0px 15px;
     }
-
+    .header .drop-equipment-icon {
+        display: inline;
+    }
 }
 
 @media only screen and (max-width: 600px) {
