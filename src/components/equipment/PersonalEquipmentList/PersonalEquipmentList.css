@@ -20,6 +20,7 @@
 
 .equipmentlist .title {
     color: white;
+    text-shadow: 2px 2px 4px rgba(203, 204, 188, 0.959);
     font-weight: bold;
     margin-top: 400px;
     width: fit-content;
@@ -38,7 +39,6 @@
 
 .equipmentlist .elform {
     display: flex;
-
 }
 
 .equipmentlist .elforminput {
@@ -51,7 +51,6 @@
     border-width: thin;
     border-color: darkgray;
     padding: 10px;
-
 }
 
 .equipmentlist .elforminput:focus, .elformbutton:focus {
@@ -59,6 +58,7 @@
 }
 
 .equipmentlist .elformbutton {
+    font-weight: bold;
     flex: 1;
     height: 50px;
     width: 80px;
@@ -261,4 +261,64 @@
 
 .equipmentlist .open-add-to-el-db-button:hover {
     background-color: rgb(209, 20, 20);
+}
+
+@media only screen and (max-width: 800px) {
+    .equipmentlist .background {
+        height: fit-content;
+    }
+    .equipmentlist .container {
+        height: fit-content;
+        padding-bottom: 20px;
+    }
+    .equipmentlist .contentcontainer {
+        justify-content: space-between;
+    }
+    .equipmentlist .buttons-container {
+        top: 60px;
+        right: 60px;
+    }
+    .equipmentlist .listcontainer {
+        margin-left: 30px;
+        width: 450px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .equipmentlist .elform {
+        flex-direction: column;
+        align-items: center;
+    }
+    .equipmentlist .elforminput {
+        width: 300px;
+        margin-right: 0px;
+        margin-bottom: 10px;
+    }
+    .equipmentlist .elformbutton {
+        width: 120px;
+        padding: 5px 10px;
+    }
+    .equipmentlist .contentcontainer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+        height: fit-content;
+    }
+    .equipmentlist .buttons-container {
+        position: relative;
+        top: 0px;
+        right: 0px;
+    }
+    .equipmentlist .listcontainer {
+        margin-left: 0px;
+        width: 85vw;
+        margin-bottom: 20px;
+    }
+    .equipmentlist .title {
+        font-size: 40px;
+    }
+    .equipmentlist .add-to-el-db-button {
+        margin-bottom: 0px;
+    }
 }

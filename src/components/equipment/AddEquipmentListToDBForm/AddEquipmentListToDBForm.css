@@ -72,3 +72,18 @@
     font-size: 12px;
     text-align: center;
 }
+
+@media only screen and (max-width: 800px) {
+    .addequipmentlisttodbform form {
+        width: 270px;
+        height: 350px;
+        padding: 15px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .addequipmentlisttodbform form {
+        position: relative;
+        left: 0px;
+    }
+}
