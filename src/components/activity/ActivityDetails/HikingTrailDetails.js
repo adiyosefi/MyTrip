@@ -5,19 +5,19 @@ const HikingTrailDetails = ({activity}) => {
     return (
         <div className="activity-hiking-metadata">
             <div className="activity-hiking-metadata-item">
-                <span>Activity type:</span> {activity.data.type}
+                <span><span className="underline-title">Activity type:</span></span> <span>{activity.data.type}</span>
             </div>
             <div className="activity-hiking-metadata-item">
-                <span>Route:</span> {activity.data.route}
+                <span><span className="underline-title">Route:</span></span> <span>{activity.data.route}</span>
             </div>
             <div className="activity-hiking-metadata-item">
-                <span>Difficulty:</span> {activity.data.difficulty}
+                <span><span className="underline-title">Difficulty:</span></span> <span>{activity.data.difficulty}</span>
             </div>
             <div className="activity-hiking-metadata-item">
-                <span>Extension:</span> {activity.data.extension}
+                <span><span className="underline-title">Extension:</span></span> <span>{activity.data.extension}</span>
             </div>
             <div className="activity-hiking-metadata-item">
-                <span>Time average:</span> {activity.data.timeAverage}
+                <span><span className="underline-title">Time average:</span></span> <span>{activity.data.timeAverage}</span>
             </div>
         </div>
     );

@@ -29,8 +29,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-top: -200px;
-    margin-left: 100px;
     height: 100vh;
     width: 100vw;
     position: relative;
@@ -48,15 +48,10 @@
 }
 
 .activitydetails .contentcontainer {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-left: 40px;
+    padding: 30px 60px;
 }
 
-.activitydetails .activity-metadata span, .activitydetails .activity-hiking-metadata-item span,
-.activitydetails .activity-address span,
-.activitydetails .description-title span, .activitydetails .activity-restaurant-metadata-item span, 
-.activitydetails .activity-attraction-metadata-item span {
+.activitydetails .underline-title {
     text-decoration: underline;
 }
 
@@ -64,12 +59,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
-    margin-bottom: 35px;
+    width: 100%;
+    margin-bottom: 50px;
 }
 
 .activitydetails .activity-address-description-picture {
     display: flex;
+    justify-content: space-between;
 }
 
 .activitydetails .submit-fav-act-button {
@@ -112,7 +108,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.activitydetails .activity-attraction-metadata-contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     margin-bottom: 30px;
 }
 
@@ -120,20 +124,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
+    width: 100%;
     margin-bottom: 30px;
 }
 
-.activitydetails .activity-restaurant-metadata-contact a, .activitydetails .activity-attraction-metadata-item a {
+.activitydetails .activity-restaurant-metadata-contact a, .activitydetails .activity-attraction-metadata-contact a {
     color: black;
 }
 
-.activitydetails .activity-restaurant-metadata-contact a:hover, .activitydetails .activity-attraction-metadata-item a:hover {
+.activitydetails .activity-restaurant-metadata-contact a:hover, .activitydetails .activity-attraction-metadata-contact a:hover {
     color: rgb(23, 126, 74);
 }
 
 .activitydetails .activity-address-description {
-    width: 60vw;
+    width: 100%;
 }
 
 .activitydetails .activity-address {
@@ -142,7 +146,7 @@
 }
 
 .activitydetails .activity-description-content {
-    width: 50vw;
+    width: 55vw;
     height: 250px;
     box-sizing: border-box;
     padding: 10px 25px;
@@ -154,9 +158,109 @@
     height: 370px;
 }
 
-
 .activitydetails  .activity-picture {
     width: 370px;
     max-height: 370px;
     border-radius: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+    .activitydetails .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: -200px;
+        height: 100vh;
+        width: fit-content;
+        position: relative;
+    }
+    .activitydetails .contentcontainer {
+        padding: 40px 30px;
+    }
+    .activitydetails .activity-description-content {
+        padding: 10px 15px;
+        width: 45vw;
+    }
+    .activitydetails .activity-metadata-item, .activitydetails .activity-hiking-metadata-item,
+    .activitydetails .activity-restaurant-metadata-item, .activitydetails .activity-attraction-metadata-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .activitydetails .title {
+        font-size: 40px;
+    }
+    .activitydetails .contentcontainer {
+        padding: 30px 30px;
+    }
+    .activitydetails .activity-metadata {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+    .activitydetails .activity-address {
+        width: 100%;
+        text-align: center;
+    }
+    .activitydetails .activity-metadata-item, .activitydetails .activity-hiking-metadata-item,
+    .activitydetails .activity-restaurant-metadata-item, .activitydetails .activity-attraction-metadata-item {
+        margin-bottom: 20px;
+    }
+    .activitydetails .activity-restaurant-metadata-item span {
+        text-align: center;
+    }
+    .activitydetails .activity-hiking-metadata, .activitydetails .activity-restaurant-metadata,
+    .activitydetails .activity-attraction-metadata {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .activitydetails .activity-address-description-picture {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .activitydetails .activity-address-description {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .activitydetails .activity-description {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 60px;
+    }
+    .activitydetails .activity-description-content {
+        width: 100%;
+        height: 250px;
+        box-sizing: border-box;
+        padding: 10px 25px;
+    }
+    .activitydetails  .activity-picture-container {
+        width: 100%;
+        height: 300px;
+        margin-bottom: 20px;
+    }
+    .activitydetails  .activity-picture {
+        width: 100%;
+        max-height: 300px;
+        border-radius: 10px;
+    }
+    .activitydetails .submit-fav-act-button {
+        margin-top: 10px;
+    }
 }

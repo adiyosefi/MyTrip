@@ -6,18 +6,20 @@ const AttractionDetails = ({activity}) => {
         <div>
             <div className="activity-attraction-metadata">
                 <div className="activity-attraction-metadata-item">
-                    <span>Activity type:</span> {activity.data.type}
+                    <span><span className="underline-title">Activity type:</span></span> <span>{activity.data.type}</span>
                 </div>
                 <div className="activity-attraction-metadata-item">
-                    <span>Suggested duration:</span> {activity.data.suggestedDuration}
-                </div>
-                <div className="activity-attraction-metadata-item">
-                    <span>Phone:</span> {activity.data.phone}
-                </div>
-                <div className="activity-attraction-metadata-item">
-                    <a href={activity.data.website} target='_blank' rel="noopener noreferrer"><span>Website </span><i className="fa fa-large fa-external-link"></i></a>
+                    <span><span className="underline-title">Suggested duration:</span></span> <span>{activity.data.suggestedDuration}</span>
                 </div>
             </div>
+                <div className="activity-attraction-metadata-contact">
+                    <div className="activity-attraction-metadata-phone-item">
+                        <span><span className="underline-title">Phone:</span></span> <span>{activity.data.phone}</span>
+                    </div>
+                    <div className="activity-attraction-metadata-website-item">
+                        <a href={activity.data.website} target='_blank' rel="noopener noreferrer"><span className="underline-title">Website </span><i className="fa fa-large fa-external-link"></i></a>
+                    </div>
+                </div>
         </div>
     );
 };

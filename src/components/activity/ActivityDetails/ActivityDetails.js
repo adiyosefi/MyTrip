@@ -58,13 +58,13 @@ const ActivityDetails = ({ match }) => {
                 <div className="contentcontainer">
                     <div className="activity-metadata">
                         <div className="activity-metadata-item">
-                            <i className="fa fa-large fa-plane"></i> <span>Destination:</span> {activity.data.destination}
+                            <span><i className="fa fa-large fa-plane"></i> <span className="underline-title">Destination:</span></span> <span>{activity.data.destination}</span>
                         </div>
                         <div className="activity-metadata-item">
-                            <i className="fa fa-large fa-cloud"></i> <span>Season:</span> {activity.data.season ? activity.data.season : 'All year round'}
+                            <span><i className="fa fa-large fa-cloud"></i> <span className="underline-title">Season:</span></span> <span>{activity.data.season ? activity.data.season : 'All year round'}</span>
                         </div>
                         <div className="activity-metadata-item">
-                            <i className="fa fa-large fa-list-ul"></i> <span>Category:</span> {activity.data.category ? activity.data.category : 'All categories'}
+                            <span><i className="fa fa-large fa-list-ul"></i> <span className="underline-title">Category:</span></span> <span>{activity.data.category ? activity.data.category : 'All categories'}</span>
                         </div>
                         {!_.isEmpty(currentUser) &&
                             <SetAsFavoriteActivityButton currentUser={currentUser} activity={activity} />
@@ -82,10 +82,10 @@ const ActivityDetails = ({ match }) => {
                     <div className="activity-address-description-picture">
                         <div className="activity-address-description">
                             <div className="activity-address">
-                                <i className="fa fa-large fa-map-marker"></i> <span>Address:</span> {activity.data.address ? activity.data.address : 'No address'}
+                                <i className="fa fa-large fa-map-marker"></i> <span className="underline-title">Address:</span> {activity.data.address ? activity.data.address : 'No address'}
                             </div>
                             <div className="activity-description">
-                                <div className="description-title"><span>Description:</span></div>
+                                <div className="description-title"><span className="underline-title">Description:</span></div>
                                 <div className="activity-description-content">{activity.data.longDescription ? activity.data.longDescription : 'No description'}</div>
                             </div>
                         </div>
