@@ -164,6 +164,13 @@ button:focus {
     max-height: 150px;
 }
 
+.activitysearch .activity-picture-and-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
 .activitysearch .activity-picture {
     width: 180px;
     max-height: 120px;
@@ -250,4 +257,106 @@ button:focus {
     color: rgb(179, 8, 8);
     font-size: 12px;
     text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+    .activitysearch .background {
+        height: fit-content;
+    }
+    .activitysearch .container {
+        height: fit-content;
+        padding-bottom: 20px;
+    }
+    .activitysearch .container-per-activity, .activitysearch .activity-container-checked {
+        height: 180px;
+        width: 550px;
+        padding: 20px;
+    }
+    .activitysearch .activitycontent {
+        width: 550px;
+    }
+    .activitysearch .activity-description-short {
+        display: none;
+    }
+    .activitysearch .activity-metadata {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 0px;
+    }
+    .activitysearch .activity-metadata-item {
+        margin-bottom: 6px;
+    }
+    .activitysearch .set-fav-act-button-con {
+        margin-left: 20px;
+    }
+    .activitysearch .formcontainer {
+        width: 400px;
+        padding: 10px;
+    }
+    .activitysearch .formcontainer form .select-inputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+    .activitysearch .destination-input, .activitysearch .season-input, .activitysearch .category-input {
+        margin-bottom: 10px;
+        margin-right: 0px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .activitysearch .title {
+        font-size: 40px;
+    }
+    .activitysearch .formcontainer {
+        width: 320px;
+    }
+    .activitysearch .activities-results-container form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .activitysearch .set-fav-act-button-con {
+        margin-left: 0px;
+    }
+    .activitysearch .submit-fav-act-button-container {
+        position: relative;
+        height: 80px;
+        width: 180px;
+        top: 0;
+    }
+    .activitysearch .submit-fav-act-button {
+        width: 180px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .activitysearch .container-per-activity, .activitysearch .activity-container-checked {
+        height: 300px;
+        width: 270px;
+        padding: 15px;
+    }
+    .activitysearch .activitycontent {
+        width: 270px;
+        max-height: 300px;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+    }
+    .activitysearch .activity-details {
+        margin-left: 0px;
+        width: 200px;
+        padding: 10px;
+    }
+    .activitysearch .activity-picture-and-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }

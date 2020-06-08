@@ -92,6 +92,7 @@ const ActivitiesResults = ({ activities, setActivities, user }) => {
                                     </div>
                                 </div>}
                             </div>
+                            <div className="activity-picture-and-details">
                             <div className="activity-picture-container">
                                 <img src={activity.data.picture} alt="activity-pic" className="activity-picture" />
                             </div>
@@ -112,9 +113,10 @@ const ActivitiesResults = ({ activities, setActivities, user }) => {
                                         <i className="fa fa-list-ul"></i> <span>Category:</span> {activity.data.category ? activity.data.category : 'All categories'}
                                     </div>
                                 </div>
-                                <div>
+                                <div className="activity-description-short">
                                     {activity.data.shortDescription}
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
