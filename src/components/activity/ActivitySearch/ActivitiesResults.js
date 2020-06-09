@@ -32,9 +32,9 @@ const ActivitiesResults = ({ activities, setActivities, user }) => {
         const filterActivities = activities.filter((activity) => {
             return activity.checked === true;
         });
-        if (user.trip !== null || user.trip) {
+        if (user.trip !== null || !_.isEmpty(user.trip)) {
             if (filterActivities.length) {
-                if (user.trip.favoriteactivities) {
+                if (user.trip.favoriteactivities.length !== 0) {
                     const notUniqueActArray = user.trip.favoriteactivities.concat(filterActivities);
                     newFavActArray = notUniqueActArray.filter((obj, pos, arr) => {
                         return arr.map(mapObj => mapObj.id).indexOf(obj.id) === pos;

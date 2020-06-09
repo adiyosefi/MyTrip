@@ -247,11 +247,13 @@ export const getActivityWithIdDocument = async (id) => {
 
 export const addFavoriteActivityToUserTrip = (user, activity) => {
   const userRef = firestore.doc(`users/${user.uid}`);
-  const oldFavActList = user.trip.favoriteactivities ? user.trip.favoriteactivities : null;
+  let oldFavActList = user.trip.favoriteactivities ? user.trip.favoriteactivities : [];
+  oldFavActList.push(activity);
+  const newFavActList = oldFavActList;
   return userRef.update({
     trip: {
       ...user.trip,
-      favoriteactivities: [...oldFavActList, activity]
+      favoriteactivities: newFavActList
     }
   })
       .then(function() {

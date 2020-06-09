@@ -9,22 +9,20 @@ const SetAsFavoriteActivityButton = ({currentUser, activity}) => {
 
     const handleAddToFavoriteActivities = async (event, user, activity) => {
         event.preventDefault();
-        if (user.trip != null || user.trip) {
-            if (activity) {
-                if (_.isEmpty(user.trip.favoriteactivities) || !user.trip.favoriteactivities ||
-                    (user.trip.favoriteactivities && _.where(user.trip.favoriteactivities, {id: activity.id}) == null)) {
-                    try {
-                        await addFavoriteActivityToUserTrip(user, activity);
-                        setFavActivitySuccess('Activity added to your trip successfully!');
-                        window.location.href = '/mytrip';
-                    } catch (favActivityError) {
-                        setFavActivityError('Error saving favorite activity');
-                    }
-                } else {
-                    setFavActivityError('This activity has already been inserted!');
+        if (user.trip !== null || !_.isEmpty(user.trip)) {
+            if (!user.trip.favoriteactivities ||
+                user.trip.favoriteactivities.length === 0 ||
+                (user.trip.favoriteactivities && user.trip.favoriteactivities.length !==0
+                    && _.where(user.trip.favoriteactivities, {id: activity.id}).length === 0)) {
+                try {
+                    await addFavoriteActivityToUserTrip(user, activity);
+                    setFavActivitySuccess('Activity added to your trip successfully!');
+                    window.location.href = '/mytrip';
+                } catch (favActivityError) {
+                    setFavActivityError('Error saving favorite activity');
                 }
             } else {
-                setFavActivityError('Select activities first!');
+                setFavActivityError('This activity has already been inserted!');
             }
         } else {
             setFavActivityError('Create trip first!');
