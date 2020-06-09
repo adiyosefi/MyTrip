@@ -174,3 +174,17 @@
     justify-content: center;
 }
 
+@media only screen and (max-width: 600px) {
+    .loginmodal .login-goto-yourtrip {
+        font-size: 14px;
+        text-align: center;
+    }
+    .loginmodal .login-hello {
+        font-size: 17px;
+        text-align: center;
+    }
+    .loginmodal .login-no-account {
+        font-size: 14px;
+        text-align: center;
+    }
+}

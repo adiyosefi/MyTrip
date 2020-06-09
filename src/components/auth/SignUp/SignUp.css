@@ -113,3 +113,25 @@
     text-align: center;
     width: 190px;
 }
+
+@media only screen and (max-width: 800px) {
+    .signup-container {
+        width: 360px;
+        padding: 40px 6px;
+    }
+    .signup-container .login-no-account {
+        font-size: 15px;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .signup-container {
+        width: 300px;
+        padding: 40px 8px;
+    }
+    .signup-container .login-no-account {
+        font-size: 14px;
+        text-align: center;
+    }
+}
