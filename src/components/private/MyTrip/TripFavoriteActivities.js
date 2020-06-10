@@ -64,7 +64,7 @@ const TripFavoriteActivities = ({ user }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div className="activity-description-item">
                                 {activity.data.shortDescription}
                             </div>
                         </div>

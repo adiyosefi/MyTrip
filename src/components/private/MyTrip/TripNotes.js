@@ -28,17 +28,19 @@ const TripNotes = ({ user }) => {
             <h4>My Notes</h4>
             <div className="text">
                 <form>
+                    <div className="text-field-notes-container">
                     <TextField
                         id="notepad"
                         name="notes"
                         label="Start typing ..."
                         multiline
                         rows={7}
-                        style={{ width: 1070 }}
+                        style={{ width: "100%" }}
                         value={notes}
                         variant="outlined"
                         onChange={handleChangeNotes}
                     />
+                    </div>
                     <div className="clear-notes-button-and-error">
                         <button className="clear-notes-button" onClick={event => {
                             clearNotesInTrip(event, notes);

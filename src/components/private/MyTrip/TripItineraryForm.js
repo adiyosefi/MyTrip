@@ -65,7 +65,7 @@ const TripItineraryForm = ({ user, trip }) => {
                     <div className="form-content">
                         <div className="destination-input">
                             <Autocomplete
-                                style={{ width: 300 }}
+                                style={{ width: 275 }}
                                 inputValue={destination}
                                 onInputChange={(event, newDestination) => {
                                     setDestination(newDestination);

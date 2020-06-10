@@ -34,7 +34,7 @@ const ActivitiesResults = ({ activities, setActivities, user }) => {
         });
         if (user.trip !== null || !_.isEmpty(user.trip)) {
             if (filterActivities.length) {
-                if (user.trip.favoriteactivities.length !== 0) {
+                if (user.trip.favoriteactivities && user.trip.favoriteactivities.length !== 0) {
                     const notUniqueActArray = user.trip.favoriteactivities.concat(filterActivities);
                     newFavActArray = notUniqueActArray.filter((obj, pos, arr) => {
                         return arr.map(mapObj => mapObj.id).indexOf(obj.id) === pos;

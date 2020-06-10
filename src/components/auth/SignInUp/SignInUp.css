@@ -130,4 +130,30 @@
     .signinup .signup-cont {
         margin-left: 0px;
     }
+    .signinup .user-profile-cont {
+        margin-top: 100px;
+        height: fit-content;
+        border-radius: 20px;
+        padding: 20px 10px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        width: fit-content;
+    }
+    .signinup .profile-picture {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+    }
+    .signinup .user-details-metadata {
+        margin-left: 10px;
+    }
+    .signinup .user-details-metadata h2 {
+        font-size: 16px;
+    }
+    .signinup .user-details-metadata h3 {
+        font-size: 14px;
+    }
+    .signinup .login-goto-yourtrip {
+        font-size: 16px;
+    }
 }
