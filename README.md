@@ -86,7 +86,7 @@ If there are details you don't want to forget such as important phone numbers, y
 ### CSS
 
 - Each and every component is styled with **CSS**, and some components also use **Material-UI** in some places.
-- The website is not responsive yet (compatible for desktop only).
+- The website is fully responsive (compatible for both desktop and mobile devices).
 
 ### Firebase
 
@@ -210,5 +210,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 # Future scope
 
 - Add users' comments on activities.
-- Make the site responsive for mobile devices and tablets.
 
