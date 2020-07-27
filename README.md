@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-<img src="./readme_assets/logo.png" width="50%"></p>
+<img src="./readme_assets/logo.png" width="30%"></p>
 
 <h2 align="center"><a  href="https://mytrip.netlify.app">Live Demo</a></h2>
 
